@@ -1,0 +1,1 @@
+2017-09-05 08:43:12	[ERROR]	Table 'mpparecruitment.t_sync_proint' doesn't exist	/mpprecruitment/letsprocess.php	::1

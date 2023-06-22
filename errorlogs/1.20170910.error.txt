@@ -1,0 +1,15 @@
+2017-09-10 03:03:37	[ERROR]	Table 'mpparecruitment.t_sync_proint' doesn't exist	/mpprecruitment/letsprocess.php	::1
+2017-09-10 06:03:01	[NOTICE]	Mulai pengambilan data detail karyawan 5296 dari database: 2017-09-10  06:03:01	/mpprecruitment/letsprocess.php	::1
+2017-09-10 06:03:02	[NOTICE]	Akhir pengambilan data detail karyawan 5296 dari database dan diinput ke array: 2017-09-10  06:03:02	/mpprecruitment/letsprocess.php	::1
+2017-09-10 06:03:02	[NOTICE]	mulai setting pdf karyawan 5296 : 2017-09-10  06:03:02	/mpprecruitment/letsprocess.php	::1
+2017-09-10 07:03:03	[NOTICE]	selesai setting pdf karyawan 5296 : 2017-09-10  07:03:03	/mpprecruitment/letsprocess.php	::1
+2017-09-10 07:03:03	[NOTICE]	mulai create table html karyawan 5296 : 2017-09-10  07:03:03	/mpprecruitment/letsprocess.php	::1
+2017-09-10 07:03:03	[NOTICE]	selesai creating table html karyawan 5296 : 2017-09-10  07:03:03	/mpprecruitment/letsprocess.php	::1
+2017-09-10 07:03:03	[NOTICE]	mulai convert ke pdf karyawan 5296 : 2017-09-10  07:03:03	/mpprecruitment/letsprocess.php	::1
+2017-09-10 07:03:11	[NOTICE]	selesai convert ke pdf karyawan 5296 : 2017-09-10  07:03:11	/mpprecruitment/letsprocess.php	::1
+2017-09-10 06:28:44	[ERROR]	Unknown column 'b.candidate_apply_status' in 'where clause'	/mpprecruitment/letsprocess.php	::1
+2017-09-10 06:30:11	[ERROR]	Unknown column 'b.candidate_apply_status' in 'where clause'	/mpprecruitment/letsprocess.php	::1
+2017-09-10 06:30:22	[ERROR]	Unknown column 'b.candidate_apply_status' in 'where clause'	/mpprecruitment/letsprocess.php	::1
+2017-09-10 06:36:11	[ERROR]	Unknown column 'b.candidate_apply_status' in 'where clause'	/mpprecruitment/letsprocess.php	::1
+2017-09-10 06:38:06	[ERROR]	Table 'mpparecruitment.t_sync_proint' doesn't exist	/mpprecruitment/letsprocess.php	::1
+2017-09-10 06:40:08	[ERROR]	Unknown column 'b.candidate_apply_status' in 'where clause'	/mpprecruitment/letsprocess.php	::1

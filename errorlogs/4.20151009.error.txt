@@ -1,0 +1,1 @@
+2015-10-09 11:12:06	[ERROR]	You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 3	/mpprecruitment/letsprocess.php	127.0.0.1

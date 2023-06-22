@@ -1,0 +1,10 @@
+2017-08-28 07:16:55	[ERROR]	You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'a LEFT JOIN m_job_vacancy b ON a.job_vacancy_id=b.job_vacancy_id 		WHERE b.stat' at line 6	/mpprecruitment/admhome/	::1
+2017-08-28 07:17:15	[ERROR]	You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'a LEFT JOIN m_job_vacancy b ON a.job_vacancy_id=b.job_vacancy_id 		WHERE b.stat' at line 6	/mpprecruitment/admhome/	::1
+2017-08-28 07:17:38	[ERROR]	You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'a LEFT JOIN m_job_vacancy b ON a.job_vacancy_id=b.job_vacancy_id 		WHERE b.stat' at line 6	/mpprecruitment/admhome/	::1
+2017-08-28 07:25:50	[ERROR]	You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'a LEFT JOIN m_job_vacancy b ON a.job_vacancy_id=b.job_vacancy_id 		WHERE b.stat' at line 6	/mpprecruitment/admhome/	::1
+2017-08-28 07:27:04	[ERROR]	You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'a LEFT JOIN m_job_vacancy b ON a.job_vacancy_id=b.job_vacancy_id 		WHERE b.stat' at line 6	/mpprecruitment/admhome/	::1
+2017-08-28 07:29:10	[ERROR]	You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'a LEFT JOIN m_job_vacancy b ON a.job_vacancy_id=b.job_vacancy_id 		WHERE b.stat' at line 6	/mpprecruitment/admhome/	::1
+2017-08-28 08:41:51	[ERROR]	Table 'mpparecruitment.t_sync_proint' doesn't exist	/mpprecruitment/letsprocess.php	::1
+2017-08-28 10:33:35	[ERROR]	Table 'mpparecruitment.t_sync_proint' doesn't exist	/mpprecruitment/letsprocess.php	::1
+2017-08-28 10:40:13	[ERROR]	Table 'mpparecruitment.t_sync_proint' doesn't exist	/mpprecruitment/letsprocess.php	::1
+2017-08-28 11:25:54	[ERROR]	Table 'mpparecruitment.t_sync_proint' doesn't exist	/mpprecruitment/letsprocess.php	::1

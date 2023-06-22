@@ -1,0 +1,15 @@
+2016-02-09 11:59:03	[ERROR]	Query was empty	/mpprecruitment/index.php?mod=candidatebyrecruiter&page=2	127.0.0.1
+2016-02-09 11:59:51	[ERROR]	Query was empty	/mpprecruitment/index.php?mod=candidatebyrecruiter&page=2	127.0.0.1
+2016-02-09 12:00:01	[ERROR]	Query was empty	/mpprecruitment/index.php?mod=candidatebyrecruiter&page=2	127.0.0.1
+2016-02-09 12:00:31	[ERROR]	Query was empty	/mpprecruitment/index.php?mod=candidatebyrecruiter&page=2	127.0.0.1
+2016-02-09 02:00:17	[ERROR]	You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ISERT INTO t_apply_history 									(candidate_id, candidate_email, job_vacancy' at line 1	/mpprecruitment/letsprocess.php	127.0.0.1
+2016-02-09 02:51:59	[ERROR]	Incorrect datetime value: '' for column 'candidate_schedule_date' at row 1	/mpprecruitment/letsprocess.php	127.0.0.1
+2016-02-09 02:57:07	[ERROR]	Incorrect datetime value: '' for column 'candidate_schedule_date' at row 1	/mpprecruitment/letsprocess.php	127.0.0.1
+2016-02-09 04:38:23	[ERROR]	Query was empty	/mpprecruitment/designadm/adm.fetch_by_recruiter.php	127.0.0.1
+2016-02-09 04:39:14	[ERROR]	Query was empty	/mpprecruitment/designadm/adm.fetch_by_recruiter.php	127.0.0.1
+2016-02-09 04:42:48	[ERROR]	Query was empty	/mpprecruitment/designadm/adm.fetch_by_recruiter.php	127.0.0.1
+2016-02-09 04:58:12	[ERROR]	Undeclared variable: $position	/mpprecruitment/designadm/adm.fetch_by_recruiter.php	127.0.0.1
+2016-02-09 05:32:25	[ERROR]	Operand should contain 1 column(s)	/mpprecruitment/index.php?mod=historycandidate&candidate_id=ZHJhUE9QUFJuV2hheU1xTU5EZmpCdTJ2M3lvZVVvZmtteUE2cDFSS0NUTT0=	127.0.0.1
+2016-02-09 05:32:25	[ERROR]	Operand should contain 1 column(s)	/mpprecruitment/index.php?mod=historycandidate&candidate_id=ZHJhUE9QUFJuV2hheU1xTU5EZmpCdTJ2M3lvZVVvZmtteUE2cDFSS0NUTT0=	127.0.0.1
+2016-02-09 05:33:43	[ERROR]	Operand should contain 1 column(s)	/mpprecruitment/index.php?mod=historycandidate&candidate_id=ZHJhUE9QUFJuV2hheU1xTU5EZmpCdTJ2M3lvZVVvZmtteUE2cDFSS0NUTT0=	127.0.0.1
+2016-02-09 05:33:43	[ERROR]	Operand should contain 1 column(s)	/mpprecruitment/index.php?mod=historycandidate&candidate_id=ZHJhUE9QUFJuV2hheU1xTU5EZmpCdTJ2M3lvZVVvZmtteUE2cDFSS0NUTT0=	127.0.0.1

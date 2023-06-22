@@ -1,0 +1,8 @@
+2019-04-01 03:34:37	[NOTICE]	Mulai pengambilan data detail karyawan 6074 dari database: 2019-04-01  03:34:37	/mpprecruitment/letsprocess.php	::1
+2019-04-01 03:34:39	[NOTICE]	Akhir pengambilan data detail karyawan 6074 dari database dan diinput ke array: 2019-04-01  03:34:39	/mpprecruitment/letsprocess.php	::1
+2019-04-01 03:34:39	[NOTICE]	mulai setting pdf karyawan 6074 : 2019-04-01  03:34:39	/mpprecruitment/letsprocess.php	::1
+2019-04-01 04:34:40	[NOTICE]	selesai setting pdf karyawan 6074 : 2019-04-01  04:34:40	/mpprecruitment/letsprocess.php	::1
+2019-04-01 04:34:40	[NOTICE]	mulai create table html karyawan 6074 : 2019-04-01  04:34:40	/mpprecruitment/letsprocess.php	::1
+2019-04-01 04:34:40	[NOTICE]	selesai creating table html karyawan 6074 : 2019-04-01  04:34:40	/mpprecruitment/letsprocess.php	::1
+2019-04-01 04:34:40	[NOTICE]	mulai convert ke pdf karyawan 6074 : 2019-04-01  04:34:40	/mpprecruitment/letsprocess.php	::1
+2019-04-01 04:34:46	[NOTICE]	selesai convert ke pdf karyawan 6074 : 2019-04-01  04:34:46	/mpprecruitment/letsprocess.php	::1

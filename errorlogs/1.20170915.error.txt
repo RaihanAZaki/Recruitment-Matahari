@@ -1,0 +1,24 @@
+2017-09-15 02:08:21	[NOTICE]	Mulai pengambilan data detail karyawan 5296 dari database: 2017-09-15  02:08:21	/mpprecruitment/letsprocess.php	::1
+2017-09-15 02:08:22	[NOTICE]	Akhir pengambilan data detail karyawan 5296 dari database dan diinput ke array: 2017-09-15  02:08:22	/mpprecruitment/letsprocess.php	::1
+2017-09-15 02:08:22	[NOTICE]	mulai setting pdf karyawan 5296 : 2017-09-15  02:08:22	/mpprecruitment/letsprocess.php	::1
+2017-09-15 03:08:22	[NOTICE]	selesai setting pdf karyawan 5296 : 2017-09-15  03:08:22	/mpprecruitment/letsprocess.php	::1
+2017-09-15 03:08:22	[NOTICE]	mulai create table html karyawan 5296 : 2017-09-15  03:08:22	/mpprecruitment/letsprocess.php	::1
+2017-09-15 03:08:22	[NOTICE]	selesai creating table html karyawan 5296 : 2017-09-15  03:08:22	/mpprecruitment/letsprocess.php	::1
+2017-09-15 03:08:22	[NOTICE]	mulai convert ke pdf karyawan 5296 : 2017-09-15  03:08:22	/mpprecruitment/letsprocess.php	::1
+2017-09-15 03:08:26	[NOTICE]	selesai convert ke pdf karyawan 5296 : 2017-09-15  03:08:26	/mpprecruitment/letsprocess.php	::1
+2017-09-15 03:24:16	[ERROR]	Incorrect datetime value: '' for column 'candidate_completed_date' at row 1	/mpprecruitment/letsprocess.php	::1
+2017-09-15 03:24:16	[ERROR]	Incorrect datetime value: '' for column 'candidate_completed_date' at row 1	/mpprecruitment/letsprocess.php	::1
+2017-09-15 03:51:08	[ERROR]	Incorrect datetime value: '' for column 'candidate_completed_date' at row 1	/mpprecruitment/letsprocess.php	::1
+2017-09-15 03:51:08	[ERROR]	Incorrect datetime value: '' for column 'candidate_completed_date' at row 1	/mpprecruitment/letsprocess.php	::1
+2017-09-15 07:59:22	[ERROR]	Incorrect datetime value: '' for column 'ContractStart' at row 1	/mpprecruitment/letsprocess.php	::1
+2017-09-15 07:59:22	[ERROR]	Incorrect datetime value: '' for column 'ContractStart' at row 1	/mpprecruitment/letsprocess.php	::1
+2017-09-15 08:00:14	[ERROR]	Incorrect datetime value: '' for column 'ContractStart' at row 1	/mpprecruitment/letsprocess.php	::1
+2017-09-15 08:00:14	[ERROR]	Incorrect datetime value: '' for column 'ContractStart' at row 1	/mpprecruitment/letsprocess.php	::1
+2017-09-15 08:14:02	[ERROR]	Incorrect datetime value: '' for column 'ContractStart' at row 1	/mpprecruitment/letsprocess.php	::1
+2017-09-15 08:14:02	[ERROR]	Incorrect datetime value: '' for column 'ContractStart' at row 1	/mpprecruitment/letsprocess.php	::1
+2017-09-15 08:23:42	[ERROR]	Incorrect datetime value: '' for column 'ContractStart' at row 1	/mpprecruitment/letsprocess.php	::1
+2017-09-15 08:23:42	[ERROR]	Incorrect datetime value: '' for column 'ContractStart' at row 1	/mpprecruitment/letsprocess.php	::1
+2017-09-15 08:36:12	[ERROR]	Incorrect datetime value: '' for column 'ContractStart' at row 1	/mpprecruitment/letsprocess.php	::1
+2017-09-15 08:36:12	[ERROR]	Incorrect datetime value: '' for column 'ContractStart' at row 1	/mpprecruitment/letsprocess.php	::1
+2017-09-15 08:48:20	[ERROR]	Incorrect datetime value: '' for column 'ContractStart' at row 1	/mpprecruitment/letsprocess.php	::1
+2017-09-15 08:48:20	[ERROR]	Incorrect datetime value: '' for column 'ContractStart' at row 1	/mpprecruitment/letsprocess.php	::1

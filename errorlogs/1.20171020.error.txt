@@ -1,0 +1,3 @@
+2017-10-20 02:16:40	[ERROR]	Table 'hypermart_mpprecruitment.t_sync_proint' doesn't exist	/mpprecruitment/letsprocess.php	::1
+2017-10-20 03:10:16	[ERROR]	Table 'hypermart_mpprecruitment.t_sync_proint' doesn't exist	/mpprecruitment/letsprocess.php	::1
+2017-10-20 03:54:44	[ERROR]	Table 'hypermart_mpprecruitment.t_sync_proint' doesn't exist	/mpprecruitment/letsprocess.php	::1

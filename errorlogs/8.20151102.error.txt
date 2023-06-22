@@ -1,0 +1,1 @@
+2015-11-02 03:43:03	[ERROR]	Unknown column 'NOW' in 'field list'	/mpprecruitment/letsprocess.php	127.0.0.1

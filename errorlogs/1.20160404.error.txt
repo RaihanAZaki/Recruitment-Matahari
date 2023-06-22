@@ -1,0 +1,8 @@
+2016-04-04 08:57:51	[NOTICE]	Mulai pengambilan data detail karyawan 3 dari database: 2016-04-04  08:57:51	/mpprecruitment/letsprocess.php	127.0.0.1
+2016-04-04 08:57:52	[NOTICE]	Akhir pengambilan data detail karyawan 3 dari database dan diinput ke array: 2016-04-04  08:57:52	/mpprecruitment/letsprocess.php	127.0.0.1
+2016-04-04 08:57:52	[NOTICE]	mulai setting pdf karyawan 3 : 2016-04-04  08:57:52	/mpprecruitment/letsprocess.php	127.0.0.1
+2016-04-04 08:57:52	[NOTICE]	selesai setting pdf karyawan 3 : 2016-04-04  08:57:52	/mpprecruitment/letsprocess.php	127.0.0.1
+2016-04-04 08:57:52	[NOTICE]	mulai create table html karyawan 3 : 2016-04-04  08:57:52	/mpprecruitment/letsprocess.php	127.0.0.1
+2016-04-04 08:57:52	[NOTICE]	selesai creating table html karyawan 3 : 2016-04-04  08:57:52	/mpprecruitment/letsprocess.php	127.0.0.1
+2016-04-04 08:57:52	[NOTICE]	mulai convert ke pdf karyawan 3 : 2016-04-04  08:57:52	/mpprecruitment/letsprocess.php	127.0.0.1
+2016-04-04 08:58:00	[NOTICE]	selesai convert ke pdf karyawan 3 : 2016-04-04  08:58:00	/mpprecruitment/letsprocess.php	127.0.0.1

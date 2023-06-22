@@ -1,0 +1,290 @@
+body {
+	font: 15px Calibri, Arial; 
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 0;
+	padding-right: 0;
+	margin:0;
+}
+
+
+.textarea200{ 
+  width: 200px; 
+  min-width:200px; 
+  max-width:200px; 
+
+  height:200px; 
+  min-height:100px;  
+  max-height:100px;
+}
+
+textarea {
+  height:200px; 
+  min-height:100px;  
+  max-height:100px;	
+}
+
+.textarea50{
+	height:50px !important;
+	min-height:50px;
+	max-height:50px !important;
+	
+  width: 100% !important; 
+  min-width: 100% !important; 
+  max-width: 100% !important; 
+	
+}
+
+select::-ms-expand {
+            width:12px;
+            border:none;
+            background:#fff;
+}
+
+
+.asterisk {
+	color: #ff0000;
+}
+
+.warningsign {
+	color: #FFB812;
+}
+
+.top10 {
+	padding-top: 10px !important;
+}
+
+.top0 {
+	padding-top: 0 !important;
+	margin-top: 0 !important;
+}
+
+.bottom10 {
+	padding-bottom: 10px !important;
+}
+
+.left10 {
+	padding-left: 10px !important;
+}
+
+.right10 {
+	padding-right: 10px !important;
+}
+
+.top30 {
+	padding-top: 30px;
+}
+
+.bottom30 {
+	padding-bottom: 30px;
+}
+
+.left30 {
+	padding-left: 30px;
+}
+
+.right30 {
+	padding-right: 30px;
+}
+
+
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
+#header { 
+	/*position: relative; 
+	width: 1000px; */
+	margin:0 auto; 
+	padding-top:0;
+	padding-bottom:20px;
+}
+
+#content { 
+	/*position: relative; 
+	width: 1000px; */
+	margin:0 auto; 
+	padding-top:0;
+	padding-bottom:20px;
+}
+
+
+#primarymenu { 
+	position: relative; 
+	width: 1000px; 
+	margin:0 auto; 
+	padding-top:0;
+	padding-bottom:10px;
+}
+
+
+#page-wrap { 
+	/*position: relative; 
+	width: 1000px; 
+	margin: 10px auto; 
+	padding: 20px; */
+	margin:0 auto; 
+	background: white; 
+	-moz-box-shadow: 0 0 20px #eeeeee; 
+	-webkit-box-shadow: 0 0 20px #eeeeee; 
+	box-shadow: 0 0 20px #eeeeee; 
+}
+
+p { 
+	font: 15px/2 Calibri, Arial; 
+	margin: 0 0 30px 0; 
+	text-indent: 40px; 
+}
+
+#footer { 
+	margin:0 auto; 
+	padding-top:0;
+	bottom: 0px;
+}
+
+
+a.linkkuning {
+	color: #ffffff;
+	text-decoration:none;
+	font-weight:normal;
+}
+
+a.linkkuning:hover {
+	color: #fffc00;
+	text-decoration:none;
+	font-weight:normal;
+}
+a.linkkuning:active {
+	color: #fffc00;
+	text-decoration:none;
+	font-weight:normal;
+}
+
+
+a.linkputih {
+	color: #ffffff;
+	text-decoration:none;
+}
+
+a.linkputih:hover {
+	color: #ffffff;
+	text-decoration:none;
+}
+a.linkputih:active {
+	color: #ffffff;
+	text-decoration:none;
+}
+
+
+a.linkbiru {
+	color: #60a0db;
+	text-decoration:none;
+}
+
+a.linkbiru:hover {
+	color: #0a59a3;
+	text-decoration:none;
+	font-weight:normal;
+}
+a.linkbiru:active {
+	color: #60a0db;
+	text-decoration:none;
+	font-weight:normal;
+}
+
+.fontAbu {
+	color: #cccccc;
+}
+
+#recaptcha_image,
+#recaptcha_image img 
+{
+	width: 250px !important;
+	cursor: pointer;
+}
+#recaptcha_image img:hover
+{
+	position: absolute;
+	width: 300px !important;
+}
+.recaptcha_only_if_image,
+.recaptcha_only_if_audio
+{
+	display: block;
+}
+
+/* update 22 maret 2016 */
+.caption_indo {
+	font-size: 80%;
+	padding-top: 0px;
+	margin-top: 0px;
+	text-align: left;
+	padding-left: 27px;
+	font-style: italic;
+}
+
+.caption_indo80 {
+	font-size: 80%;
+	padding-top: 0px;
+	margin-top: 0px;
+	text-align: left;
+	padding-left: 27px;
+	font-style: italic;
+	color: #777777;
+}
+
+.menu_indo {
+	font-size: 80%;
+	padding-top: -7px;
+	margin-top: -7px;
+	margin-bottom: -12px !important;
+	text-align: left;
+	padding-left: 17px;
+	font-style: italic;
+}
+
+.menu_indo_inner {
+	font-size: 85%;
+	padding-top: -7px;
+	margin-top: -7px;
+	text-align: left;
+	padding-left: 22px;
+	color: #999999;
+	font-style: italic;
+}
+
+
+.title_indo {
+	font-size: 100%;
+	padding-top: 0px;
+	margin-top: 0px;
+	text-align: left;
+	font-style: italic;
+}
+
+.right {
+	text-align: right;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.italic {
+	font-style: italic;
+}
+
+.novpadding {
+	margin-top: -7px !important;
+	margin-bottom: -7px !important;
+}
+
+.left0 {
+	padding-left: 0;
+	margin-left: 0;
+}
+
+.putih {
+	color: #ffffff;
+}

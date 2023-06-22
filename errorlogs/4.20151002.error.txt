@@ -1,0 +1,9 @@
+2015-10-02 10:46:05	[ERROR]	Unknown column 'candidate_edu_id' in 'field list'	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-02 10:48:18	[ERROR]	Unknown column 'candidate_edu_id' in 'field list'	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-02 10:54:53	[ERROR]	Unknown column 'candidate_edu_id' in 'field list'	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-02 03:02:37	[ERROR]	Incorrect date value: '2011-05' for column 'candidate_jobexp_start' at row 1	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-02 03:02:37	[ERROR]	Incorrect date value: '2010-05' for column 'candidate_jobexp_start' at row 1	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-02 03:16:40	[ERROR]	Data too long for column 'candidate_jobexp_phone' at row 1	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-02 03:16:40	[ERROR]	Incorrect integer value: '' for column 'candidate_jobexp_numemployee' at row 1	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-02 04:01:22	[ERROR]	Incorrect integer value: '' for column 'candidate_jobexp_salary' at row 1	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-02 04:04:08	[ERROR]	Incorrect integer value: '' for column 'candidate_jobexp_salary' at row 1	/mpprecruitment/letsprocess.php	127.0.0.1

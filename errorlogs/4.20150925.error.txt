@@ -1,0 +1,1 @@
+2015-09-25 09:20:14	[ERROR]	Unknown column 'candidate_organization_stillactive' in 'field list'	/mpprecruitment/organization/	127.0.0.1

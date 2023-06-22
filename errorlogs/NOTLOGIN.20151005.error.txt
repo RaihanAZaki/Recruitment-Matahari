@@ -1,0 +1,2 @@
+2015-10-05 05:05:35	[ERROR]	Unknown column 'cellphone1' in 'where clause'	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-05 05:06:13	[ERROR]	Unknown column 'cellphone1' in 'where clause'	/mpprecruitment/letsprocess.php	127.0.0.1

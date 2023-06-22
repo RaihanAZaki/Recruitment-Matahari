@@ -1,0 +1,1 @@
+2015-09-29 10:46:21	[ERROR]	Incorrect integer value: '' for column 'candidate_id' at row 1	/mpprecruitment/letsprocess.php	127.0.0.1

@@ -1,0 +1,18 @@
+2015-10-23 09:12:52	[ERROR]	Query was empty	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-23 09:22:59	[ERROR]	Query was empty	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-23 09:29:02	[ERROR]	Query was empty	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-23 09:32:03	[ERROR]	Query was empty	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-23 09:38:39	[ERROR]	Query was empty	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-23 09:51:56	[ERROR]	Query was empty	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-23 10:03:07	[ERROR]	Query was empty	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-23 10:07:25	[ERROR]	Query was empty	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-23 10:12:17	[ERROR]	Incorrect date value: '15-09-2015' for column 'job_vacancy_startdate' at row 1	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-23 10:12:48	[ERROR]	Incorrect date value: '15-09-2015' for column 'job_vacancy_startdate' at row 1	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-23 10:17:18	[ERROR]	Incorrect date value: '--5-1' for column 'job_vacancy_startdate' at row 1	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-23 10:18:07	[ERROR]	Incorrect integer value: '' for column 'job_vacancy_requestby' at row 1	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-23 02:35:54	[ERROR]	Column 'employee_id' in where clause is ambiguous	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-23 02:35:54	[ERROR]	Column 'employee_id' in where clause is ambiguous	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-23 02:37:23	[ERROR]	Column 'employee_id' in where clause is ambiguous	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-23 02:37:23	[ERROR]	Column 'employee_id' in where clause is ambiguous	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-23 02:38:01	[ERROR]	Column 'employee_id' in where clause is ambiguous	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-23 02:38:01	[ERROR]	Column 'employee_id' in where clause is ambiguous	/mpprecruitment/letsprocess.php	127.0.0.1

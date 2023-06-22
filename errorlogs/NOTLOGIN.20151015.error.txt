@@ -1,0 +1,1 @@
+2015-10-15 11:58:56	[ERROR]	You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=='open' ORDER BY job_vacancy_enddate ASC' at line 2	/mpprecruitment/vacancy/	127.0.0.1

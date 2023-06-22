@@ -1,0 +1,104 @@
+.navbar {
+  margin-bottom: 20px;
+}
+
+.navbar-dark {
+	background-color: #000000;
+	/*border-color: #74c5f9;*/
+}
+
+
+.navbar-blue {
+	background-color: #60a0db;
+	/*border-color: #74c5f9;*/
+}
+.navbar-blue .navbar-brand {
+	color: #ecf0f1;
+}
+.navbar-blue .navbar-brand:hover, .navbar-blue .navbar-brand:focus {
+	color: #ffffff;
+}
+.navbar-blue .navbar-text {
+	color: #ecf0f1;
+}
+.navbar-blue .navbar-nav > li > a {
+	color: #ecf0f1;
+}
+.navbar-blue .navbar-nav > li > a:hover, .navbar-blue .navbar-nav > li > a:focus {
+	color: #ffffff;
+	background-color: #74c5f9;
+}
+
+#biru a:active,
+#biru a:focus,
+#biru a:hover {
+	color: #ffffff;
+	background-color: #6CB1DB;
+}
+
+#hijau a:active,
+#hijau a:focus,
+#hijau a:hover {
+	color: #ffffff;
+	background-color: #55CA5E;
+}
+
+#kuning a:active,
+#kuning a:focus,
+#kuning a:hover {
+	color: #ffffff;
+	background-color: #ffd200;
+}
+
+
+
+.navbar-blue .navbar-nav > .active > a, .navbar-blue .navbar-nav > .active > a:hover, .navbar-blue .navbar-nav > .active > a:focus {
+	color: #ffffff;
+	background-color: #74c5f9;  /*biru muda */
+	/*background-color: #ffd200; kuning */
+}
+#aqua a:active,
+#aqua a:focus,
+#aqua a:hover {
+	color: #ffffff;
+	background-color: #2BD2CA;
+}
+
+#aqua .active {
+	color: #ffffff;
+	background-color: #2BD2CA;
+}
+
+
+.navbar-blue .navbar-toggle {
+	border-color: #74c5f9;
+}
+.navbar-blue .navbar-toggle:hover, .navbar-blue .navbar-toggle:focus {
+	background-color: #74c5f9;
+}
+.navbar-blue .navbar-toggle .icon-bar {
+	background-color: #ecf0f1;
+}
+.navbar-blue .navbar-collapse,
+.navbar-blue .navbar-form {
+	border-color: #ecf0f1;
+}
+.navbar-blue .navbar-link {
+	color: #ecf0f1;
+}
+.navbar-blue .navbar-link:hover {
+	color: #ffffff;
+}
+
+@media (max-width: 767px) {
+	.navbar-blue .navbar-nav .open .dropdown-menu > li > a {
+		color: #ecf0f1;
+	}
+	.navbar-blue .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-blue .navbar-nav .open .dropdown-menu > li > a:focus {
+		color: #ffffff;
+	}
+	.navbar-blue .navbar-nav .open .dropdown-menu > .active > a, .navbar-blue .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-blue .navbar-nav .open .dropdown-menu > .active > a:focus {
+		color: #ffffff;
+		background-color: #74c5f9;
+	}
+}

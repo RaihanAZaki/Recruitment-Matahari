@@ -1,0 +1,1 @@
+2015-10-19 03:16:08	[ERROR]	You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-2, 2' at line 6	/mpprecruitment/index.php?mod=jobadv&view=NG1CVnRDSktxWjVpZ2FoWUIvRDl4YkY1RC9EdFRiSm1vWHB5NmZERHhMQT0=&page=cHhCL2Q0VHdMM0FaMzdCTkkyNXlRdUdoZ2RlcVdwa1lNM2Nja1I0NGhtMD0=	127.0.0.1

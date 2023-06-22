@@ -1,0 +1,6 @@
+2017-09-08 09:47:28	[ERROR]	Incorrect datetime value: '' for column 'candidate_completed_date' at row 1	/mpprecruitment/letsprocess.php	::1
+2017-09-08 09:47:28	[ERROR]	Incorrect datetime value: '' for column 'candidate_completed_date' at row 1	/mpprecruitment/letsprocess.php	::1
+2017-09-08 09:57:18	[ERROR]	Incorrect datetime value: '' for column 'candidate_completed_date' at row 1	/mpprecruitment/letsprocess.php	::1
+2017-09-08 09:57:43	[ERROR]	Incorrect datetime value: '' for column 'candidate_completed_date' at row 1	/mpprecruitment/letsprocess.php	::1
+2017-09-08 10:41:15	[ERROR]	Incorrect datetime value: '' for column 'candidate_schedule_date' at row 1	/mpprecruitment/letsprocess.php	::1
+2017-09-08 10:41:15	[ERROR]	Incorrect datetime value: '' for column 'candidate_schedule_date' at row 1	/mpprecruitment/letsprocess.php	::1

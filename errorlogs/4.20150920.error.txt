@@ -1,0 +1,3 @@
+2015-09-20 06:59:12	[ERROR]	FUNCTION mpprecruitment.candidate_edu_degree does not exist	/mpprecruitment/education/	127.0.0.1
+2015-09-20 06:59:55	[ERROR]	You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'candidate_edu_degree('S3','S2','S1','D4','D3','D2','D1','SMA','SMP','SD')' at line 2	/mpprecruitment/education/	127.0.0.1
+2015-09-20 07:01:34	[ERROR]	You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'candidate_edu_degree(candidate_edu_degree:'S3','S2','S1','D4','D3','D2','D1','SM' at line 2	/mpprecruitment/education/	127.0.0.1

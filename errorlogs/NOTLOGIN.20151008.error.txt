@@ -1,0 +1,1 @@
+2015-10-08 10:24:44	[ERROR]	Data too long for column 'candidate_phone' at row 1	/mpprecruitment/letsprocess.php	127.0.0.1

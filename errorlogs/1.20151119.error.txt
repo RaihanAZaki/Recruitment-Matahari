@@ -1,0 +1,7 @@
+2015-11-19 11:40:12	[ERROR]	You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%sha%''' at line 2	/mpprecruitment/index.php?mod=admsearch&candidate_name=%27%sha%%27&status_id=active	127.0.0.1
+2015-11-19 11:40:53	[ERROR]	You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Highschool - SMA''' at line 2	/mpprecruitment/index.php?mod=admsearch&candidate_edu_degree=%27Highschool%20-%20SMA%27&status_id=active	127.0.0.1
+2015-11-19 11:45:20	[ERROR]	Unknown column 'c.candidate_gender' in 'where clause'	/mpprecruitment/index.php?mod=admsearch&candidate_edu_degree=Bachelor%20-%20S1&candidate_gender=male&status_id=active	127.0.0.1
+2015-11-19 11:49:36	[ERROR]	Unknown column 'c.candidate_gender' in 'where clause'	/mpprecruitment/index.php?mod=admsearch&candidate_edu_degree=Bachelor%20-%20S1&candidate_gender=male&status_id=active	127.0.0.1
+2015-11-19 03:55:40	[ERROR]	Unknown column 'b.candidate_edu_id' in 'field list'	/mpprecruitment/index.php?mod=admsearch&candidate_edu_degree=Bachelor%20-%20S1&status_id=active	127.0.0.1
+2015-11-19 05:02:26	[ERROR]	Table 'mpprecruitment.edu_temp' doesn't exist	/mpprecruitment/index.php?mod=admsearch&candidate_edu_degree=Bachelor%20-%20S1&status_id=active	127.0.0.1
+2015-11-19 05:26:48	[ERROR]	Table 'mpprecruitment.edu_temp' doesn't exist	/mpprecruitment/index.php?mod=admsearch&status_id=active	127.0.0.1

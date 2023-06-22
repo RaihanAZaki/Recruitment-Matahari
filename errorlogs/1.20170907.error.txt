@@ -1,0 +1,2 @@
+2017-09-07 10:06:53	[ERROR]	Incorrect datetime value: '' for column 'candidate_completed_date' at row 1	/mpprecruitment/letsprocess.php	::1
+2017-09-07 10:06:54	[ERROR]	Incorrect datetime value: '' for column 'candidate_completed_date' at row 1	/mpprecruitment/letsprocess.php	::1

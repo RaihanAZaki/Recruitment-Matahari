@@ -1,0 +1,1 @@
+2015-11-03 01:38:00	[ERROR]	Query was empty	/mpprecruitment/index.php?mod=candidatebyrecruiter&page=2	127.0.0.1

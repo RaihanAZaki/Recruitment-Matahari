@@ -1,0 +1,2 @@
+2015-10-07 03:02:23	[ERROR]	Field 'register_activation_date' doesn't have a default value	/mpprecruitment/letsprocess.php	127.0.0.1
+2015-10-07 04:55:14	[ERROR]	Field 'candidate_religion' doesn't have a default value	/mpprecruitment/useractivation.php?usr=SEJHVTI4M3AwTUc3bjBHaWZQZGczYzI2Vjh2VmZzMWdINXRIZ01LYWF0ND0=&a=$5$rounds=5000$8d813f7cde0b7f9c$rQk5NDSG98rdPbAd0eNqsJ9mhhRLD5uK96yflIYPWH6	127.0.0.1
