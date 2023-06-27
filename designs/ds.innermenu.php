@@ -18,7 +18,21 @@
         $innermenu = sqlGetData($q);
 
         $datapplication = getDataApply();
-        // var_dump($datapplication);exit;
+
+        $hideMenu = false;
+        $disableMenu = false;
+        
+
+        if (
+          isset($datapplication[0]["candidate_apply_stage"]) &&
+          $datapplication[0]["candidate_apply_stage"] !== "offering"
+        ) {
+          $hideMenu = true;
+          $disableMenu = true;
+        } elseif (!isset($datapplication[0]["candidate_apply_stage"]) || $datapplication[0]["candidate_apply_stage"] == 0) {
+          $hideMenu = true;
+          $disableMenu = true;
+        }
 
         foreach ($innermenu as $menu2) {
           $menuUrl = _PATHURL . "/" . url_slug($menu2["menu_name"]) . "/";
@@ -26,6 +40,7 @@
 
           // Check for specific candidate_apply_stage to hide menu2
           if (
+            $hideMenu &&
             in_array(
               $menu2["menu_name"],
               array(
@@ -36,23 +51,32 @@
                 "skills",
                 "language",
                 "family",
-                "document",
                 "questionaire"
               )
             )
           ) {
-            if (
-              isset($datapplication["candidate_apply_stage"]) && $datapplication["candidate_apply_stage"] === "offering"
-              && $menu2["status_id"] === "active"
-            ) {
-              $menuClass .= " hidden";
-            }
+            continue; // Skip this menu item
           }
-      ?>
-          <a class="<?php echo $menuClass; ?>" href="<?php echo $menuUrl; ?>">
-            <i class="fa <?php echo $menu2["menu_icon"]; ?> fa-fw"></i>&nbsp; <?php echo $menu2["menu_title"]; ?>
-          </a>
-      <?php
+
+          // Check for specific menu_name to disable menu2
+          if (
+            $disableMenu &&
+            in_array(
+              $menu2["menu_name"],
+              array(
+                "resume",
+                "documents"
+              )
+            )
+          ) {
+            echo '<span class="' . $menuClass . ' disabled">';
+            echo '<i class="fa ' . $menu2["menu_icon"] . ' fa-fw"></i>&nbsp;' . $menu2["menu_title"];
+            echo '</span>';
+          } else {
+            echo '<a class="' . $menuClass . '" href="' . $menuUrl . '">';
+            echo '<i class="fa ' . $menu2["menu_icon"] . ' fa-fw"></i>&nbsp;' . $menu2["menu_title"];
+            echo '</a>';
+          }
         }
       }
       ?>
@@ -64,25 +88,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var menuList = document.getElementById("menu-list");
-    var dataStage = "<?php echo isset($datapplication['candidate_apply_stage']) ? $datapplication['candidate_apply_stage'] : ''; ?>";
-
-    var menuItems = menuList.getElementsByClassName("list-group-item");
-    for (var i = 0; i < menuItems.length; i++) {
-      var menuItem = menuItems[i];
-      var menuName = menuItem.getAttribute("href").replace(/\/$/, "").split("/").pop();
-
-      if (
-        ["education", "workingexp", "organization", "training", "skills", "language", "family", "document", "questionaire"].includes(menuName)
-        && dataStage !== "offering"
-      ) {
-        menuItem.classList.add("hidden");
-      } else {
-        menuItem.classList.remove("hidden");
-      }
-    }
-  });
-</script>

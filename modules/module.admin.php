@@ -45,7 +45,7 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 					$nextstage="user-interview"; break;
 				case "user-interview":
 					$nextstage="background-check"; break;
-				case "offering":
+				case "background-check":
 					$nextstage="offering"; break;
 				case "offering":
 					$nextstage="final"; break;
@@ -113,7 +113,7 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 	
 		function admin_getCandidateAll($type="") {
 			if(isset($type) && $type=="register") {
-				$query=querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, candidate_birthplace, candidate_birthdate, candidate_gender, candidate_nationality, candidate_country, candidate_idtype, candidate_idcard, candidate_hp1, candidate_hp2, candidate_phone, register_date, register_expiry_date, register_activation_code
+				$query=querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, curriculum, candidate_hp1, candidate_hp2,  register_date, register_expiry_date, register_activation_code
 			FROM m_register nolock ORDER BY register_id DESC",
 				array());
 			}
@@ -155,12 +155,12 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 		function admin_getListCandidate($type,$start,$limit) {
 			if(isset($type) && $type=="register") {
 				if($start=="" && $limit=="") {
-					$query=querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, candidate_birthplace, candidate_birthdate, candidate_gender, candidate_nationality, candidate_country, candidate_idtype, candidate_idcard, candidate_hp1, candidate_hp2, candidate_phone, register_date, register_expiry_date, register_activation_code
+					$query=querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, curriculum, candidate_hp1, candidate_hp2, register_date, register_expiry_date, register_activation_code
 				FROM m_register ORDER BY register_id DESC",
 					array());
 				}
 				else {
-					$query=querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, candidate_birthplace, candidate_birthdate, candidate_gender, candidate_nationality, candidate_country, candidate_idtype, candidate_idcard, candidate_hp1, candidate_hp2, candidate_phone, register_date, register_expiry_date, register_activation_code
+					$query=querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, curriculum, candidate_hp1, candidate_hp2, register_date, register_expiry_date, register_activation_code
 				FROM m_register ORDER BY register_id DESC LIMIT ".$start.", ".$limit,
 				array());
 					
@@ -2653,7 +2653,7 @@ function admin_upload_candidateDelFileOthers() {
 					exit;
 				}
 				
-				$query = querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, candidate_birthplace, candidate_birthdate, candidate_gender, candidate_nationality, candidate_country, candidate_idtype, candidate_idcard, candidate_hp1, candidate_hp2, candidate_phone, register_date, register_activation_code
+				$query = querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, curriculum, candidate_hp1, candidate_hp2, register_date, register_activation_code
 				FROM m_register WHERE register_id=? AND candidate_email= ? ORDER BY register_id ASC LIMIT 1",array($_POST["register_id"],$_POST["candidate_email"]));
 				$data = sqlGetData($query);
 				$galat = 1;

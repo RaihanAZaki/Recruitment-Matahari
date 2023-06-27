@@ -104,6 +104,18 @@ candidate_country, candidate_idtype, candidate_idcard, candidate_hp1, candidate_
 				</div>
 			</div>
 
+			<div class="form-group">
+				<div class="col-md-3">
+					<div class="right bold">Curriculum vitae &nbsp;<span class="asterisk">*</span></div>
+					<div class="right caption_indo80 novpadding" style="padding-right:15px;">Riwayat hidup</div>
+				</div>
+				<div class="col-md-4">
+				<input type="file" class="form-control" name="curriculum" id="curriculum" accept=".pdf" value="<?php echo (isset($_SESSION["session"]["curriculum"]))?$_SESSION["session"]["curriculum"]:"";?>">
+				</div>
+			</div>
+
+		
+
 			<?php
 			if(_WITHCAPTCHA=="y") {
 			?>	
@@ -113,6 +125,7 @@ candidate_country, candidate_idtype, candidate_idcard, candidate_hp1, candidate_
 						<div class="right bold">Security code &nbsp;<span class="asterisk">*</span></div>
 						<div class="right caption_indo80 novpadding" style="padding-right:15px;">Kode keamanan</div>
 					</div>
+					
 					<div class="col-md-4">
 					
 						<div id="recaptcha_widget" style="display:none">

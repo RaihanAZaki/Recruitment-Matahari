@@ -158,35 +158,34 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 	
 	function export_DataCandidate() {
 		if(isset($_POST["candidate_id"]) && $_POST["candidate_id"]<>"") {
-			$query=querying("SELECT a.candidate_apply_id, a.candidate_id, a.candidate_email, a.job_vacancy_id, 
-				a.candidate_apply_date, a.candidate_apply_stage, a.candidate_apply_status,
-				a.OrgCode, a.JobTtlCode, a.LocationCode, a.ContractStart, a.ContractEnd,
-				b.job_vacancy_id, b.job_vacancy_name, b.job_vacancy_city, b.job_vacancy_desc, 
-				b.job_vacancy_brief, b.job_vacancy_degree, b.job_vacancy_type, b.job_vacancy_startdate, 
-				b.job_vacancy_enddate, b.log_auth_id, c.*
-				FROM t_candidate_apply a LEFT JOIN m_job_vacancy b ON a.job_vacancy_id=b.job_vacancy_id 
-				LEFT JOIN m_candidate c ON a.candidate_id=c.candidate_id 
-				WHERE b.status_id=? AND c.export_flag=? AND c.candidate_id=? GROUP BY a.candidate_id ORDER BY a.candidate_id ASC",
-				array("open","0",$_POST["candidate_id"]));    
+		$query=querying("SELECT a.candidate_apply_id, a.candidate_id, a.candidate_email, a.job_vacancy_id, 
+			a.candidate_apply_date, a.candidate_apply_stage, a.candidate_apply_status,
+			a.OrgCode, a.JobTtlCode, a.LocationCode, a.ContractStart, a.ContractEnd,
+			b.job_vacancy_id, b.job_vacancy_name, b.job_vacancy_city, b.job_vacancy_desc, 
+			b.job_vacancy_brief, b.job_vacancy_degree, b.job_vacancy_type, b.job_vacancy_startdate, 
+			b.job_vacancy_enddate, b.log_auth_id, c.*
+			FROM t_candidate_apply a LEFT JOIN m_job_vacancy b ON a.job_vacancy_id=b.job_vacancy_id 
+			LEFT JOIN m_candidate c ON a.candidate_id=c.candidate_id 
+			WHERE b.status_id=? AND c.export_flag=? AND c.candidate_id=? GROUP BY a.candidate_id ORDER BY a.candidate_id ASC",
+			array("open","0",$_POST["candidate_id"]));	
 		}
 		else {
-			$query=querying("SELECT a.candidate_apply_id, a.candidate_id, a.candidate_email, a.job_vacancy_id, 
-				a.candidate_apply_date, a.candidate_apply_stage, a.candidate_apply_status,
-				a.OrgCode, a.JobTtlCode, a.LocationCode, a.ContractStart, a.ContractEnd,
-				b.job_vacancy_id, b.job_vacancy_name, b.job_vacancy_city, b.job_vacancy_desc, 
-				b.job_vacancy_brief, b.job_vacancy_degree, b.job_vacancy_type, b.job_vacancy_startdate, 
-				b.job_vacancy_enddate, b.log_auth_id, c.*
-				FROM t_candidate_apply a LEFT JOIN m_job_vacancy b ON a.job_vacancy_id=b.job_vacancy_id 
-				LEFT JOIN m_candidate c ON a.candidate_id=c.candidate_id 
-				WHERE b.status_id=? AND c.export_flag=? GROUP BY a.candidate_id ORDER BY a.candidate_id ASC",
-				array("open","0"));                
+		$query=querying("SELECT a.candidate_apply_id, a.candidate_id, a.candidate_email, a.job_vacancy_id, 
+			a.candidate_apply_date, a.candidate_apply_stage, a.candidate_apply_status,
+			a.OrgCode, a.JobTtlCode, a.LocationCode, a.ContractStart, a.ContractEnd,
+			b.job_vacancy_id, b.job_vacancy_name, b.job_vacancy_city, b.job_vacancy_desc, 
+			b.job_vacancy_brief, b.job_vacancy_degree, b.job_vacancy_type, b.job_vacancy_startdate, 
+			b.job_vacancy_enddate, b.log_auth_id, c.*
+			FROM t_candidate_apply a LEFT JOIN m_job_vacancy b ON a.job_vacancy_id=b.job_vacancy_id 
+			LEFT JOIN m_candidate c ON a.candidate_id=c.candidate_id 
+			WHERE b.status_id=? AND c.export_flag=? GROUP BY a.candidate_id ORDER BY a.candidate_id ASC",
+			array("open","0"));				
 		}
 			
 		$data=sqlGetData($query);
 		return $data;
 
 	}
-	
 	
 	//tambahan shakti 2017_09_10
 	function export_DataCandidateJoin() {
@@ -363,7 +362,7 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 	/* UPDATE RAIHAN 2023 */
 	function adm_exportExcel() {
 		if (isset($_POST["type"]) && $_POST["type"] !== "") {
-			$datacandidate = export_DataCandidateJoin();
+			$datacandidate = export_DataCandidate();
 			$dataedu = export_DataEdu();
 			$datafam = export_DataFam();
 			$datajobexp = export_DataJob();
@@ -372,7 +371,8 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 			$datafile = export_DataFile();
 			$datafileother = export_DataFileOther();
 			$dataskill = export_DataSkill();
-			print_r($datacandidate);exit;
+			// print_r($datacandidate);exit;
+
 
 			require './vendor/autoload.php';
 			$spreadsheet = new Spreadsheet();
@@ -1187,7 +1187,7 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 // 			$styleArray = array(
 // 					  'borders' => array(
 // 						  'allborders' => array(
-// 							//   'style' => PHPExcel_Style_Border::BORDER_THIN
+// 							//   'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
 // 						  )
 // 					  )
 // 				  );
@@ -1696,10 +1696,11 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 			//print_r($dataedu);exit;
 			/** Include PHPExcel */
 			// require_once(_INCLUDEDIRECTORY."/excel/PHPExcel.php");	
-			require_once(_INCLUDEDIRECTORY."/PHPExcel-1.8/Classes/PHPExcel.php");	
+			// require_once(_INCLUDEDIRECTORY."/PHPExcel-1.8/Classes/PHPExcel.php");	
 
 			// Create new PHPExcel object
-			$objPHPExcel = new PHPExcel();
+			require './vendor/autoload.php';
+			$spreadsheet = new Spreadsheet();
 			
 			$namafile=(isset($_POST["candidate_id"]) && $_POST["candidate_id"]<>"")?"candidate_".$_POST["type"]."_".date("YmdHis")."_".$_POST["candidate_id"].".xls":"candidate_".$_POST["type"]."_".date("YmdHis").".xls";
 			header('Content-Type: application/vnd.ms-excel');
@@ -1707,23 +1708,24 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 			header('Cache-Control: max-age=0');
 
 			
-			$objPHPExcel->getProperties()->setCreator("MPPA Recruitment")
-										 ->setLastModifiedBy("MPPA Recruitment")
-										 ->setTitle("Titlenya")
-										 ->setSubject("Subjectnya")
-										 ->setDescription("Generate by system.")
-										 ->setKeywords("successful candidate")
-										 ->setCategory("User Screening");
+			$spreadsheet->getProperties()
+			->setCreator("MPPA Recruitment")
+			->setLastModifiedBy("MPPA Recruitment")
+			->setTitle("Titlenya")
+			->setSubject("Subjectnya")
+			->setDescription("Generate by system.")
+			->setKeywords("proposed candidate")
+			->setCategory("User Screening");
 
+			$worksheet1 = $spreadsheet->getActiveSheet();
+			$worksheet2 = $spreadsheet->createSheet();
+			$worksheet3 = $spreadsheet->createSheet();
+			$worksheet4 = $spreadsheet->createSheet();
+			$worksheet5 = $spreadsheet->createSheet();
 
-			$objPHPExcel->createSheet(0);
-			$objPHPExcel->createSheet(1);
-			$objPHPExcel->createSheet(2);
-			$objPHPExcel->createSheet(3);
-			
 			/* Sheet Candidate */
-			$objPHPExcel->setActiveSheetIndex(0)
-						->setCellValue('A1', 'CanId.')
+			
+			$worksheet1->setCellValue('A1', 'CanId.')
 						->setCellValue('B1', 'EmpName')
 						->setCellValue('C1', 'EmpOrganization')
 						->setCellValue('D1', 'EmpJobTitle')
@@ -1863,97 +1865,97 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 				
 				//print_r($datacandidate);exit;
 				
-				$objPHPExcel->getActiveSheet()->setCellValue('A'.$rows, $datacandidate[$i]["candidate_id"]);	
-				$objPHPExcel->getActiveSheet()->getStyle('A'.$rows)->getAlignment()->setWrapText(true);
+				$worksheet1->setCellValue('A'.$rows, $datacandidate[$i]["candidate_id"]);	
+				$worksheet1->getStyle('A'.$rows)->getAlignment()->setWrapText(true);
 				
-				$objPHPExcel->getActiveSheet()->setCellValue('B'.$rows, strtoupper($datacandidate[$i]["candidate_name"]));	
-				$objPHPExcel->getActiveSheet()->getStyle('B'.$rows)->getAlignment()->setWrapText(true);
+				$worksheet1->setCellValue('B'.$rows, strtoupper($datacandidate[$i]["candidate_name"]));	
+				$worksheet1->getStyle('B'.$rows)->getAlignment()->setWrapText(true);
 
-				$objPHPExcel->getActiveSheet()->setCellValue('C'.$rows, strtoupper($datacandidate[$i]["OrgCode"]));	
-				//$objPHPExcel->getActiveSheet()->getStyle('C'.$rows)->getAlignment()->setWrapText(true);
+				$worksheet1->setCellValue('C'.$rows, strtoupper($datacandidate[$i]["OrgCode"]));	
+				//$worksheet1->getStyle('C'.$rows)->getAlignment()->setWrapText(true);
 				
-				$objPHPExcel->getActiveSheet()->setCellValue('D'.$rows, strtoupper($datacandidate[$i]["JobTtlCode"]));	
-				$objPHPExcel->getActiveSheet()->setCellValue('E'.$rows, strtoupper($datacandidate[$i]["job_vacancy_grade"]));	
-				$objPHPExcel->getActiveSheet()->setCellValue('F'.$rows, strtoupper($emptype));	
-				$objPHPExcel->getActiveSheet()->setCellValue('G'.$rows, 'HHPR');	
-				$objPHPExcel->getActiveSheet()->setCellValue('H'.$rows, strtoupper($datacandidate[$i]["LocationCode"]));	
-				$objPHPExcel->getActiveSheet()->getStyle('H'.$rows)->getAlignment()->setWrapText(true);
+				$worksheet1->setCellValue('D'.$rows, strtoupper($datacandidate[$i]["JobTtlCode"]));	
+				$worksheet1->setCellValue('E'.$rows, strtoupper($datacandidate[$i]["job_vacancy_grade"]));	
+				$worksheet1->setCellValue('F'.$rows, strtoupper($emptype));	
+				$worksheet1->setCellValue('G'.$rows, 'HHPR');	
+				$worksheet1->setCellValue('H'.$rows, strtoupper($datacandidate[$i]["LocationCode"]));	
+				$worksheet1->getStyle('H'.$rows)->getAlignment()->setWrapText(true);
 
-				$objPHPExcel->getActiveSheet()->setCellValue('I'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('J'.$rows, 'costcenter');	
-				$objPHPExcel->getActiveSheet()->setCellValue('K'.$rows, $datacandidate[$i]["candidate_birthdate"]);	
-				$objPHPExcel->getActiveSheet()->getStyle('K'.$rows)->getAlignment()->setWrapText(true);
+				$worksheet1->setCellValue('I'.$rows, "NULL");	
+				$worksheet1->setCellValue('J'.$rows, 'costcenter');	
+				$worksheet1->setCellValue('K'.$rows, $datacandidate[$i]["candidate_birthdate"]);	
+				$worksheet1->getStyle('K'.$rows)->getAlignment()->setWrapText(true);
 				
-				$objPHPExcel->getActiveSheet()->setCellValue('L'.$rows, strtoupper($birthplace));	
-				$objPHPExcel->getActiveSheet()->setCellValue('M'.$rows, strtoupper($gender));	
-				$objPHPExcel->getActiveSheet()->setCellValue('N'.$rows, strtoupper($datacandidate[$i]["candidate_bloodtype"]));
-				$objPHPExcel->getActiveSheet()->getStyle('N'.$rows)->getAlignment()->setWrapText(true);
+				$worksheet1->setCellValue('L'.$rows, strtoupper($birthplace));	
+				$worksheet1->setCellValue('M'.$rows, strtoupper($gender));	
+				$worksheet1->setCellValue('N'.$rows, strtoupper($datacandidate[$i]["candidate_bloodtype"]));
+				$worksheet1->getStyle('N'.$rows)->getAlignment()->setWrapText(true);
 				
-				$objPHPExcel->getActiveSheet()->setCellValue('O'.$rows, $warganegara);	
-				$objPHPExcel->getActiveSheet()->getStyle('O'.$rows)->getAlignment()->setWrapText(true);				
+				$worksheet1->setCellValue('O'.$rows, $warganegara);	
+				$worksheet1->getStyle('O'.$rows)->getAlignment()->setWrapText(true);				
 				
-				$objPHPExcel->getActiveSheet()->setCellValue('P'.$rows, strtoupper($datacandidate[$i]["candidate_race"]));	//if candidate_race tidak ada di table maka "NULL"
-				$objPHPExcel->getActiveSheet()->setCellValue('Q'.$rows, strtoupper($agama));	
-				$objPHPExcel->getActiveSheet()->setCellValue('R'.$rows, strtoupper($statusnikah));	
-				$objPHPExcel->getActiveSheet()->setCellValue('S'.$rows, $datacandidate[$i]["ContractStart"]);	
-				$objPHPExcel->getActiveSheet()->setCellValue('T'.$rows, $datacandidate[$i]["ContractStart"]);	
-				$objPHPExcel->getActiveSheet()->getStyle('T'.$rows)->getAlignment()->setWrapText(true);
+				$worksheet1->setCellValue('P'.$rows, strtoupper($datacandidate[$i]["candidate_race"]));	//if candidate_race tidak ada di table maka "NULL"
+				$worksheet1->setCellValue('Q'.$rows, strtoupper($agama));	
+				$worksheet1->setCellValue('R'.$rows, strtoupper($statusnikah));	
+				$worksheet1->setCellValue('S'.$rows, $datacandidate[$i]["ContractStart"]);	
+				$worksheet1->setCellValue('T'.$rows, $datacandidate[$i]["ContractStart"]);	
+				$worksheet1->getStyle('T'.$rows)->getAlignment()->setWrapText(true);
 				
-				$objPHPExcel->getActiveSheet()->setCellValue('U'.$rows, $datacandidate[$i]["ContractStart"]);	
-				$objPHPExcel->getActiveSheet()->getStyle('U'.$rows)->getAlignment()->setWrapText(true);
+				$worksheet1->setCellValue('U'.$rows, $datacandidate[$i]["ContractStart"]);	
+				$worksheet1->getStyle('U'.$rows)->getAlignment()->setWrapText(true);
 				
-				$objPHPExcel->getActiveSheet()->setCellValue('V'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('W'.$rows, $datacandidate[$i]["ContractStart"]);	
-				$objPHPExcel->getActiveSheet()->setCellValue('X'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('Y'.$rows, $datacandidate[$i]["ContractStart"]);	
-				$objPHPExcel->getActiveSheet()->setCellValue('Z'.$rows, $datacandidate[$i]["employee_nik"]);	
-				$objPHPExcel->getActiveSheet()->setCellValue('AA'.$rows, $datacandidate[$i]["ContractStart"]);	
-				$objPHPExcel->getActiveSheet()->setCellValue('AB'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->getStyle('AB'.$rows)->getAlignment()->setWrapText(true);
+				$worksheet1->setCellValue('V'.$rows, "NULL");	
+				$worksheet1->setCellValue('W'.$rows, $datacandidate[$i]["ContractStart"]);	
+				$worksheet1->setCellValue('X'.$rows, "NULL");	
+				$worksheet1->setCellValue('Y'.$rows, $datacandidate[$i]["ContractStart"]);	
+				$worksheet1->setCellValue('Z'.$rows, $datacandidate[$i]["employee_nik"]);	
+				$worksheet1->setCellValue('AA'.$rows, $datacandidate[$i]["ContractStart"]);	
+				$worksheet1->setCellValue('AB'.$rows, "NULL");	
+				$worksheet1->getStyle('AB'.$rows)->getAlignment()->setWrapText(true);
 				
-				$objPHPExcel->getActiveSheet()->setCellValue('AC'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('AD'.$rows, $datacandidate[$i]["ContractStart"]);	
-				$objPHPExcel->getActiveSheet()->setCellValue('AE'.$rows, $datacandidate[$i]["ContractEnd"]);	
-				$objPHPExcel->getActiveSheet()->setCellValue('AF'.$rows, "REKRUT");	
-				$objPHPExcel->getActiveSheet()->setCellValue('AG'.$rows, strtoupper($datacandidate[$i]["candidate_email"]));	
-				$objPHPExcel->getActiveSheet()->setCellValue('AH'.$rows, "901");	
-				$objPHPExcel->getActiveSheet()->setCellValue('AI'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('AJ'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('AK'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('AL'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('AM'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('AN'.$rows, ($warganegara=="INA")?"N":"Y");	
-				$objPHPExcel->getActiveSheet()->setCellValue('AO'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('AP'.$rows, date("Y-m-d H:i:s"));	
-				$objPHPExcel->getActiveSheet()->setCellValue('AQ'.$rows, $recruit_pic);	
-				$objPHPExcel->getActiveSheet()->setCellValue('AR'.$rows, "Y");	
-				$objPHPExcel->getActiveSheet()->setCellValue('AS'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('AT'.$rows, strtoupper($datacandidate[$i]["candidate_c_address"]));	
-				$objPHPExcel->getActiveSheet()->setCellValue('AU'.$rows, $ccity);	
-				$objPHPExcel->getActiveSheet()->setCellValue('AV'.$rows, $datacandidate[$i]["candidate_c_postcode"]);	
-				$objPHPExcel->getActiveSheet()->setCellValue('AW'.$rows, $datacandidate[$i]["candidate_hp1"]);	
-				$objPHPExcel->getActiveSheet()->setCellValue('AX'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('AY'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('AZ'.$rows, strtoupper($datacandidate[$i]["candidate_p_address"]));	
-				$objPHPExcel->getActiveSheet()->setCellValue('BA'.$rows, $pcity);	
-				$objPHPExcel->getActiveSheet()->setCellValue('BB'.$rows, $datacandidate[$i]["candidate_p_postcode"]);	
-				$objPHPExcel->getActiveSheet()->setCellValue('BC'.$rows, $datacandidate[$i]["candidate_phone"]);	
-				$objPHPExcel->getActiveSheet()->setCellValue('BD'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('BE'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('BF'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('BG'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('BH'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('BI'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('BJ'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('BK'.$rows, $candidate_homebase);	
-				$objPHPExcel->getActiveSheet()->setCellValue('BL'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('BM'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('BN'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('BO'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('BP'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('BQ'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('BR'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('BS'.$rows, "NULL");	
+				$worksheet1->setCellValue('AC'.$rows, "NULL");	
+				$worksheet1->setCellValue('AD'.$rows, $datacandidate[$i]["ContractStart"]);	
+				$worksheet1->setCellValue('AE'.$rows, $datacandidate[$i]["ContractEnd"]);	
+				$worksheet1->setCellValue('AF'.$rows, "REKRUT");	
+				$worksheet1->setCellValue('AG'.$rows, strtoupper($datacandidate[$i]["candidate_email"]));	
+				$worksheet1->setCellValue('AH'.$rows, "901");	
+				$worksheet1->setCellValue('AI'.$rows, "NULL");	
+				$worksheet1->setCellValue('AJ'.$rows, "NULL");	
+				$worksheet1->setCellValue('AK'.$rows, "NULL");	
+				$worksheet1->setCellValue('AL'.$rows, "NULL");	
+				$worksheet1->setCellValue('AM'.$rows, "NULL");	
+				$worksheet1->setCellValue('AN'.$rows, ($warganegara=="INA")?"N":"Y");	
+				$worksheet1->setCellValue('AO'.$rows, "NULL");	
+				$worksheet1->setCellValue('AP'.$rows, date("Y-m-d H:i:s"));	
+				$worksheet1->setCellValue('AQ'.$rows, $recruit_pic);	
+				$worksheet1->setCellValue('AR'.$rows, "Y");	
+				$worksheet1->setCellValue('AS'.$rows, "NULL");	
+				$worksheet1->setCellValue('AT'.$rows, strtoupper($datacandidate[$i]["candidate_c_address"]));	
+				$worksheet1->setCellValue('AU'.$rows, $ccity);	
+				$worksheet1->setCellValue('AV'.$rows, $datacandidate[$i]["candidate_c_postcode"]);	
+				$worksheet1->setCellValue('AW'.$rows, $datacandidate[$i]["candidate_hp1"]);	
+				$worksheet1->setCellValue('AX'.$rows, "NULL");	
+				$worksheet1->setCellValue('AY'.$rows, "NULL");	
+				$worksheet1->setCellValue('AZ'.$rows, strtoupper($datacandidate[$i]["candidate_p_address"]));	
+				$worksheet1->setCellValue('BA'.$rows, $pcity);	
+				$worksheet1->setCellValue('BB'.$rows, $datacandidate[$i]["candidate_p_postcode"]);	
+				$worksheet1->setCellValue('BC'.$rows, $datacandidate[$i]["candidate_phone"]);	
+				$worksheet1->setCellValue('BD'.$rows, "NULL");	
+				$worksheet1->setCellValue('BE'.$rows, "NULL");	
+				$worksheet1->setCellValue('BF'.$rows, "NULL");	
+				$worksheet1->setCellValue('BG'.$rows, "NULL");	
+				$worksheet1->setCellValue('BH'.$rows, "NULL");	
+				$worksheet1->setCellValue('BI'.$rows, "NULL");	
+				$worksheet1->setCellValue('BJ'.$rows, "NULL");	
+				$worksheet1->setCellValue('BK'.$rows, $candidate_homebase);	
+				$worksheet1->setCellValue('BL'.$rows, "NULL");	
+				$worksheet1->setCellValue('BM'.$rows, "NULL");	
+				$worksheet1->setCellValue('BN'.$rows, "NULL");	
+				$worksheet1->setCellValue('BO'.$rows, "NULL");	
+				$worksheet1->setCellValue('BP'.$rows, "NULL");	
+				$worksheet1->setCellValue('BQ'.$rows, "NULL");	
+				$worksheet1->setCellValue('BR'.$rows, "NULL");	
+				$worksheet1->setCellValue('BS'.$rows, "NULL");	
 				//tambahan untuk input ke tabel t_sync_proint 29 April 2016
 				querying("INSERT INTO t_sync_proint (candidate_id, t_sync_status, date_insert, user_insert, date_update, user_update)
 	VALUES (?, 0, NOW(), ?, NOW(), ?)",array($datacandidate[$i]["candidate_id"],$_SESSION["log_auth_id"],$_SESSION["log_auth_id"]));
@@ -1962,7 +1964,7 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 			}			
 			
 			for($col = 'A'; $col !== 'BS'; $col++) {
-				$objPHPExcel->getActiveSheet()
+				$worksheet1
 					->getColumnDimension($col)
 					->setAutoSize(true);
 			}			
@@ -1970,26 +1972,26 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 			$styleArray = array(
 					  'borders' => array(
 						  'allborders' => array(
-							  'style' => PHPExcel_Style_Border::BORDER_THIN
+							  'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
 						  )
 					  )
 				  );
 
-			$objPHPExcel->getActiveSheet()->getStyle(
+			$worksheet1->getStyle(
 				'A1:' . 
-				$objPHPExcel->getActiveSheet()->getHighestColumn() . 
-				$objPHPExcel->getActiveSheet()->getHighestRow()
+				$worksheet1->getHighestColumn() . 
+				$worksheet1->getHighestRow()
 			)->applyFromArray($styleArray);	  
 				  
 					
 			// Rename worksheet
-			$objPHPExcel->getActiveSheet()->setTitle('Candidate');
+			$worksheet1->setTitle('Candidate');
 
 			
 			
 			/* Sheet CanEdu */
-			$objPHPExcel->setActiveSheetIndex(1)
-						->setCellValue('A1', 'CanId.')
+			
+			$worksheet2->setCellValue('A1', 'CanId.')
 						->setCellValue('B1', 'EmpEduStatus')
 						->setCellValue('C1', 'EmpEduSeq')
 						->setCellValue('D1', 'EmpEduLevel')
@@ -2050,35 +2052,35 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 						
 						if($k=="1"){$lastedu="Y";}
 						
-						$objPHPExcel->getActiveSheet()->setCellValue('A'.$rows, $dataedu[$i]["candidate_id"]);	
+						$worksheet2->setCellValue('A'.$rows, $dataedu[$i]["candidate_id"]);	
 						
-						$objPHPExcel->getActiveSheet()->setCellValue('B'.$rows, "F");	
+						$worksheet2->setCellValue('B'.$rows, "F");	
 
-						$objPHPExcel->getActiveSheet()->setCellValue('C'.$rows, $k);	
-						//$objPHPExcel->getActiveSheet()->setCellValue('C'.$rows, '=COUNTIFS($A$2:A2,A2)');
+						$worksheet2->setCellValue('C'.$rows, $k);	
+						//$worksheet2->setCellValue('C'.$rows, '=COUNTIFS($A$2:A2,A2)');
 						
-						$objPHPExcel->getActiveSheet()->setCellValue('D'.$rows, $degree);	
-						// $objPHPExcel->getActiveSheet()->setCellValue('E'.$rows, (isset($dataedu[$i]["candidate_edu_major"]) && $dataedu[$i]["candidate_edu_major"]!="")?getEduMajor($dataedu[$i]["candidate_edu_major"]):$dataedu[$i]["candidate_edu_major"]);	
-						$objPHPExcel->getActiveSheet()->setCellValue('E'.$rows, (isset($dataedu[$i]["candidate_edu_major"]) && $dataedu[$i]["candidate_edu_major"]!="")?strtoupper($dataedu[$i]["candidate_edu_major"]):"NULL");	
-						$objPHPExcel->getActiveSheet()->setCellValue('F'.$rows, "NULL");	
+						$worksheet2->setCellValue('D'.$rows, $degree);	
+						// $worksheet2->setCellValue('E'.$rows, (isset($dataedu[$i]["candidate_edu_major"]) && $dataedu[$i]["candidate_edu_major"]!="")?getEduMajor($dataedu[$i]["candidate_edu_major"]):$dataedu[$i]["candidate_edu_major"]);	
+						$worksheet2->setCellValue('E'.$rows, (isset($dataedu[$i]["candidate_edu_major"]) && $dataedu[$i]["candidate_edu_major"]!="")?strtoupper($dataedu[$i]["candidate_edu_major"]):"NULL");	
+						$worksheet2->setCellValue('F'.$rows, "NULL");	
 						
-						// $objPHPExcel->getActiveSheet()->setCellValue('G'.$rows, (isset($dataedu[$i]["candidate_edu_institution"]) && $dataedu[$i]["candidate_edu_institution"]!="")?getEduInstitution($dataedu[$i]["candidate_edu_institution"]):$dataedu[$i]["candidate_edu_institution"]);	
-						$objPHPExcel->getActiveSheet()->setCellValue('G'.$rows, (isset($dataedu[$i]["candidate_edu_institution"]) && $dataedu[$i]["candidate_edu_institution"]!="")?strtoupper($dataedu[$i]["candidate_edu_institution"]):"NULL");	
-						$objPHPExcel->getActiveSheet()->getStyle('G'.$rows)->getAlignment()->setWrapText(true);
+						// $worksheet2->setCellValue('G'.$rows, (isset($dataedu[$i]["candidate_edu_institution"]) && $dataedu[$i]["candidate_edu_institution"]!="")?getEduInstitution($dataedu[$i]["candidate_edu_institution"]):$dataedu[$i]["candidate_edu_institution"]);	
+						$worksheet2->setCellValue('G'.$rows, (isset($dataedu[$i]["candidate_edu_institution"]) && $dataedu[$i]["candidate_edu_institution"]!="")?strtoupper($dataedu[$i]["candidate_edu_institution"]):"NULL");	
+						$worksheet2->getStyle('G'.$rows)->getAlignment()->setWrapText(true);
 						
-						$objPHPExcel->getActiveSheet()->setCellValue('H'.$rows, (isset($dataedu[$i]["candidate_edu_city"]) && $dataedu[$i]["candidate_edu_city"]!="")?getCityCode($dataedu[$i]["candidate_edu_city"]):$dataedu[$i]["candidate_edu_city"]);	
+						$worksheet2->setCellValue('H'.$rows, (isset($dataedu[$i]["candidate_edu_city"]) && $dataedu[$i]["candidate_edu_city"]!="")?getCityCode($dataedu[$i]["candidate_edu_city"]):$dataedu[$i]["candidate_edu_city"]);	
 						
-						$objPHPExcel->getActiveSheet()->setCellValue('I'.$rows, $dataedu[$i]["candidate_edu_end"]);	
-						$objPHPExcel->getActiveSheet()->getStyle('I'.$rows)->getAlignment()->setWrapText(true);
+						$worksheet2->setCellValue('I'.$rows, $dataedu[$i]["candidate_edu_end"]);	
+						$worksheet2->getStyle('I'.$rows)->getAlignment()->setWrapText(true);
 						
-						$objPHPExcel->getActiveSheet()->setCellValue('J'.$rows, $dataedu[$i]["candidate_edu_gpa"]);	
-						$objPHPExcel->getActiveSheet()->setCellValue('K'.$rows, "BERIJAZAH");	
-						$objPHPExcel->getActiveSheet()->setCellValue('L'.$rows, "NULL");	
-						$objPHPExcel->getActiveSheet()->setCellValue('M'.$rows, "NULL");	
-						$objPHPExcel->getActiveSheet()->setCellValue('N'.$rows, $lastedu);	
-						$objPHPExcel->getActiveSheet()->setCellValue('O'.$rows, $dataedu[$i]["date_update"]);	
-						$objPHPExcel->getActiveSheet()->setCellValue('P'.$rows, $recruit_pic);	
-						$objPHPExcel->getActiveSheet()->setCellValue('Q'.$rows, "Y");	
+						$worksheet2->setCellValue('J'.$rows, $dataedu[$i]["candidate_edu_gpa"]);	
+						$worksheet2->setCellValue('K'.$rows, "BERIJAZAH");	
+						$worksheet2->setCellValue('L'.$rows, "NULL");	
+						$worksheet2->setCellValue('M'.$rows, "NULL");	
+						$worksheet2->setCellValue('N'.$rows, $lastedu);	
+						$worksheet2->setCellValue('O'.$rows, $dataedu[$i]["date_update"]);	
+						$worksheet2->setCellValue('P'.$rows, $recruit_pic);	
+						$worksheet2->setCellValue('Q'.$rows, "Y");	
 						
 						querying("UPDATE m_candidate_edu SET export_flag=? WHERE candidate_edu_id=?", array('1',$dataedu[$i]["candidate_edu_id"]));
 
@@ -2089,32 +2091,32 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 									
 									
 			foreach(range('A','Q') as $columnID) {
-				$objPHPExcel->getActiveSheet()->getColumnDimension($columnID)
+				$worksheet2->getColumnDimension($columnID)
 					->setAutoSize(true);
 			}
 
 			$styleArray = array(
 					  'borders' => array(
 						  'allborders' => array(
-							  'style' => PHPExcel_Style_Border::BORDER_THIN
+							  'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
 						  )
 					  )
 				  );
 
-			$objPHPExcel->getActiveSheet()->getStyle(
+			$worksheet2->getStyle(
 				'A1:' . 
-				$objPHPExcel->getActiveSheet()->getHighestColumn() . 
-				$objPHPExcel->getActiveSheet()->getHighestRow()
+				$worksheet2->getHighestColumn() . 
+				$worksheet2->getHighestRow()
 			)->applyFromArray($styleArray);	  
 				  
 					
 			// Rename worksheet
-			$objPHPExcel->getActiveSheet()->setTitle('CanEdu');
+			$worksheet2->setTitle('CanEdu');
 			
 			
 			/* Sheet CanFamily */
-			$objPHPExcel->setActiveSheetIndex(2)
-						->setCellValue('A1', 'CanId.')
+			
+			$worksheet3 ->setCellValue('A1', 'CanId.')
 						->setCellValue('B1', 'EmpFamRelation')
 						->setCellValue('C1', 'EmpFamName')
 						->setCellValue('D1', 'EmpFamEmpId')
@@ -2232,34 +2234,34 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 									
 									
 									
-									$objPHPExcel->getActiveSheet()->setCellValue('A'.$rows, $datafam[$i]["candidate_id"]);	
-									$objPHPExcel->getActiveSheet()->setCellValue('B'.$rows, (isset($fmrelation) && $fmrelation!="")?getRelationCode($fmrelation):"NULL");	
-									$objPHPExcel->getActiveSheet()->setCellValue('C'.$rows, strtoupper($datafam[$i]["candidate_family_name"]));	
-									$objPHPExcel->getActiveSheet()->setCellValue('D'.$rows, "NULL");	
-									$objPHPExcel->getActiveSheet()->setCellValue('E'.$rows, (isset($datafam[$i]["candidate_family_birthplace"]) && $datafam[$i]["candidate_family_birthplace"])?getCityCode($datafam[$i]["candidate_family_birthplace"]):"NULL");	
-									$objPHPExcel->getActiveSheet()->setCellValue('F'.$rows, $datafam[$i]["candidate_family_birthdate"]);	
-									$objPHPExcel->getActiveSheet()->setCellValue('G'.$rows, $fmsex);	
-									$objPHPExcel->getActiveSheet()->setCellValue('H'.$rows, "NULL");	
-									$objPHPExcel->getActiveSheet()->setCellValue('I'.$rows, "NULL");	
-									$objPHPExcel->getActiveSheet()->setCellValue('J'.$rows, "NULL");	
-									$objPHPExcel->getActiveSheet()->setCellValue('K'.$rows, "NULL");	
-									$objPHPExcel->getActiveSheet()->setCellValue('L'.$rows, "NULL");	
-									$objPHPExcel->getActiveSheet()->setCellValue('M'.$rows, $degree);	
-									$objPHPExcel->getActiveSheet()->setCellValue('N'.$rows, "NULL");	
-									$objPHPExcel->getActiveSheet()->setCellValue('O'.$rows, strtoupper($datafam[$i]["candidate_family_lastjob"]));	
-									$objPHPExcel->getActiveSheet()->setCellValue('P'.$rows, strtoupper($datafam[$i]["candidate_family_company"]));	
-									$objPHPExcel->getActiveSheet()->setCellValue('Q'.$rows, "NULL");	
-									$objPHPExcel->getActiveSheet()->setCellValue('R'.$rows, (isset($datafam[$i]["candidate_family_rip"]) && $datafam[$i]["candidate_family_rip"]=="Alive")?"Y":"N");	
-									$objPHPExcel->getActiveSheet()->setCellValue('S'.$rows, "NULL");	
-									$objPHPExcel->getActiveSheet()->setCellValue('T'.$rows, "NULL");	
-									$objPHPExcel->getActiveSheet()->setCellValue('U'.$rows, "NULL");	
-									$objPHPExcel->getActiveSheet()->setCellValue('V'.$rows, "NULL");	
-									$objPHPExcel->getActiveSheet()->setCellValue('W'.$rows, "NULL");	
-									$objPHPExcel->getActiveSheet()->setCellValue('X'.$rows, "NULL");	
-									$objPHPExcel->getActiveSheet()->setCellValue('Y'.$rows, "NULL");	
-									$objPHPExcel->getActiveSheet()->setCellValue('Z'.$rows, $datafam[$i]["date_update"]);	
-									$objPHPExcel->getActiveSheet()->setCellValue('AA'.$rows, $recruit_pic);	
-									$objPHPExcel->getActiveSheet()->setCellValue('AB'.$rows, "Y");	
+									$worksheet3->setCellValue('A'.$rows, $datafam[$i]["candidate_id"]);	
+									$worksheet3->setCellValue('B'.$rows, (isset($fmrelation) && $fmrelation!="")?getRelationCode($fmrelation):"NULL");	
+									$worksheet3->setCellValue('C'.$rows, strtoupper($datafam[$i]["candidate_family_name"]));	
+									$worksheet3->setCellValue('D'.$rows, "NULL");	
+									$worksheet3->setCellValue('E'.$rows, (isset($datafam[$i]["candidate_family_birthplace"]) && $datafam[$i]["candidate_family_birthplace"])?getCityCode($datafam[$i]["candidate_family_birthplace"]):"NULL");	
+									$worksheet3->setCellValue('F'.$rows, $datafam[$i]["candidate_family_birthdate"]);	
+									$worksheet3->setCellValue('G'.$rows, $fmsex);	
+									$worksheet3->setCellValue('H'.$rows, "NULL");	
+									$worksheet3->setCellValue('I'.$rows, "NULL");	
+									$worksheet3->setCellValue('J'.$rows, "NULL");	
+									$worksheet3->setCellValue('K'.$rows, "NULL");	
+									$worksheet3->setCellValue('L'.$rows, "NULL");	
+									$worksheet3->setCellValue('M'.$rows, $degree);	
+									$worksheet3->setCellValue('N'.$rows, "NULL");	
+									$worksheet3->setCellValue('O'.$rows, strtoupper($datafam[$i]["candidate_family_lastjob"]));	
+									$worksheet3->setCellValue('P'.$rows, strtoupper($datafam[$i]["candidate_family_company"]));	
+									$worksheet3->setCellValue('Q'.$rows, "NULL");	
+									$worksheet3->setCellValue('R'.$rows, (isset($datafam[$i]["candidate_family_rip"]) && $datafam[$i]["candidate_family_rip"]=="Alive")?"Y":"N");	
+									$worksheet3->setCellValue('S'.$rows, "NULL");	
+									$worksheet3->setCellValue('T'.$rows, "NULL");	
+									$worksheet3->setCellValue('U'.$rows, "NULL");	
+									$worksheet3->setCellValue('V'.$rows, "NULL");	
+									$worksheet3->setCellValue('W'.$rows, "NULL");	
+									$worksheet3->setCellValue('X'.$rows, "NULL");	
+									$worksheet3->setCellValue('Y'.$rows, "NULL");	
+									$worksheet3->setCellValue('Z'.$rows, $datafam[$i]["date_update"]);	
+									$worksheet3->setCellValue('AA'.$rows, $recruit_pic);	
+									$worksheet3->setCellValue('AB'.$rows, "Y");	
 									
 									querying("UPDATE m_candidate_family SET export_flag=? WHERE candidate_family_id=?", array('1',$datafam[$i]["candidate_family_id"]));
 									
@@ -2269,30 +2271,30 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 								
 								
 			foreach(range('A','AB') as $columnID) {
-				$objPHPExcel->getActiveSheet()->getColumnDimension($columnID)
+				$worksheet3->getColumnDimension($columnID)
 					->setAutoSize(true);
 			}			
 			
 			$styleArray = array(
 					  'borders' => array(
 						  'allborders' => array(
-							  'style' => PHPExcel_Style_Border::BORDER_THIN
+							  'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
 						  )
 					  )
 				  );
 
-			$objPHPExcel->getActiveSheet()->getStyle(
+			$worksheet3->getStyle(
 				'A1:' . 
-				$objPHPExcel->getActiveSheet()->getHighestColumn() . 
-				$objPHPExcel->getActiveSheet()->getHighestRow()
+				$worksheet3->getHighestColumn() . 
+				$worksheet3->getHighestRow()
 			)->applyFromArray($styleArray);	  					
 			// Rename worksheet
-			$objPHPExcel->getActiveSheet()->setTitle('CanFamily');
+			$worksheet3->setTitle('CanFamily');
 			
 			
 			/* Sheet CanExperience */
-			$objPHPExcel->setActiveSheetIndex(3)
-						->setCellValue('A1', 'CanId.')
+			
+			$worksheet4->setCellValue('A1', 'CanId.')
 						->setCellValue('B1', 'Sequence')
 						->setCellValue('C1', 'CompanyName')
 						->setCellValue('D1', 'CompanyAddress')
@@ -2324,65 +2326,64 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 				{
 					$rows++;
 					$k++;
-					$objPHPExcel->getActiveSheet()->setCellValue('A'.$rows, $datajobexp[$i]["candidate_id"]);	
-					$objPHPExcel->getActiveSheet()->setCellValue('B'.$rows, $k);	
-					$objPHPExcel->getActiveSheet()->setCellValue('C'.$rows, strtoupper($datajobexp[$i]["candidate_jobexp_company"]));	
-					$objPHPExcel->getActiveSheet()->setCellValue('D'.$rows, strtoupper($datajobexp[$i]["candidate_jobexp_address"]));
-					$objPHPExcel->getActiveSheet()->getStyle('D'.$rows)->getAlignment()->setWrapText(true);				
+					$worksheet4->setCellValue('A'.$rows, $datajobexp[$i]["candidate_id"]);	
+					$worksheet4->setCellValue('B'.$rows, $k);	
+					$worksheet4->setCellValue('C'.$rows, strtoupper($datajobexp[$i]["candidate_jobexp_company"]));	
+					$worksheet4->setCellValue('D'.$rows, strtoupper($datajobexp[$i]["candidate_jobexp_address"]));
+					$worksheet4->getStyle('D'.$rows)->getAlignment()->setWrapText(true);				
 					
-					$objPHPExcel->getActiveSheet()->setCellValue('E'.$rows, "");	
-					$objPHPExcel->getActiveSheet()->setCellValue('F'.$rows, "");	
-					$objPHPExcel->getActiveSheet()->setCellValue('G'.$rows, strtoupper($datajobexp[$i]["candidate_jobexp_phone"]));	
-					$objPHPExcel->getActiveSheet()->setCellValue('H'.$rows, strtoupper($datajobexp[$i]["candidate_jobexp_start"]));	
-					$objPHPExcel->getActiveSheet()->setCellValue('I'.$rows, strtoupper($datajobexp[$i]["candidate_jobexp_end"]));	
-					$objPHPExcel->getActiveSheet()->setCellValue('J'.$rows, strtoupper($datajobexp[$i]["candidate_jobexp_spvposition"]));	
-					$objPHPExcel->getActiveSheet()->setCellValue('K'.$rows, "");	
-					$objPHPExcel->getActiveSheet()->setCellValue('L'.$rows, strtoupper($datajobexp[$i]["candidate_jobexp_salary"]));	
-					$objPHPExcel->getActiveSheet()->setCellValue('M'.$rows, strtoupper($datajobexp[$i]["candidate_jobexp_leaving"]));	
-					$objPHPExcel->getActiveSheet()->getStyle('M'.$rows)->getAlignment()->setWrapText(true);				
+					$worksheet4->setCellValue('E'.$rows, "");	
+					$worksheet4->setCellValue('F'.$rows, "");	
+					$worksheet4->setCellValue('G'.$rows, strtoupper($datajobexp[$i]["candidate_jobexp_phone"]));	
+					$worksheet4->setCellValue('H'.$rows, strtoupper($datajobexp[$i]["candidate_jobexp_start"]));	
+					$worksheet4->setCellValue('I'.$rows, strtoupper($datajobexp[$i]["candidate_jobexp_end"]));	
+					$worksheet4->setCellValue('J'.$rows, strtoupper($datajobexp[$i]["candidate_jobexp_spvposition"]));	
+					$worksheet4->setCellValue('K'.$rows, "");	
+					$worksheet4->setCellValue('L'.$rows, strtoupper($datajobexp[$i]["candidate_jobexp_salary"]));	
+					$worksheet4->setCellValue('M'.$rows, strtoupper($datajobexp[$i]["candidate_jobexp_leaving"]));	
+					$worksheet4->getStyle('M'.$rows)->getAlignment()->setWrapText(true);				
 					
-					$objPHPExcel->getActiveSheet()->setCellValue('N'.$rows, $datajobexp[$i]["date_update"]);	
-					$objPHPExcel->getActiveSheet()->setCellValue('O'.$rows, $recruit_pic);	
-					$objPHPExcel->getActiveSheet()->setCellValue('P'.$rows, "");	
+					$worksheet4->setCellValue('N'.$rows, $datajobexp[$i]["date_update"]);	
+					$worksheet4->setCellValue('O'.$rows, $recruit_pic);	
+					$worksheet4->setCellValue('P'.$rows, "");	
 					
-					$objPHPExcel->getActiveSheet()->setCellValue('Q'.$rows, strtoupper($datajobexp[$i]["candidate_jobexp_desc"]));	
-					$objPHPExcel->getActiveSheet()->getStyle('Q'.$rows)->getAlignment()->setWrapText(true);				
+					$worksheet4->setCellValue('Q'.$rows, strtoupper($datajobexp[$i]["candidate_jobexp_desc"]));	
+					$worksheet4->getStyle('Q'.$rows)->getAlignment()->setWrapText(true);				
 
-					$objPHPExcel->getActiveSheet()->setCellValue('R'.$rows, "");	
-					$objPHPExcel->getActiveSheet()->setCellValue('S'.$rows, "");	
-					$objPHPExcel->getActiveSheet()->setCellValue('T'.$rows, strtoupper($datajobexp[$i]["candidate_jobexp_spvname"]));	
-					$objPHPExcel->getActiveSheet()->setCellValue('U'.$rows, "");	
+					$worksheet4->setCellValue('R'.$rows, "");	
+					$worksheet4->setCellValue('S'.$rows, "");	
+					$worksheet4->setCellValue('T'.$rows, strtoupper($datajobexp[$i]["candidate_jobexp_spvname"]));	
+					$worksheet4->setCellValue('U'.$rows, "");	
 					
 					querying("UPDATE m_candidate_jobexp SET export_flag=? WHERE candidate_jobexp_id=?", array('1',$datajobexp[$i]["candidate_jobexp_id"]));
 				}
 			}
 			foreach(range('A','U') as $columnID) {
-				$objPHPExcel->getActiveSheet()->getColumnDimension($columnID)
+				$worksheet4->getColumnDimension($columnID)
 					->setAutoSize(true);
 			}			
 			
 			$styleArray = array(
 					  'borders' => array(
 						  'allborders' => array(
-							  'style' => PHPExcel_Style_Border::BORDER_THIN
+							  'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
 						  )
 					  )
 				  );
 
-			$objPHPExcel->getActiveSheet()->getStyle(
+			$worksheet4->getStyle(
 				'A1:' . 
-				$objPHPExcel->getActiveSheet()->getHighestColumn() . 
-				$objPHPExcel->getActiveSheet()->getHighestRow()
+				$worksheet4->getHighestColumn() . 
+				$worksheet4->getHighestRow()
 			)->applyFromArray($styleArray);	  					
 			// Rename worksheet
-			$objPHPExcel->getActiveSheet()->setTitle('CanExperience');			
+			$worksheet4->setTitle('CanExperience');			
 						
 			
 			
 			
 			/* Sheet CandidateIDCard */
-			$objPHPExcel->setActiveSheetIndex(4)
-						->setCellValue('A1', 'EmpId.')
+			$worksheet5->setCellValue('A1', 'EmpId.')
 						->setCellValue('B1', 'EmpCardType')
 						->setCellValue('C1', 'EmpCardNumber')
 						->setCellValue('D1', 'EmpCardPublisher')
@@ -2396,58 +2397,58 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 			$rows=1;	
 			for($i=0;$i<count($datacandidate);$i++) {
 				$rows++;
-				$objPHPExcel->getActiveSheet()->setCellValue('A'.$rows, $datacandidate[$i]["candidate_id"]);	
-				$objPHPExcel->getActiveSheet()->setCellValue('B'.$rows, $datacandidate[$i]["candidate_idtype"]);	
-				//$objPHPExcel->getActiveSheet()->setCellValue('C'.$rows, $datacandidate[$i]["candidate_idcard"]);	
-				$objPHPExcel->getActiveSheet()->setCellValueExplicit('C'.$rows, $datacandidate[$i]["candidate_idcard"], PHPExcel_Cell_DataType::TYPE_STRING);
+				$worksheet5->setCellValue('A'.$rows, $datacandidate[$i]["candidate_id"]);	
+				$worksheet5->setCellValue('B'.$rows, $datacandidate[$i]["candidate_idtype"]);	
+				//$worksheet5->setCellValue('C'.$rows, $datacandidate[$i]["candidate_idcard"]);	
+				$worksheet5->setCellValueExplicit('C'.$rows, $datacandidate[$i]["candidate_idcard"], PHPExcel_Cell_DataType::TYPE_STRING);
 
 
-				$objPHPExcel->getActiveSheet()->setCellValue('D'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('E'.$rows, "NULL");	
-				$objPHPExcel->getActiveSheet()->setCellValue('F'.$rows, $datacandidate[$i]["date_update"]);	
-				$objPHPExcel->getActiveSheet()->setCellValue('G'.$rows, $recruit_pic);					
-				$objPHPExcel->getActiveSheet()->setCellValue('H'.$rows, "Y");	
-				$objPHPExcel->getActiveSheet()->setCellValue('I'.$rows, "NULL");	
+				$worksheet5->setCellValue('D'.$rows, "NULL");	
+				$worksheet5->setCellValue('E'.$rows, "NULL");	
+				$worksheet5->setCellValue('F'.$rows, $datacandidate[$i]["date_update"]);	
+				$worksheet5->setCellValue('G'.$rows, $recruit_pic);					
+				$worksheet5->setCellValue('H'.$rows, "Y");	
+				$worksheet5->setCellValue('I'.$rows, "NULL");	
 				
 				querying("UPDATE m_candidate SET export_flag=? WHERE candidate_id=?", array('1',$datacandidate[$i]["candidate_id"]));
 			}
 			foreach(range('A','I') as $columnID) {
-				$objPHPExcel->getActiveSheet()->getColumnDimension($columnID)
+				$worksheet5->getColumnDimension($columnID)
 					->setAutoSize(true);
 			}
 
 			$styleArray = array(
 					  'borders' => array(
 						  'allborders' => array(
-							  'style' => PHPExcel_Style_Border::BORDER_THIN
+							  'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
 						  )
 					  )
 				  );
 
-			$objPHPExcel->getActiveSheet()->getStyle(
+			$worksheet5->getStyle(
 				'A1:' . 
-				$objPHPExcel->getActiveSheet()->getHighestColumn() . 
-				$objPHPExcel->getActiveSheet()->getHighestRow()
+				$worksheet5->getHighestColumn() . 
+				$worksheet5->getHighestRow()
 			)->applyFromArray($styleArray);	  
 				  
 					
 			// Rename worksheet
-			$objPHPExcel->getActiveSheet()->setTitle('CandidateIDCard');
+			$worksheet5->setTitle('CandidateIDCard');
 
 			
 			
 
 			// Set active sheet index to the first sheet, so Excel opens this as the first sheet
-			$objPHPExcel->setActiveSheetIndex(0);
-
-
-			// Save Excel 95 file
-			$callStartTime = microtime(true);
-
-			$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
-			$objWriter->save('php://output');
-			$callEndTime = microtime(true);
-			$callTime = $callEndTime - $callStartTime;
+			$writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+			$writer->save($namafile);
+	
+			// Mengirimkan file Excel sebagai unduhan
+			ob_end_clean();
+			header('Content-Type: application/vnd.ms-excel');
+			header('Content-Disposition: attachment; filename="' . $namafile . '"');
+			header('Cache-Control: max-age=0');
+			$writer->save('php://output');
+			exit;
 			
 			
 			

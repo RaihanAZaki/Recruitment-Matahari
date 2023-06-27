@@ -20,37 +20,42 @@ $dataresume=getDataResume();
 //print_r($_SESSION);
 //exit;
 
+
+$datapplication = getDataApply();
+
+
 $data=array();
-$data["candidate_religion"]=(isset($_SESSION["session"]["candidate_religion"]) && $_SESSION["session"]["candidate_religion"]<>"")?$_SESSION["session"]["candidate_religion"]:$dataresume[0]["candidate_religion"];
-$data["candidate_race"]=(isset($_SESSION["session"]["candidate_race"]) && $_SESSION["session"]["candidate_race"]<>"")?$_SESSION["session"]["candidate_race"]:$dataresume[0]["candidate_race"];
+$data["candidate_birthplace"]=(isset($_SESSION["session"]["candidate_birthplace"]) && $_SESSION["session"]["candidate_birthplace"]<>"")?$_SESSION["session"]["candidate_birthplace"]:$dataresume[0]["candidate_birthplace"];
+		$data["candidate_religion"]=(isset($_SESSION["session"]["candidate_religion"]) && $_SESSION["session"]["candidate_religion"]<>"")?$_SESSION["session"]["candidate_religion"]:$dataresume[0]["candidate_religion"];
+		$data["candidate_race"]=(isset($_SESSION["session"]["candidate_race"]) && $_SESSION["session"]["candidate_race"]<>"")?$_SESSION["session"]["candidate_race"]:$dataresume[0]["candidate_race"];
 
-$data["candidate_bodyheight"]=(isset($_SESSION["session"]["candidate_bodyheight"]) && $_SESSION["session"]["candidate_bodyheight"]<>"")?$_SESSION["session"]["candidate_bodyheight"]:$dataresume[0]["candidate_bodyheight"];
-$data["candidate_bodyweight"]=(isset($_SESSION["session"]["candidate_bodyweight"]) && $_SESSION["session"]["candidate_bodyweight"]<>"")?$_SESSION["session"]["candidate_bodyweight"]:$dataresume[0]["candidate_bodyweight"];
+		$data["candidate_bodyheight"]=(isset($_SESSION["session"]["candidate_bodyheight"]) && $_SESSION["session"]["candidate_bodyheight"]<>"")?$_SESSION["session"]["candidate_bodyheight"]:$dataresume[0]["candidate_bodyheight"];
+		$data["candidate_bodyweight"]=(isset($_SESSION["session"]["candidate_bodyweight"]) && $_SESSION["session"]["candidate_bodyweight"]<>"")?$_SESSION["session"]["candidate_bodyweight"]:$dataresume[0]["candidate_bodyweight"];
 
-$data["candidate_bloodtype"]=(isset($_SESSION["session"]["candidate_bloodtype"]) && $_SESSION["session"]["candidate_bloodtype"]<>"")?$_SESSION["session"]["candidate_bloodtype"]:$dataresume[0]["candidate_bloodtype"];
-$data["candidate_sim_a"]=(isset($_SESSION["session"]["candidate_sim_a"]) && $_SESSION["session"]["candidate_sim_a"]<>"")?$_SESSION["session"]["candidate_sim_a"]:$dataresume[0]["candidate_sim_a"];
-$data["candidate_sim_c"]=(isset($_SESSION["session"]["candidate_sim_c"]) && $_SESSION["session"]["candidate_sim_c"]<>"")?$_SESSION["session"]["candidate_sim_c"]:$dataresume[0]["candidate_sim_c"];
-$data["candidate_npwp"]=(isset($_SESSION["session"]["candidate_npwp"]) && $_SESSION["session"]["candidate_npwp"]<>"")?$_SESSION["session"]["candidate_npwp"]:$dataresume[0]["candidate_npwp"];
-$data["candidate_marital"]=(isset($_SESSION["session"]["candidate_marital"]) && $_SESSION["session"]["candidate_marital"]<>"")?$_SESSION["session"]["candidate_marital"]:$dataresume[0]["candidate_marital"];
-$data["candidate_p_address"]=(isset($_SESSION["session"]["candidate_p_address"]) && $_SESSION["session"]["candidate_p_address"]<>"")?$_SESSION["session"]["candidate_p_address"]:$dataresume[0]["candidate_p_address"];
-$data["candidate_p_city"]=(isset($_SESSION["session"]["candidate_p_city"]) && $_SESSION["session"]["candidate_p_city"]<>"")?$_SESSION["session"]["candidate_p_city"]:$dataresume[0]["candidate_p_city"];
-$data["candidate_p_postcode"]=(isset($_SESSION["session"]["candidate_p_postcode"]) && $_SESSION["session"]["candidate_p_postcode"]<>"")?$_SESSION["session"]["candidate_p_postcode"]:$dataresume[0]["candidate_p_postcode"];
-$data["candidate_c_address"]=(isset($_SESSION["session"]["candidate_c_address"]) && $_SESSION["session"]["candidate_c_address"]<>"")?$_SESSION["session"]["candidate_c_address"]:$dataresume[0]["candidate_c_address"];
-$data["candidate_c_city"]=(isset($_SESSION["session"]["candidate_c_city"]) && $_SESSION["session"]["candidate_c_city"]<>"")?$_SESSION["session"]["candidate_c_city"]:$dataresume[0]["candidate_c_city"];
-$data["candidate_c_postcode"]=(isset($_SESSION["session"]["candidate_c_postcode"]) && $_SESSION["session"]["candidate_c_postcode"]<>"")?$_SESSION["session"]["candidate_c_postcode"]:$dataresume[0]["candidate_c_postcode"];
-$data["candidate_hp2"]=(isset($_SESSION["session"]["candidate_hp2"]) && $_SESSION["session"]["candidate_hp2"]<>"")?$_SESSION["session"]["candidate_hp2"]:$dataresume[0]["candidate_hp2"];
-$data["candidate_phone"]=(isset($_SESSION["session"]["candidate_phone"]) && $_SESSION["session"]["candidate_phone"]<>"")?$_SESSION["session"]["candidate_phone"]:$dataresume[0]["candidate_phone"];
-$data["candidate_cp_name1"]=(isset($_SESSION["session"]["candidate_cp_name1"]) && $_SESSION["session"]["candidate_cp_name1"]<>"")?$_SESSION["session"]["candidate_cp_name1"]:$dataresume[0]["candidate_cp_name1"];
-$data["candidate_cp_relation1"]=(isset($_SESSION["session"]["candidate_cp_relation1"]) && $_SESSION["session"]["candidate_cp_relation1"]<>"")?$_SESSION["session"]["candidate_cp_relation1"]:$dataresume[0]["candidate_cp_relation1"];
-$data["candidate_cp_phone1"]=(isset($_SESSION["session"]["candidate_cp_phone1"]) && $_SESSION["session"]["candidate_cp_phone1"]<>"")?$_SESSION["session"]["candidate_cp_phone1"]:$dataresume[0]["candidate_cp_phone1"];
-$data["candidate_cp_name2"]=(isset($_SESSION["session"]["candidate_cp_name2"]) && $_SESSION["session"]["candidate_cp_name2"]<>"")?$_SESSION["session"]["candidate_cp_name2"]:$dataresume[0]["candidate_cp_name2"];
-$data["candidate_cp_relation2"]=(isset($_SESSION["session"]["candidate_cp_relation2"]) && $_SESSION["session"]["candidate_cp_relation2"]<>"")?$_SESSION["session"]["candidate_cp_relation2"]:$dataresume[0]["candidate_cp_relation2"];
-$data["candidate_cp_phone2"]=(isset($_SESSION["session"]["candidate_cp_phone2"]) && $_SESSION["session"]["candidate_cp_phone2"]<>"")?$_SESSION["session"]["candidate_cp_phone2"]:$dataresume[0]["candidate_cp_phone2"];
-$data["candidate_ref_name"]=(isset($_SESSION["session"]["candidate_ref_name"]) && $_SESSION["session"]["candidate_ref_name"]<>"")?$_SESSION["session"]["candidate_ref_name"]:$dataresume[0]["candidate_ref_name"];
-$data["candidate_ref_division"]=(isset($_SESSION["session"]["candidate_ref_division"]) && $_SESSION["session"]["candidate_ref_division"]<>"")?$_SESSION["session"]["candidate_ref_division"]:$dataresume[0]["candidate_ref_division"];
-$data["candidate_ref_position"]=(isset($_SESSION["session"]["candidate_ref_position"]) && $_SESSION["session"]["candidate_ref_position"]<>"")?$_SESSION["session"]["candidate_ref_position"]:$dataresume[0]["candidate_ref_position"];
-$data["candidate_expected_salary"]=(isset($_SESSION["session"]["candidate_expected_salary"]) && $_SESSION["session"]["candidate_expected_salary"]<>"")?$_SESSION["session"]["candidate_expected_salary"]:$dataresume[0]["candidate_expected_salary"];
-$data["candidate_hobby"]=(isset($_SESSION["session"]["candidate_hobby"]) && $_SESSION["session"]["candidate_hobby"]<>"")?$_SESSION["session"]["candidate_hobby"]:$dataresume[0]["candidate_hobby"];
+		$data["candidate_bloodtype"]=(isset($_SESSION["session"]["candidate_bloodtype"]) && $_SESSION["session"]["candidate_bloodtype"]<>"")?$_SESSION["session"]["candidate_bloodtype"]:$dataresume[0]["candidate_bloodtype"];
+		$data["candidate_sim_a"]=(isset($_SESSION["session"]["candidate_sim_a"]) && $_SESSION["session"]["candidate_sim_a"]<>"")?$_SESSION["session"]["candidate_sim_a"]:$dataresume[0]["candidate_sim_a"];
+		$data["candidate_sim_c"]=(isset($_SESSION["session"]["candidate_sim_c"]) && $_SESSION["session"]["candidate_sim_c"]<>"")?$_SESSION["session"]["candidate_sim_c"]:$dataresume[0]["candidate_sim_c"];
+		$data["candidate_npwp"]=(isset($_SESSION["session"]["candidate_npwp"]) && $_SESSION["session"]["candidate_npwp"]<>"")?$_SESSION["session"]["candidate_npwp"]:$dataresume[0]["candidate_npwp"];
+		$data["candidate_marital"]=(isset($_SESSION["session"]["candidate_marital"]) && $_SESSION["session"]["candidate_marital"]<>"")?$_SESSION["session"]["candidate_marital"]:$dataresume[0]["candidate_marital"];
+		$data["candidate_p_address"]=(isset($_SESSION["session"]["candidate_p_address"]) && $_SESSION["session"]["candidate_p_address"]<>"")?$_SESSION["session"]["candidate_p_address"]:$dataresume[0]["candidate_p_address"];
+		$data["candidate_p_city"]=(isset($_SESSION["session"]["candidate_p_city"]) && $_SESSION["session"]["candidate_p_city"]<>"")?$_SESSION["session"]["candidate_p_city"]:$dataresume[0]["candidate_p_city"];
+		$data["candidate_p_postcode"]=(isset($_SESSION["session"]["candidate_p_postcode"]) && $_SESSION["session"]["candidate_p_postcode"]<>"")?$_SESSION["session"]["candidate_p_postcode"]:$dataresume[0]["candidate_p_postcode"];
+		$data["candidate_c_address"]=(isset($_SESSION["session"]["candidate_c_address"]) && $_SESSION["session"]["candidate_c_address"]<>"")?$_SESSION["session"]["candidate_c_address"]:$dataresume[0]["candidate_c_address"];
+		$data["candidate_c_city"]=(isset($_SESSION["session"]["candidate_c_city"]) && $_SESSION["session"]["candidate_c_city"]<>"")?$_SESSION["session"]["candidate_c_city"]:$dataresume[0]["candidate_c_city"];
+		$data["candidate_c_postcode"]=(isset($_SESSION["session"]["candidate_c_postcode"]) && $_SESSION["session"]["candidate_c_postcode"]<>"")?$_SESSION["session"]["candidate_c_postcode"]:$dataresume[0]["candidate_c_postcode"];
+		$data["candidate_hp2"]=(isset($_SESSION["session"]["candidate_hp2"]) && $_SESSION["session"]["candidate_hp2"]<>"")?$_SESSION["session"]["candidate_hp2"]:$dataresume[0]["candidate_hp2"];
+		$data["candidate_phone"]=(isset($_SESSION["session"]["candidate_phone"]) && $_SESSION["session"]["candidate_phone"]<>"")?$_SESSION["session"]["candidate_phone"]:$dataresume[0]["candidate_phone"];
+		$data["candidate_cp_name1"]=(isset($_SESSION["session"]["candidate_cp_name1"]) && $_SESSION["session"]["candidate_cp_name1"]<>"")?$_SESSION["session"]["candidate_cp_name1"]:$dataresume[0]["candidate_cp_name1"];
+		$data["candidate_cp_relation1"]=(isset($_SESSION["session"]["candidate_cp_relation1"]) && $_SESSION["session"]["candidate_cp_relation1"]<>"")?$_SESSION["session"]["candidate_cp_relation1"]:$dataresume[0]["candidate_cp_relation1"];
+		$data["candidate_cp_phone1"]=(isset($_SESSION["session"]["candidate_cp_phone1"]) && $_SESSION["session"]["candidate_cp_phone1"]<>"")?$_SESSION["session"]["candidate_cp_phone1"]:$dataresume[0]["candidate_cp_phone1"];
+		$data["candidate_cp_name2"]=(isset($_SESSION["session"]["candidate_cp_name2"]) && $_SESSION["session"]["candidate_cp_name2"]<>"")?$_SESSION["session"]["candidate_cp_name2"]:$dataresume[0]["candidate_cp_name2"];
+		$data["candidate_cp_relation2"]=(isset($_SESSION["session"]["candidate_cp_relation2"]) && $_SESSION["session"]["candidate_cp_relation2"]<>"")?$_SESSION["session"]["candidate_cp_relation2"]:$dataresume[0]["candidate_cp_relation2"];
+		$data["candidate_cp_phone2"]=(isset($_SESSION["session"]["candidate_cp_phone2"]) && $_SESSION["session"]["candidate_cp_phone2"]<>"")?$_SESSION["session"]["candidate_cp_phone2"]:$dataresume[0]["candidate_cp_phone2"];
+		$data["candidate_ref_name"]=(isset($_SESSION["session"]["candidate_ref_name"]) && $_SESSION["session"]["candidate_ref_name"]<>"")?$_SESSION["session"]["candidate_ref_name"]:$dataresume[0]["candidate_ref_name"];
+		$data["candidate_ref_division"]=(isset($_SESSION["session"]["candidate_ref_division"]) && $_SESSION["session"]["candidate_ref_division"]<>"")?$_SESSION["session"]["candidate_ref_division"]:$dataresume[0]["candidate_ref_division"];
+		$data["candidate_ref_position"]=(isset($_SESSION["session"]["candidate_ref_position"]) && $_SESSION["session"]["candidate_ref_position"]<>"")?$_SESSION["session"]["candidate_ref_position"]:$dataresume[0]["candidate_ref_position"];
+		$data["candidate_expected_salary"]=(isset($_SESSION["session"]["candidate_expected_salary"]) && $_SESSION["session"]["candidate_expected_salary"]<>"")?$_SESSION["session"]["candidate_expected_salary"]:$dataresume[0]["candidate_expected_salary"];
+		$data["candidate_hobby"]=(isset($_SESSION["session"]["candidate_hobby"]) && $_SESSION["session"]["candidate_hobby"]<>"")?$_SESSION["session"]["candidate_hobby"]:$dataresume[0]["candidate_hobby"];
 
 $array_religion=array('Islam', 'Roman Catholic', 'Protestant', 'Hindu', 'Budhist', 'Confucianism');
 
@@ -63,13 +68,27 @@ exit;
 //print_r($data);
 */
 if(count($data)>0) $data=clean_view($data);
+
 ?>
+
+
 <div class="panel panel-info" style="margin-bottom:30px;">
 	<div class="panel-heading">
 		<h2 class="panel-title"><cufonize><i class="fa fa-user"></i>&nbsp;Basic Information</cufonize></h2>
 		<div class="caption_indo">Informasi Dasar</div>
 	</div>
 	
+	<?php
+		$datapplication = getDataApply();
+		// Memeriksa kondisi tahap "offering"
+		if (is_array($datapplication) && count($datapplication) > 0) {
+			// Memeriksa kondisi tahap "offering"
+			if ($datapplication[0]["candidate_apply_stage"] !== "offering") {
+			// Jika belum mencapai tahap "offering", tampilkan pesan atau elemen HTML lainnya
+			echo '<div class="alert alert-warning" role="alert">Harap tunggu tahap "offering" untuk mengisi personal data.</div>';
+		} else {
+    // Jika sudah mencapai tahap "offering", tampilkan form
+    ?>
 	<!-- awal panel body -->
 	<div class="panel-body" style="line-height:150%; text-align:justify;">		
 		<form class="form-horizontal" name="resumeform" id="resumeform" method="post" action="<?php echo _PATHURL;?>/letsprocess.php" role="form">
@@ -101,91 +120,72 @@ if(count($data)>0) $data=clean_view($data);
 				
 			</div>
 			
-			<!-- <div class="form-group">
-				<div class="col-md-3">
-					<div class="right bold">Place of birth</div>
-					<div class="right caption_indo80 novpadding">Tempat lahir</div>
-				</div>
-				<div class="col-md-4">
-					<div class="button-group">
-						<input name="place_of_birth" id="birthplace" class="form-control" value="<?php echo (isset($dataresume[0]["candidate_birthplace"]) && $dataresume[0]["candidate_birthplace"]<>"")?$dataresume[0]["candidate_birthplace"]:"";?>">
-					</div>
-					<div id="errorpob"></div>					
-					
-				</div>
-			</div> -->
+			
 			<div class="form-group">
-				<div class="col-md-3">
-					<div class="right bold">Place of birth &nbsp;<span class="asterisk">*</span></div>
-					<div class="right caption_indo80 novpadding" style="padding-right:15px;">Tempat lahir sesuai KTP</div>
-				</div>
-				<div class="col-md-4">
-					<div class="button-group">
-						<input name="candidate_birthplace" id="birthplace" class="form-control validate[required]">
+						<label class="control-label col-md-3" for="birthplace">Place of birth: &nbsp;<span class="asterisk">*</span></label>
+						<div class="col-md-4">
+							<div class="button-group">
+								<input name="place_of_birth" id="birthplace" class="form-control validate[required]">
+							</div>
+						</div>
+						<span><small class="text-info"><i>(As shown on ID Card)</i></small></span>
+
 					</div>
-				</div>
-				<span><small class="text-info"><i>(As shown on ID Card)</i></small></span>
-			</div>
-			<div class="form-group">
-				<div class="col-md-3">
-					<div class="right bold">Date of birth &nbsp;<span class="asterisk">*</span></div>
-					<div class="right caption_indo80 novpadding" style="padding-right:15px;">Tanggal lahir sesuai KTP</div>
-				</div>
-				<div class="col-md-4">
-					<input type="text" id="birthdate" placeholder="dd-mm-yyyy" name="candidate_birthdate" class="form-control validate[required,funcCall[checkLEGAL]] date">
-				</div>
-				<span><small class="text-info"><i>(As shown on ID Card)</i></small></span>
-			</div>
 
 			<div class="form-group">
-				<div class="col-md-3">
-					<div class="right bold">Gender</div>
-					<div class="right caption_indo80 novpadding">Jenis kelamin</div>
-				</div>
-				<div class="col-md-4">
-						<label class="radio-inline"><input type="radio" name="candidate_gender" id="male" value="male" checked="checked">Male <i>(Pria)</i></label>
-						<label class="radio-inline"><input type="radio" name="candidate_gender" id="female" value="female" checked="checked">Female <i>(Wanita)</i></label>
-				</div>
-			</div>
+						<label class="control-label col-md-3" for="birthdate">Date of birth: &nbsp;<span class="asterisk">*</span></label>
+
+						<div class="col-md-4">
+							<input type="text" id="birthdate" placeholder="dd-mm-yyyy" name="birthdate" class="form-control validate[required,funcCall[checkLEGAL]] date" value="<?php echo (isset($dataresume[0]["candidate_birthdate"]))?reverseDate($dataresume[0]["candidate_birthdate"]):"";?>">
+						</div>
+						<span><small class="text-info"><i>(As shown on ID Card)</i></small></span>
+
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-3" for="sex">Gender: &nbsp;<span class="asterisk">*</span></label>
+						<div class="col-md-4">
+							<label class="radio-inline"><input type="radio" name="candidate_gender" id="male" value="male" class="validate[required]"  <?php echo (isset($dataresume[0]["candidate_gender"]) && $dataresume[0]["candidate_gender"]=="male")?"checked":"";?> >Male</label>
+							<label class="radio-inline"><input type="radio" name="candidate_gender" id="female" value="female" class="validate[required]" <?php echo (isset($dataresume[0]["candidate_gender"]) && $dataresume[0]["candidate_gender"]=="female")?"checked":"";?>>Female</label>
+						</div>
+					</div>
 			
 			<div class="form-group">
-				<div class="col-md-3">
-					<div class="right bold">Nationality</div>
-					<div class="right caption_indo80 novpadding">Warga negara</div>
-				</div>
-				<div class="col-md-8">
-						<label class="radio-inline"><input type="radio" name="nationality" id="wni" value="wni" checked="checked">Indonesian <i>(WNI)</i></label>
-						<label class="radio-inline"><input type="radio" name="nationality" id="wna" value="wna" checked="checked">Expatriat <i>(WNA)</i></label>
-				</div>
-			</div>
-			<div id="partwni" class="form-group">
-				<div class="col-md-3">
-					<div class="right bold">Nomor KTP</div>
-					<div class="right caption_indo80 novpadding">Id Number</div>
-				</div>
-				<div class="col-md-3">
-					<input type="text" class="form-control" name="candidate_idcard" id="candidate_idcard" value="<?php echo (isset($dataresume[0]["candidate_idcard"]) && $dataresume[0]["candidate_idcard"]<>"")?$dataresume[0]["candidate_idcard"]:"";?>">
-				</div>
-			</div>
-			<div id="partwna" class="form-group">
-				<div class="col-md-3">
-					<div class="right bold">Country</div>
-					<div class="right caption_indo80 novpadding">Negara</div>
-				</div>
-				<div class="col-md-3">
-					<input type="text" class="form-control" name="candidate_country" id="candidate_country" value="<?php echo (isset($dataresume[0]["candidate_country"]) && $dataresume[0]["candidate_country"]<>"")?$dataresume[0]["candidate_country"]:"";?>">
-				</div>
-			
-				<div class="col-md-3">
-					<div class="right bold">ID Number <i>(<?php echo (isset($dataresume[0]["candidate_nationality"]) && $dataresume[0]["candidate_nationality"]=="wni")?"KTP":"Passport";?>)</i></div>
-					<div class="right caption_indo80 novpadding">Nomor <i>(<?php echo (isset($dataresume[0]["candidate_nationality"]) && $dataresume[0]["candidate_nationality"]=="wna")?"KTP":"Passport";?>)</i></div>
-				</div>
-				
-				<div class="col-md-3">
-					<input type="text" class="form-control" name="candidate_idcard" id="candidate_idcard" value="<?php echo (isset($dataresume[0]["candidate_idcard"]) && $dataresume[0]["candidate_idcard"]<>"")?$dataresume[0]["candidate_idcard"]:"";?>">
-				</div>
-			</div>
-			
+						<label class="control-label col-md-3" for="full_name">Nationality: &nbsp;<span class="asterisk">*</span></label>
+						<div class="col-md-4">
+							<label class="radio-inline"><input type="radio" name="candidate_nationality" id="wni" value="wni" class="validate[required]" <?php echo (isset($dataresume[0]["candidate_nationality"]) && $dataresume[0]["candidate_nationality"]=="wni")?"checked":"";?>>Indonesian</label>
+							<label class="radio-inline"><input type="radio" name="candidate_nationality" id="wna" value="wna" class="validate[required]" <?php echo (isset($dataresume[0]["candidate_nationality"]) && $dataresume[0]["candidate_nationality"]=="wna")?"checked":"";?>>Expatriat</label>
+						</div>
+					</div>
+					<!-- muncul jika pilih WNI -->
+					<div id="partwni" class="form-group" style="<?php echo (isset($dataresume[0]["candidate_nationality"]) && $dataresume[0]["candidate_nationality"]=="wni")?"":"display:none";?>">
+						<label class="control-label col-md-3" for="nomor_ktp">ID Number (KTP): &nbsp;<span class="asterisk"></span></label>
+						<div class="col-md-4">
+							<input type="text" class="form-control" name="nomor_ktp" id="nomor_ktp" placeholder="Please enter your valid ID Number" value="<?php echo (isset($dataresume[0]["candidate_idcard"]) && $dataresume[0]["candidate_idcard"]<>"")?$dataresume[0]["candidate_idcard"]:"";?>">
+						</div>
+					</div>
+
+					<!-- muncul jika pilih WNA -->
+					<div id="partwna" class="form-group" style="<?php echo (isset($dataresume[0]["candidate_nationality"]) && $dataresume[0]["candidate_nationality"]=="wna")?"":"display:none";?>">
+						<label class="control-label col-md-3" for="candidate_country">Country: &nbsp;<span class="asterisk">*</span></label>
+						<div class="col-md-4">
+							<input type="text" class="form-control" name="candidate_country" id="candidate_country" placeholder="Country of origin" value="<?php echo (isset($dataresume[0]["candidate_country"]))?$dataresume[0]["candidate_country"]:"";?>">
+						</div>
+					
+						<label class="control-label col-md-2" for="nomor_passport">Passport Number: &nbsp;<span class="asterisk"></span></label>
+						<div class="col-md-3">
+							<input type="text" class="form-control" name="nomor_passport" id="nomor_passport" placeholder="Please enter your valid Passport Number" value="<?php echo (isset($dataresume[0]["candidate_idcard"]))?$dataresume[0]["candidate_idcard"]:"";?>">
+						</div>
+					</div>
+					<!-- akhir part WNA -->
+					
+					<div class="form-group">
+						<label class="control-label col-md-3" for="candidate_hp1">Cellular number: &nbsp;<span class="asterisk">*</span></label>
+						<div class="col-md-4">
+							<input type="text" class="form-control validate[required,custom[phone]]" name="candidate_hp1" id="candidate_hp1" value="<?php echo (isset($dataresume[0]["candidate_hp1"]) && $dataresume[0]["candidate_hp1"]<>"")?$dataresume[0]["candidate_hp1"]:"";?>">
+						</div>
+					</div>
+					
 			<div class="form-group">
 				<div class="col-md-3">
 					<div class="right bold">Cellular number</div>
@@ -196,26 +196,6 @@ if(count($data)>0) $data=clean_view($data);
 				</div>
 			</div>
 
-			<div class="form-group">
-				<div class="col-md-3">
-					<div class="right bold">Cellular number 2</div>
-					<div class="right caption_indo80 novpadding">Nomor ponsel 2</div>
-				</div>
-				<div class="col-md-4">
-					<input type="text" class="form-control validate[custom[phone]]" name="candidate_hp2" id="candidate_hp2" value="<?php echo (isset($data["candidate_hp2"]) && $data["candidate_hp2"]<>"")?$data["candidate_hp2"]:"";?>" placeholder="Enter your secondary cellular number">
-				</div>
-			</div>
-
-			<div class="form-group">
-				<div class="col-md-3">
-					<div class="right bold">Home phone</div>
-					<div class="right caption_indo80 novpadding">Nomor telepon rumah</div>
-				</div>
-				<div class="col-md-4">
-					<input type="text" class="form-control validate[custom[phone]]" name="homephone" id="homephone"  value="<?php echo (isset($data["candidate_phone"]) && $data["candidate_phone"]<>"")?$data["candidate_phone"]:"";?>" placeholder="Enter your home phone number">
-				</div>
-			</div>
-			
 			<div class="form-group">
 				<div class="col-md-3">
 					<div class="right bold">Religion &nbsp;<span class="asterisk">*</span></div>
@@ -263,26 +243,6 @@ if(count($data)>0) $data=clean_view($data);
 					<div class="button-group">
 						<input name="candidate_marital" id="candidate_marital" class="form-control validate[required]">
 					</div>
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<div class="col-md-3">
-					<div class="right bold">Body height</div>
-					<div class="right caption_indo80 novpadding">Tinggi badan</div>
-				</div>
-				<div class="col-sm-4">
-						<input type="text" class="form-control input-group-md"  name="candidate_bodyheight" id="candidate_bodyheight" value="<?php echo (isset($data["candidate_bodyheight"]) && $data["candidate_bodyheight"]<>"")?$data["candidate_bodyheight"]:"000.00";?>"/>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<div class="col-md-3">
-					<div class="right bold">Body weight</div>
-					<div class="right caption_indo80 novpadding">Berat badan</div>
-				</div>
-				<div class="col-sm-4">
-						<input type="text" class="form-control input-group-md"  name="candidate_bodyweight" id="candidate_bodyweight" value="<?php echo (isset($data["candidate_bodyweight"]) && $data["candidate_bodyweight"]<>"")?$data["candidate_bodyweight"]:"00.00";?>"/>
 				</div>
 			</div>
 			
@@ -542,8 +502,45 @@ if(count($data)>0) $data=clean_view($data);
 		</form>				
 	</div>
 	<!-- akhir panel body -->
-	
+	<?php 
+	}
+}
+	?>
 </div>
+
+<script type="text/javascript">
+$(function() {
+
+	$('#birthplace').magicSuggest({
+	    resultAsString: true,
+		required: true,
+	    maxSelection: 1,
+	    data: '<?php echo _PATHURL;?>/application/api.city.php',
+		name: 'place_of_birth',
+		<?php
+		if(isset($_SESSION["session"]["place_of_birth"]) && $_SESSION["session"]["place_of_birth"]<>"") {
+		?>
+		value: ['<?php echo $_SESSION["session"]["place_of_birth"];?>'],
+		<?php
+		}
+		else {
+		?>
+		placeholder: 'Please choose from the available list',
+		<?php
+		}
+		?>		
+		valueField: 'city_name',
+	    displayField: 'city_name'
+	});	
+	
+	$('#birthdate').datepicker({
+		format:"dd-mm-yyyy"
+	});
+	
+
+});
+</script>
+
 <script type="text/javascript">
 $(document).ready(function(){
 
@@ -801,63 +798,4 @@ $(document).ready(function(){
         maxboostedstep: 10,
         postfix: 'kg'
     });
-</script>
-<script type="text/javascript">
-$(function() {
-
-	$('#birthplace').magicSuggest({
-	    resultAsString: true,
-		required: true,
-	    maxSelection: 1,
-	    data: '<?php echo _PATHURL;?>/application/api.city.php',
-		name: 'candidate_birthplace',
-		<?php
-		if(isset($_SESSION["session"]["candidate_birthplace"]) && $_SESSION["session"]["candidate_birthplace"]<>"") {
-		?>
-		value: ['<?php echo $_SESSION["session"]["candidate_birthplace"];?>'],
-		<?php
-		}
-		else {
-		?>
-		placeholder: 'Please choose from the available list',
-		<?php
-		}
-		?>		
-		valueField: 'city_name',
-	    displayField: 'city_name'
-	});	
-	
-	$('#birthdate').datepicker({
-		format:"dd-mm-yyyy"
-	});
-	
-
-});
-</script>
-
-
-<script>
-	/**/
-	jQuery(document).ready(function(){
-		// binds form submission and fields to the validation engine
-		jQuery("#registerform").validationEngine('attach', {promptPosition : "topRight", autoPositionUpdate : true});
-	});
-	/**/
-	var dateFormat = /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.]((?:19|20)\d\d)$/
-
-	function checkLEGAL(field, rules, i, options){
-		var match = field.val().match(dateFormat)
-		console.log(match)
-		if (!match) return "Please enter valid date (dd-mm-yyyy)"
-		var bd=new Date(match[3], match[2]-1, match[1])
-		console.log(bd)
-		var diff = Math.floor((new Date).getTime() - bd.getTime());
-		var day = 1000* 60 * 60 * 24
-
-		var days = Math.floor(diff/day)
-		var months = Math.floor(days/31)
-		var years = Math.floor(months/12)
-		console.log(days,months,years)
-		if (years<16) return "You have to be at least 17 year old to register"
-	}
 </script>

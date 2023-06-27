@@ -13,8 +13,9 @@ function vacancy_getJobAdv($job_vacancy_id,$type) {
 		$query=querying("SELECT job_vacancy_id, job_vacancy_name, job_vacancy_desc, job_vacancy_brief, job_vacancy_city, job_vacancy_startdate, job_vacancy_enddate
 	FROM m_job_vacancy WHERE job_vacancy_startdate<=now() AND job_vacancy_enddate>=now() AND status_id=? ORDER BY job_vacancy_enddate ASC",array("open"));
 	}
-	if($data=sqlGetData($query) )
-		return $data;
+	if($data=sqlGetData($query) ) {
+	// var_dump($data);
+		return $data;}
 	else return false;
 	
 }
@@ -31,48 +32,48 @@ function vacancy_requiredItem() {
 
 function vacancy_requiredData($menu_name)
 {
-	if($menu_name=="education") {
-		$data=	getDataEdu();
-	}
-	if($menu_name=="workingexp") {
-		$data=	getDataJob();
-	}
-	if($menu_name=="family") {
-		$data=	getDataFam();
-	}
-	if($menu_name=="language") {
-		$data=	getDataLanguage();
-	}
-	if($menu_name=="organization") {
-		$data=	getDataOrg();
-	}
-	if($menu_name=="training") {
-		$data=	getDataTraining();
-	}
-	if($menu_name=="skills") {
-		$data=	getDataSkills();
-	}
-	if($menu_name=="passphoto") {
-		$data=	getRequiredDocs("passphoto");
-	}
-	if($menu_name=="transcript") {
-		$data=	getRequiredDocs("transcript");
-	}
-	if($menu_name=="ijazah") {
-		$data=	getRequiredDocs("ijazah");
-	}
+	// if($menu_name=="education") {
+	// 	$data=	getDataEdu();
+	// }
+	// if($menu_name=="workingexp") {
+	// 	$data=	getDataJob();
+	// }
+	// if($menu_name=="family") {
+	// 	$data=	getDataFam();
+	// }
+	// if($menu_name=="language") {
+	// 	$data=	getDataLanguage();
+	// }
+	// if($menu_name=="organization") {
+	// 	$data=	getDataOrg();
+	// }
+	// if($menu_name=="training") {
+	// 	$data=	getDataTraining();
+	// }
+	// if($menu_name=="skills") {
+	// 	$data=	getDataSkills();
+	// }
+	// if($menu_name=="passphoto") {
+	// 	$data=	getRequiredDocs("passphoto");
+	// }
+	// if($menu_name=="transcript") {
+	// 	$data=	getRequiredDocs("transcript");
+	// }
+	// if($menu_name=="ijazah") {
+	// 	$data=	getRequiredDocs("ijazah");
+	// }
 	if($menu_name=="resume") {
 		$data=	getRequiredResume();
 	}
-	if($menu_name=="coverletter") {
-		$data=	getRequiredDocs("coverletter");
-	}
-	if($menu_name=="idcard") {
-		$data=	getRequiredDocs("idcard");
-	}
-	if($menu_name=="questionaire") {
-		$data=	getRequiredQuestionaire();
-	}
+	// if($menu_name=="coverletter") {
+	// 	$data=	getRequiredDocs("coverletter");
+	// }
+	// if($menu_name=="idcard") {
+	// 	$data=	getRequiredDocs("idcard");
+	// }
+	// if($menu_name=="questionaire") {
+	// 	$data=	getRequiredQuestionaire();
+	// }
 	
 	
 	
@@ -217,48 +218,48 @@ function vacancy_candidateApply() {
 	*/
 
 	for($i=0;$i<count($datarequired);$i++) {
-		if($datarequired[$i]["required_name"]=="education") {
-			$required["education"]=$datarequired[$i]["status_id"];
-		}
-		if($datarequired[$i]["required_name"]=="workingexp") {
-			$required["workingexp"]=$datarequired[$i]["status_id"];
-		}
-		if($datarequired[$i]["required_name"]=="family") {
-			$required["family"]=$datarequired[$i]["status_id"];
-		}
-		if($datarequired[$i]["required_name"]=="language") {
-			$required["language"]=$datarequired[$i]["status_id"];
-		}
-		if($datarequired[$i]["required_name"]=="organization") {
-			$required["organization"]=$datarequired[$i]["status_id"];
-		}
-		if($datarequired[$i]["required_name"]=="training") {
-			$required["training"]=$datarequired[$i]["status_id"];
-		}
-		if($datarequired[$i]["required_name"]=="skills") {
-			$required["skills"]=$datarequired[$i]["status_id"];
-		}
-		if($datarequired[$i]["required_name"]=="passphoto") {
-			$required["passphoto"]=$datarequired[$i]["status_id"];
-		}
-		if($datarequired[$i]["required_name"]=="transcript") {
-			$required["transcript"]=$datarequired[$i]["status_id"];
-		}
-		if($datarequired[$i]["required_name"]=="ijazah") {
-			$required["ijazah"]=$datarequired[$i]["status_id"];
-		}
-		if($datarequired[$i]["required_name"]=="resume") {
-			$required["resume"]=$datarequired[$i]["status_id"];
-		}
-		if($datarequired[$i]["required_name"]=="coverletter") {
-			$required["coverletter"]=$datarequired[$i]["status_id"];
-		}
-		if($datarequired[$i]["required_name"]=="idcard") {
-			$required["idcard"]=$datarequired[$i]["status_id"];
-		}
-		if($datarequired[$i]["required_name"]=="questionaire") {
-			$required["questionaire"]=$datarequired[$i]["status_id"];
-		}
+		// if($datarequired[$i]["required_name"]=="education") {
+		// 	$required["education"]=$datarequired[$i]["status_id"];
+		// }
+		// if($datarequired[$i]["required_name"]=="workingexp") {
+		// 	$required["workingexp"]=$datarequired[$i]["status_id"];
+		// }
+		// if($datarequired[$i]["required_name"]=="family") {
+		// 	$required["family"]=$datarequired[$i]["status_id"];
+		// }
+		// if($datarequired[$i]["required_name"]=="language") {
+		// 	$required["language"]=$datarequired[$i]["status_id"];
+		// }
+		// if($datarequired[$i]["required_name"]=="organization") {
+		// 	$required["organization"]=$datarequired[$i]["status_id"];
+		// }
+		// if($datarequired[$i]["required_name"]=="training") {
+		// 	$required["training"]=$datarequired[$i]["status_id"];
+		// }
+		// if($datarequired[$i]["required_name"]=="skills") {
+		// 	$required["skills"]=$datarequired[$i]["status_id"];
+		// }
+		// if($datarequired[$i]["required_name"]=="passphoto") {
+		// 	$required["passphoto"]=$datarequired[$i]["status_id"];
+		// }
+		// if($datarequired[$i]["required_name"]=="transcript") {
+		// 	$required["transcript"]=$datarequired[$i]["status_id"];
+		// }
+		// if($datarequired[$i]["required_name"]=="ijazah") {
+		// 	$required["ijazah"]=$datarequired[$i]["status_id"];
+		// }
+		// if($datarequired[$i]["required_name"]=="resume") {
+		// 	$required["resume"]=$datarequired[$i]["status_id"];
+		// }
+		// if($datarequired[$i]["required_name"]=="coverletter") {
+		// 	$required["coverletter"]=$datarequired[$i]["status_id"];
+		// }
+		// if($datarequired[$i]["required_name"]=="idcard") {
+		// 	$required["idcard"]=$datarequired[$i]["status_id"];
+		// }
+		// if($datarequired[$i]["required_name"]=="questionaire") {
+		// 	$required["questionaire"]=$datarequired[$i]["status_id"];
+		// }
 		
 	}
 	/*
@@ -271,79 +272,79 @@ function vacancy_candidateApply() {
 	$galat=0;
 	$mess="";
 	
-	if(isset($_POST["numApply"]) && $_POST["numApply"]>_MAXAPPLY) {
-		$galat++;
-		$mess.="<a href='"._PATHURL."/vacancy/'>You have applied for "._MAXAPPLY." position. You are not allowed to apply more than "._MAXAPPLY." position.</a><br>";
-	}
+	// if(isset($_POST["numApply"]) && $_POST["numApply"]>_MAXAPPLY) {
+	// 	$galat++;
+	// 	$mess.="<a href='"._PATHURL."/vacancy/'>You have applied for "._MAXAPPLY." position. You are not allowed to apply more than "._MAXAPPLY." position.</a><br>";
+	// }
 	
 	//print_r($required);exit;
-	if( (vacancy_requiredData("education")=="incomplete") && $required["education"]==1) {
-		$galat++;
-		$mess.="<a href='"._PATHURL."/education/'>Please click here to complete your Educational Background.</a><br>";
-	}
-	if( (vacancy_requiredData("workingexp")=="incomplete") && $required["workingexp"]==1) {
-		$galat++;
-		$mess.="<a href='"._PATHURL."/workingexp/'>Please click here to complete your Working Experience.</a><br>";
-	}
-	if( (vacancy_requiredData("family")=="incomplete") && $required["family"]==1 ) {
-		$galat++;
-		$mess.="<a href='"._PATHURL."/family/'>Please click here to complete your Family Background.</a><br>";
-	}
-	if( (vacancy_requiredData("language")=="incomplete") && $required["language"]==1 ) {
-		$galat++;
-		$mess.="<a href='"._PATHURL."/language/'>Please click here to complete your Language Skills.</a><br>";
-	}
-	if( (vacancy_requiredData("organization")=="incomplete") && $required["organization"]==1 ) {
-		$galat++;
-		$mess.="<a href='"._PATHURL."/organization/'>Please click here to complete your Organization Experience.</a><br>";
-	}
-	if( (vacancy_requiredData("training")=="incomplete") && $required["training"]==1 ) {
-		$galat++;
-		$mess.="<a href='"._PATHURL."/training/'>Please click here to complete your Training Experience.</a><br>";
-	}
-	if( (vacancy_requiredData("skills")=="incomplete") && $required["skills"]==1 ) {
-		$galat++;
-		$mess.="<a href='"._PATHURL."/refference/'>Please click here to complete your Skills.</a><br>";
-	}
+	// if( (vacancy_requiredData("education")=="incomplete") && $required["education"]==1) {
+	// 	$galat++;
+	// 	$mess.="<a href='"._PATHURL."/education/'>Please click here to complete your Educational Background.</a><br>";
+	// }
+	// if( (vacancy_requiredData("workingexp")=="incomplete") && $required["workingexp"]==1) {
+	// 	$galat++;
+	// 	$mess.="<a href='"._PATHURL."/workingexp/'>Please click here to complete your Working Experience.</a><br>";
+	// }
+	// if( (vacancy_requiredData("family")=="incomplete") && $required["family"]==1 ) {
+	// 	$galat++;
+	// 	$mess.="<a href='"._PATHURL."/family/'>Please click here to complete your Family Background.</a><br>";
+	// }
+	// if( (vacancy_requiredData("language")=="incomplete") && $required["language"]==1 ) {
+	// 	$galat++;
+	// 	$mess.="<a href='"._PATHURL."/language/'>Please click here to complete your Language Skills.</a><br>";
+	// }
+	// if( (vacancy_requiredData("organization")=="incomplete") && $required["organization"]==1 ) {
+	// 	$galat++;
+	// 	$mess.="<a href='"._PATHURL."/organization/'>Please click here to complete your Organization Experience.</a><br>";
+	// }
+	// if( (vacancy_requiredData("training")=="incomplete") && $required["training"]==1 ) {
+	// 	$galat++;
+	// 	$mess.="<a href='"._PATHURL."/training/'>Please click here to complete your Training Experience.</a><br>";
+	// }
+	// if( (vacancy_requiredData("skills")=="incomplete") && $required["skills"]==1 ) {
+	// 	$galat++;
+	// 	$mess.="<a href='"._PATHURL."/refference/'>Please click here to complete your Skills.</a><br>";
+	// }
 	
-	if( (vacancy_requiredData("passphoto")=="incomplete") && $required["passphoto"]==1 ) {
-		$galat++;
-		$mess.="<a href='"._PATHURL."/documents/#passphoto'>Please click here to upload your Passphoto.</a><br>";
-	}
+	// if( (vacancy_requiredData("passphoto")=="incomplete") && $required["passphoto"]==1 ) {
+	// 	$galat++;
+	// 	$mess.="<a href='"._PATHURL."/documents/#passphoto'>Please click here to upload your Passphoto.</a><br>";
+	// }
 	
-	if( (vacancy_requiredData("transcript")=="incomplete") && $required["transcript"]==1 ) {
-		$galat++;
-		$mess.="<a href='"._PATHURL."/documents/#transcript'>Please click here to upload your Transcript.</a><br>";
-	}
+	// if( (vacancy_requiredData("transcript")=="incomplete") && $required["transcript"]==1 ) {
+	// 	$galat++;
+	// 	$mess.="<a href='"._PATHURL."/documents/#transcript'>Please click here to upload your Transcript.</a><br>";
+	// }
 	
-	if( (vacancy_requiredData("ijazah")=="incomplete") && $required["ijazah"]==1 ) {
-		$galat++;
-		$mess.="<a href='"._PATHURL."/documents/#ijazah'>Please click here to upload your Ijazah.</a><br>";
-	}
+	// if( (vacancy_requiredData("ijazah")=="incomplete") && $required["ijazah"]==1 ) {
+	// 	$galat++;
+	// 	$mess.="<a href='"._PATHURL."/documents/#ijazah'>Please click here to upload your Ijazah.</a><br>";
+	// }
 
-	if( (vacancy_requiredData("coverletter")=="incomplete") && $required["coverletter"]==1 ) {
-		$galat++;
-		$mess.="<a href='"._PATHURL."/documents/#coverletter'>Please click here to upload your Application Letter.</a><br>";
-	}
+	// if( (vacancy_requiredData("coverletter")=="incomplete") && $required["coverletter"]==1 ) {
+	// 	$galat++;
+	// 	$mess.="<a href='"._PATHURL."/documents/#coverletter'>Please click here to upload your Application Letter.</a><br>";
+	// }
 
-	if( (vacancy_requiredData("idcard")=="incomplete") && $required["idcard"]==1 ) {
-		$galat++;
-		$mess.="<a href='"._PATHURL."/documents/#idcard'>Please click here to upload your ID Card.</a><br>";
-	}
+	// if( (vacancy_requiredData("idcard")=="incomplete") && $required["idcard"]==1 ) {
+	// 	$galat++;
+	// 	$mess.="<a href='"._PATHURL."/documents/#idcard'>Please click here to upload your ID Card.</a><br>";
+	// }
 	
-	if( (vacancy_requiredData("resume")=="incomplete") && $required["resume"]==1 ) {
-		$galat++;
-		$mess.="<a href='"._PATHURL."/resume/'>Please click here to complete your full Resume.</a><br>";
-	}
+	// if( (vacancy_requiredData("resume")=="incomplete") && $required["resume"]==1 ) {
+	// 	$galat++;
+	// 	$mess.="<a href='"._PATHURL."/resume/'>Please click here to complete your full Resume.</a><br>";
+	// }
 
-	$questionnaireData = vacancy_requiredData("questionaire");
-	if ((is_countable($questionnaireData) && count($questionnaireData) == 0) && $required["questionaire"] == 1) {
-		$galat++;
-		$mess .= "<a href='" . _PATHURL . "/questionaire/'>Please click here to complete your Questionaire.</a><br>";
-	}
+	// $questionnaireData = vacancy_requiredData("questionaire");
+	// if ((is_countable($questionnaireData) && count($questionnaireData) == 0) && $required["questionaire"] == 1) {
+	// 	$galat++;
+	// 	$mess .= "<a href='" . _PATHURL . "/questionaire/'>Please click here to complete your Questionaire.</a><br>";
+	// }
 
 	
-	
+	// var_dump($galat);exit;
 	if ($galat == 0) {
 		if(vacancy_insertToApply($datacandidate) && vacancy_insertToHistory($datacandidate))
 		{
@@ -367,7 +368,7 @@ function vacancy_candidateApply() {
 			{
 				unset($_SESSION["session"]);
 				unset($variablemail);
-				header("location: "._PATHURL."/index.php?mod=detail&mess=".coded("Your application has been sent to our recruitment team. Thank You."));
+				header("location: "._PATHURL."/index.php?mod=detail&job_vacancy_id=".$datacandidate["job_vacancy_id"]."&mess=".coded("Your application has been sent to our recruitment team. Thank You."));
 				exit;	
 			}
 			else

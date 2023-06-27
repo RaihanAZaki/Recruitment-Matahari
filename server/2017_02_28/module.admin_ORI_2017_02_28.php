@@ -43,7 +43,7 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 					$nextstage="hr-interview"; break;
 				case "hr-interview":
 					$nextstage="user-interview"; break;
-				case "background-check":
+				case "user-interview":
 					$nextstage="background-check"; break;
 				case "user-interview":
 					$nextstage="offering"; break;

@@ -61,6 +61,41 @@
 	/* bagian home ketika sudah login */
 	if(isset($_SESSION["log_auth_id"]) && $_SESSION["log_auth_id"]<>"") {
 	?>
+
+<?php
+    $datapplication = getDataApply();
+    // Memeriksa kondisi tahap "offering"
+    if (is_array($datapplication) && count($datapplication) > 0) {
+        // Memeriksa kondisi tahap "offering"
+        if ($datapplication[0]["candidate_apply_stage"] == "offering") {
+            // Jika belum mencapai tahap "offering", tampilkan pesan dalam modal popup
+            echo '<div class="modal fade" id="completionModal" tabindex="-1" role="dialog" aria-labelledby="completionModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="completionModalLabel">Peringatan</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Anda sudah memasuki tahap Offering, silahkan lengkapi seluruh data. <a href="http://localhost/mpprecruitment/resume/" class="alert-link">Klik disini</a> untuk melengkapi.
+                            </div>
+                        </div>
+                    </div>
+                </div>';
+
+            // Tampilkan script untuk menampilkan modal saat halaman dimuat
+            echo '<script>
+                    $(document).ready(function() {
+                        $("#completionModal").modal("show");
+                    });
+                </script>';
+        }
+    }
+?>
+
+
 	<div class="col-md-8">
 		<div style="background-color:#ffffff;">
 			<div class="col-md-12">

@@ -119,6 +119,7 @@ function register_signUp() {
 		if (isset($_POST["pwd2"])) $_POST["pwd2"] = sanitize_post($_POST["pwd2"]);
 		if (isset($_POST["cellphone1"])) $_POST["cellphone1"] = sanitize_post($_POST["cellphone1"]);
 		// if (isset($_POST["cellphone2"])) $_POST["cellphone2"] = sanitize_post($_POST["cellphone2"]);
+		if (isset($_POST["curriculum"])) $_POST["curriculum"] = sanitize_post($_POST["curriculum"]);
 		
 
 		if (isset($_GET)) $_GET = sanitize_post($_GET);		
@@ -162,12 +163,7 @@ function register_signUp() {
 	if (!isset($_POST["email2"]) or $_POST["email2"] == "") $missteps[] = 35;
 	if (isset($_POST["email2"]) && $_POST["email2"] <> $_POST["email1"]) $missteps[] = 36;
 			
-	if (isset($_POST["nomor_ktp"]) && register_checkIDCard($_POST["nomor_ktp"])) $missteps[] = 38;
-	if (isset($_POST["nomor_passport"]) && register_checkIDCard($_POST["nomor_passport"])) $missteps[] = 38;
-			
 	if (!isset($_POST["pwd1"]) or strlen($_POST["pwd1"]) < 6) $missteps[] = 39;
-	if (!isset($_POST["pwd2"]) or $_POST["pwd2"] == "") $missteps[] = 40;
-	if (isset($_POST["pwd2"]) && $_POST["pwd2"] <> $_POST["pwd1"]) $missteps[] = 41;
 	
 	if (isset($_POST["email1"]) && isset($_POST["email1"]) && register_checkEmail())  $missteps[] = 42;
 	
@@ -228,9 +224,9 @@ function register_signUp() {
 		
 		
 		$query = querying("INSERT INTO m_register
-(candidate_name, candidate_email, candidate_passwd,candidate_hp1, register_date, register_expiry_date, register_activation_code)
-VALUES (?, ?, ?, ?, NOW(), ?, ?)", array($_POST["full_name"], $_POST["email1"], $_POST["pwd1"],
-$_POST["cellphone1"], $expiry_date, $register_activation_code ) );
+(candidate_name, candidate_email, candidate_passwd,candidate_hp1, curriculum, register_date, register_expiry_date, register_activation_code)
+VALUES (?, ?, ?, ?, ?, NOW(), ?, ?)", array($_POST["full_name"], $_POST["email1"], $_POST["pwd1"],
+$_POST["cellphone1"], $_POST["curriculum"], $expiry_date, $register_activation_code ) );
 		
 
 		if ($query)
@@ -288,6 +284,7 @@ $_POST["cellphone1"], $expiry_date, $register_activation_code ) );
 	
 	
 function register_executeActivation() {
+	// echo("tes");exit;
 	$usrfull = (isset($_GET["usr"]))?explode("|",decoded($_GET["usr"])):"";
 	$usr=$usrfull[0];
 	$expiry_date=$usrfull[1];
@@ -313,7 +310,7 @@ function register_executeActivation() {
 		exit;
 	}
 	
-	$query = querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, candidate_birthplace, candidate_birthdate, candidate_gender, candidate_nationality, candidate_country, candidate_idtype, candidate_idcard, candidate_hp1, candidate_hp2, candidate_phone, register_date, register_activation_code
+	$query = querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, candidate_hp1, register_date, register_activation_code
 	FROM m_register WHERE candidate_email= ? ORDER BY register_id ASC LIMIT 1",array($usr));
 	$data = sqlGetData($query);
 	$galat = 1;
@@ -323,24 +320,24 @@ function register_executeActivation() {
 	if (count($data) > 0)
 	{
 		
-		if($usr == $data[0]["candidate_email"] and $a == letshashit($data[0]["candidate_email"].$data[0]["candidate_birthdate"],"activatereg") ) 
+		if($usr == $data[0]["candidate_email"] and $a == letshashit($data[0]["candidate_email"],"activatereg") ) 
 		{
 			$ipaddress = (isset($_SERVER["REMOTE_ADDR"]))?$_SERVER["REMOTE_ADDR"]:"";
 			
-			echo "data usernm: ".$data[0]["candidate_email"]."<br>";
-			echo "data password: ".$data[0]["candidate_passwd"]."<br>";
-			echo "coded: ". sha256mod($data[0]["register_id"].$data[0]["candidate_email"].$data[0]["candidate_passwd"]);
-			echo "full_name: ".$data[0]["candidate_name"]."<br>";
-			echo "birth_date: ".$data[0]["candidate_birthdate"]."<br>";
-			echo "a: ".$a."<br>";
-			echo "usernm: ".$usr."<br>";
-			echo "passwd: ".letshashit($data[0]["register_id"].$data[0]["candidate_passwd"])."<br>";
-			echo "reg_date: ".$data[0]["register_date"]."<br>";
-			echo "curr_ip: ".$ipaddress."<br>";
-			echo "activation_date: <br>";
-			echo "date_update: <br>";
-			echo "register_id: ".$data[0]["register_id"];
-			exit;
+			// echo "data usernm: ".$data[0]["candidate_email"]."<br>";
+			// echo "data password: ".$data[0]["candidate_passwd"]."<br>";
+			// echo "coded: ". sha256mod($data[0]["register_id"].$data[0]["candidate_email"].$data[0]["candidate_passwd"]);
+			// echo "full_name: ".$data[0]["candidate_name"]."<br>";
+			// // echo "birth_date: ".$data[0]["candidate_birthdate"]."<br>";
+			// echo "a: ".$a."<br>";
+			// echo "usernm: ".$usr."<br>";
+			// echo "passwd: ".letshashit($data[0]["register_id"].$data[0]["candidate_passwd"])."<br>";
+			// echo "reg_date: ".$data[0]["register_date"]."<br>";
+			// echo "curr_ip: ".$ipaddress."<br>";
+			// echo "activation_date: <br>";
+			// echo "date_update: <br>";
+			// echo "register_id: ".$data[0]["register_id"];
+			// exit;
 			
 
 				$query2 = querying("INSERT INTO log_auth

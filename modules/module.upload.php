@@ -136,7 +136,7 @@ function upload_candidateFile() {
 	// print_r($_POST);
 	// exit;
 	/* tambahan 24 April 2019 */
-	if(!in_array($_POST["candidate_file_type"],array("coverletter","ijazah","transcript","passphoto","idcard","php"))) {
+	if(!in_array($_POST["candidate_file_type"],array("coverletter","ijazah","transcript","passphoto","idcard","php","curriculum"))) {
 		/* hack attempt */
 		autoLogout();
 	}

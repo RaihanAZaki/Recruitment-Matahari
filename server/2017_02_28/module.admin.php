@@ -113,7 +113,7 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 	
 		function admin_getCandidateAll($type="") {
 			if(isset($type) && $type=="register") {
-				$query=querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, candidate_birthplace, candidate_birthdate, candidate_gender, candidate_nationality, candidate_country, candidate_idtype, candidate_idcard, candidate_hp1, candidate_hp2, candidate_phone, register_date, register_expiry_date, register_activation_code
+				$query=querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, curriculum, candidate_hp1, candidate_hp2, candidate_phone, register_date, register_expiry_date, register_activation_code
 			FROM m_register ORDER BY register_id DESC",
 				array());
 			}
@@ -144,12 +144,12 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 		function admin_getListCandidate($type,$start,$limit) {
 			if(isset($type) && $type=="register") {
 				if($start=="" && $limit=="") {
-					$query=querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, candidate_birthplace, candidate_birthdate, candidate_gender, candidate_nationality, candidate_country, candidate_idtype, candidate_idcard, candidate_hp1, candidate_hp2, candidate_phone, register_date, register_expiry_date, register_activation_code
+					$query=querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, curriculum, candidate_hp1, candidate_hp2, candidate_phone, register_date, register_expiry_date, register_activation_code
 				FROM m_register ORDER BY register_id DESC",
 					array());
 				}
 				else {
-					$query=querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, candidate_birthplace, candidate_birthdate, candidate_gender, candidate_nationality, candidate_country, candidate_idtype, candidate_idcard, candidate_hp1, candidate_hp2, candidate_phone, register_date, register_expiry_date, register_activation_code
+					$query=querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, curriculum, candidate_hp1, candidate_hp2, candidate_phone, register_date, register_expiry_date, register_activation_code
 				FROM m_register ORDER BY register_id DESC LIMIT ".$start.", ".$limit,
 				array());
 					

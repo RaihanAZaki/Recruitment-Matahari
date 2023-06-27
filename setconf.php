@@ -15,7 +15,7 @@
 		$_database["sqlhost"] = "localhost";						// local
 		$_database["username"] = "root";
 		$_database["password"] = "";
-		$_database["databasename"] = "hypermart_mpprecruitment"; //develop
+		$_database["databasename"] = "tester"; //develop
 		//$_database["databasename"] = "mpprecruitment0419";
 		define("_PATHURL","http://localhost/mpprecruitment");
 	}

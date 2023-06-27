@@ -76,10 +76,13 @@
 
 <?php
 if (isset($_GET)) $_GET = sanitize_get($_GET);
+// var_dump($_GET);
 $data=(isset($_GET["job_vacancy_id"]) && $_GET["job_vacancy_id"]<>"")?vacancy_getJobAdv($_GET["job_vacancy_id"],"detail"):vacancy_getJobAdv(0,"detail");
 
-//echo "jv_id=".$_GET["job_vacancy_id"];
-if(count($data)>0) {
+// echo "jv_id=".$_GET["job_vacancy_id"];
+// var_dump(is_array($data));
+// var_dump(count($data) > 0);
+if (is_array($data) && count($data) > 0) {
 	
 $data=clean_view($data);
 ?>

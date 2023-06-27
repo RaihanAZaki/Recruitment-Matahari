@@ -1240,38 +1240,36 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 					KETERANGAN <br /><i>Explanation</i></th>
 				</tr>';
 				
-				$urut=1;
-				for($i=0;$i<4;$i++) {
-				$html.='
-				<tr>
-					<td width="2%" height="40px" style="border: 0.1mm solid black; padding-top:1px; padding-bottom:1px;">'.$urut.'</td>
-					<td width="15%" height="40px" style="border: 0.1mm solid black; padding-top:1px; padding-bottom:1px;" >
-						'.$dataedu[$i]["candidate_edu_degree"].'
-					</td>
-
-					<td width="20%" height="40px" style="border: 0.1mm solid black; padding-top:1px; padding-bottom:1px;" >
-						'.$dataedu[$i]["candidate_edu_institution"].'
-					</td>
-
-					<td width="15%" height="40px" style="border: 0.1mm solid black; padding-top:1px; padding-bottom:1px;" align="center">
-						'.$dataedu[$i]["candidate_edu_city"].'
-					</td>
-
-					<td width="20%" height="40px" style="border: 0.1mm solid black; padding-top:1px; padding-bottom:1px;" >
-						'.$dataedu[$i]["candidate_edu_major"].'
-					</td>
-
-					<td width="13%" height="40px" style="border: 0.1mm solid black; padding-top:1px; padding-bottom:1px;" align="center">
-						'.$dataedu[$i]["candidate_edu_start"].' / '.$dataedu[$i]["candidate_edu_end"].'
-					</td>
-
-					<td width="15%" height="40px" style="border: 0.1mm solid black; padding-top:1px; padding-bottom:1px;" >
-						'.$dataedu[$i]["candidate_edu_notes"].'
-					</td>
-				</tr>';
-				$urut++;
+				$urut = 1;
+				for ($i = 0; $i < 4; $i++) {
+					if (isset($dataedu[$i])) {
+						$html .= '
+						<tr>
+							<td width="2%" height="40px" style="border: 0.1mm solid black; padding-top:1px; padding-bottom:1px;">' . $urut . '</td>
+							<td width="15%" height="40px" style="border: 0.1mm solid black; padding-top:1px; padding-bottom:1px;">
+								' . $dataedu[$i]["candidate_edu_degree"] . '
+							</td>
+							<td width="20%" height="40px" style="border: 0.1mm solid black; padding-top:1px; padding-bottom:1px;">
+								' . $dataedu[$i]["candidate_edu_institution"] . '
+							</td>
+							<td width="15%" height="40px" style="border: 0.1mm solid black; padding-top:1px; padding-bottom:1px;" align="center">
+								' . $dataedu[$i]["candidate_edu_city"] . '
+							</td>
+							<td width="20%" height="40px" style="border: 0.1mm solid black; padding-top:1px; padding-bottom:1px;">
+								' . $dataedu[$i]["candidate_edu_major"] . '
+							</td>
+							<td width="13%" height="40px" style="border: 0.1mm solid black; padding-top:1px; padding-bottom:1px;" align="center">
+								' . $dataedu[$i]["candidate_edu_start"] . ' / ' . $dataedu[$i]["candidate_edu_end"] . '
+							</td>
+							<td width="15%" height="40px" style="border: 0.1mm solid black; padding-top:1px; padding-bottom:1px;">
+								' . $dataedu[$i]["candidate_edu_notes"] . '
+							</td>
+						</tr>';
+						$urut++;
+					}
 				}
-			$html.='</table>';
+				$html .= '</table>';
+				
 			
 			/* training dan pelatihan */
 			$html .='
@@ -1301,32 +1299,63 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 				DIBIAYAI OLEH <br /><i>Financed by</i>
 				</th>
 			</tr>';
-			for($i=0;$i<4;$i++) {
-			$html.='
-			<tr>
-				<td width="20%" height="33px" style="border: 0.1mm solid black;" >
-				'.$datatraining[$i]["candidate_training_name"].'
-				</td>
+			// for($i=0;$i<4;$i++) {
+			// $html.='
+			// <tr>
+			// 	<td width="20%" height="33px" style="border: 0.1mm solid black;" >
+			// 	'.$datatraining[$i]["candidate_training_name"].'
+			// 	</td>
 
-				<td width="20%" height="33px" style="border: 0.1mm solid black;" align="left">
-				'.$datatraining[$i]["candidate_training_institution"].'
-				</td>
+			// 	<td width="20%" height="33px" style="border: 0.1mm solid black;" align="left">
+			// 	'.$datatraining[$i]["candidate_training_institution"].'
+			// 	</td>
 
 
-				<td width="20%" height="33px" style="border: 0.1mm solid black;" align="center">
-				'.$datatraining[$i]["candidate_training_city"].'
-				</td>
+			// 	<td width="20%" height="33px" style="border: 0.1mm solid black;" align="center">
+			// 	'.$datatraining[$i]["candidate_training_city"].'
+			// 	</td>
 
-				<td width="15%" height="33px" style="border: 0.1mm solid black;" align="center">
-				'.$datatraining[$i]["candidate_training_year"].' <i>('.$datatraining[$i]["candidate_training_duration"].')</i>
-				</td>
+			// 	<td width="15%" height="33px" style="border: 0.1mm solid black;" align="center">
+			// 	'.$datatraining[$i]["candidate_training_year"].' <i>('.$datatraining[$i]["candidate_training_duration"].')</i>
+			// 	</td>
 
-				<td width="25%" height="33px" style="border: 0.1mm solid black;" >
-				'.$datatraining[$i]["candidate_training_sponsor"].'
-				</td>
-			</tr>';
+			// 	<td width="25%" height="33px" style="border: 0.1mm solid black;" >
+			// 	'.$datatraining[$i]["candidate_training_sponsor"].'
+			// 	</td>
+			// </tr>';
+			// }
+			// $html.='</table>';
+			if (count($datatraining) >= 4) {
+				for ($i = 0; $i < 4; $i++) {
+					$html .= '
+					<tr>
+						<td width="20%" height="33px" style="border: 0.1mm solid black;" >
+						'.$datatraining[$i]["candidate_training_name"].'
+						</td>
+			
+						<td width="20%" height="33px" style="border: 0.1mm solid black;" align="left">
+						'.$datatraining[$i]["candidate_training_institution"].'
+						</td>
+			
+						<td width="20%" height="33px" style="border: 0.1mm solid black;" align="center">
+						'.$datatraining[$i]["candidate_training_city"].'
+						</td>
+			
+						<td width="15%" height="33px" style="border: 0.1mm solid black;" align="center">
+						'.$datatraining[$i]["candidate_training_year"].' <i>('.$datatraining[$i]["candidate_training_duration"].')</i>
+						</td>
+			
+						<td width="25%" height="33px" style="border: 0.1mm solid black;" >
+						'.$datatraining[$i]["candidate_training_sponsor"].'
+						</td>
+					</tr>';
+				}
+				$html .= '</table>';
+			} else {
+				// Handle the case when the array doesn't have enough elements
+				// Display an error message or take appropriate action
 			}
-			$html.='</table>';
+			
 			
 			/* bahasa */
 			
@@ -1353,45 +1382,56 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 					Menulis <br /><i>Write</i>
 					</th>
 
-				</tr>
-			';
-			for($i=0;$i<=3;$i++){
-			$html .='
-				<tr>
-
-					<td width="20%" height="20px" style="border: 0.1mm solid black;" >'.$datalang[$i]["candidate_language_name"].'
-					</td>
-
-					<td width="20%" height="20px" style="border: 0.1mm solid black;" >'.$datalang[$i]["candidate_language_read"].'
-					</td>
-
-					<td width="20%" height="20px" style="border: 0.1mm solid black;" >'.$datalang[$i]["candidate_language_conversation"].'
-					</td>
-
-					<td width="20%" height="20px" style="border: 0.1mm solid black;" >'.$datalang[$i]["candidate_language_write"].'
-					</td>
-
-				</tr>			
-			';
+				</tr>';
+			// INI BARU
+			for ($i = 0; $i <= 3; $i++) {
+				if (isset($datalang[$i])) {
+					$html .= '
+					<tr>
+						<td width="20%" height="20px" style="border: 0.1mm solid black;">'.$datalang[$i]["candidate_language_name"].'</td>
+						<td width="20%" height="20px" style="border: 0.1mm solid black;">'.$datalang[$i]["candidate_language_read"].'</td>
+						<td width="20%" height="20px" style="border: 0.1mm solid black;">'.$datalang[$i]["candidate_language_conversation"].'</td>
+						<td width="20%" height="20px" style="border: 0.1mm solid black;">'.$datalang[$i]["candidate_language_write"].'</td>
+					</tr>';
+				}
 			}
-			$html.='</table>';
+			$html .= '</table>';
 			
-			/* Skills */
-			$html .='
+			
+			// /* Skills */
+			// $html .='
+			// <div style="font-family: serif;font-size:11px;margin-top:15px;margin-bottom:0px;padding-bottom:0px; line-height:100%;"><b>KETRAMPILAN LAIN</b></div>
+			// <div style="font-family: serif;font-size:10px;margin-bottom:5px;margin-top:0px;padding-top:0px; line-height:100%;"><i>Other skilss</i></div>
+
+			// <table width="800px" style="font-family: serif;font-size:10px;" cellpadding="3" cellspacing="0">
+			// <tr>
+			// 	<td width="50%" height="20px" style="border: 0.1mm solid black;" >1. '.$dataskills[0]["candidate_skill_name"].' <i>('.$dataskills[0]["candidate_skill_level"].')</i></td>
+			// 	<td width="50%" height="20px" style="border: 0.1mm solid black;" >3. '.$dataskills[2]["candidate_skill_name"].' <i>('.$dataskills[2]["candidate_skill_level"].')</i></td>
+			// </tr>
+			// <tr>
+			// 	<td width="50%" height="20px" style="border: 0.1mm solid black;" >2. '.$dataskills[1]["candidate_skill_name"].' <i>('.$dataskills[1]["candidate_skill_level"].')</i></td>
+			// 	<td width="50%" height="20px" style="border: 0.1mm solid black;" >4. '.$dataskills[3]["candidate_skill_name"].' <i>('.$dataskills[3]["candidate_skill_level"].')</i></td>
+			// </tr>';
+			
+			// $html .='</table>';
+
+			$html .= '
 			<div style="font-family: serif;font-size:11px;margin-top:15px;margin-bottom:0px;padding-bottom:0px; line-height:100%;"><b>KETRAMPILAN LAIN</b></div>
-			<div style="font-family: serif;font-size:10px;margin-bottom:5px;margin-top:0px;padding-top:0px; line-height:100%;"><i>Other skilss</i></div>
+			<div style="font-family: serif;font-size:10px;margin-bottom:5px;margin-top:0px;padding-top:0px; line-height:100%;"><i>Other skills</i></div>
 
 			<table width="800px" style="font-family: serif;font-size:10px;" cellpadding="3" cellspacing="0">
-			<tr>
-				<td width="50%" height="20px" style="border: 0.1mm solid black;" >1. '.$dataskills[0]["candidate_skill_name"].' <i>('.$dataskills[0]["candidate_skill_level"].')</i></td>
-				<td width="50%" height="20px" style="border: 0.1mm solid black;" >3. '.$dataskills[2]["candidate_skill_name"].' <i>('.$dataskills[2]["candidate_skill_level"].')</i></td>
-			</tr>
-			<tr>
-				<td width="50%" height="20px" style="border: 0.1mm solid black;" >2. '.$dataskills[1]["candidate_skill_name"].' <i>('.$dataskills[1]["candidate_skill_level"].')</i></td>
-				<td width="50%" height="20px" style="border: 0.1mm solid black;" >4. '.$dataskills[3]["candidate_skill_name"].' <i>('.$dataskills[3]["candidate_skill_level"].')</i></td>
-			</tr>';
-			
-			$html .='</table>';
+				<tr>
+					<td width="50%" height="20px" style="border: 0.1mm solid black;">1. ' . (isset($dataskills[0]["candidate_skill_name"]) ? $dataskills[0]["candidate_skill_name"] : "") . ' <i>(' . (isset($dataskills[0]["candidate_skill_level"]) ? $dataskills[0]["candidate_skill_level"] : "") . ')</i></td>
+					<td width="50%" height="20px" style="border: 0.1mm solid black;">3. ' . (isset($dataskills[2]["candidate_skill_name"]) ? $dataskills[2]["candidate_skill_name"] : "") . ' <i>(' . (isset($dataskills[2]["candidate_skill_level"]) ? $dataskills[2]["candidate_skill_level"] : "") . ')</i></td>
+				</tr>
+				<tr>
+					<td width="50%" height="20px" style="border: 0.1mm solid black;">2. ' . (isset($dataskills[1]["candidate_skill_name"]) ? $dataskills[1]["candidate_skill_name"] : "") . ' <i>(' . (isset($dataskills[1]["candidate_skill_level"]) ? $dataskills[1]["candidate_skill_level"] : "") . ')</i></td>
+					<td width="50%" height="20px" style="border: 0.1mm solid black;">4. ' . (isset($dataskills[3]["candidate_skill_name"]) ? $dataskills[3]["candidate_skill_name"] : "") . ' <i>(' . (isset($dataskills[3]["candidate_skill_level"]) ? $dataskills[3]["candidate_skill_level"] : "") . ')</i></td>
+				</tr>
+			</table>';
+
+			$html .= '</div>';
+
 			
 			/* family */
 			$html .='
@@ -1431,39 +1471,56 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 			$datachildren=admin_getDataFamByType($_POST["candidate_id"],"children");
 						
 			/* part parents */
-			$ur=1;
-			for($i=0;$i<2;$i++) {
-			$html.='
-			<tr>
-				<td width="3%" height="35px" style="border: 0.1mm solid black;" >'.$ur.'</td>
+			// $ur=1;
+			// for($i=0;$i<2;$i++) {
+			// $html.='
+			// <tr>
+			// 	<td width="3%" height="35px" style="border: 0.1mm solid black;" >'.$ur.'</td>
 				
-				<td width="10%" height="35px" style="border: 0.1mm solid black;" >
-				'.$dataparents[$i]["candidate_family_relation"].'
-				</td>
+			// 	<td width="10%" height="35px" style="border: 0.1mm solid black;" >
+			// 	'.$dataparents[$i]["candidate_family_relation"].'
+			// 	</td>
 
-				<td width="17%" height="35px" style="border: 0.1mm solid black;" align="left">
-				'.((isset($dataparents[$i]["candidate_family_rip"]) && $dataparents[$i]["candidate_family_rip"]=="Alive")?"":"<i>[RIP]</i>").' '.$dataparents[$i]["candidate_family_name"].'
-				</td>
-
-
-				<td width="15%" height="35px" style="border: 0.1mm solid black;" align="center">
-				'.$dataparents[$i]["candidate_family_birthplace"].' , '.((isset($dataparents[$i]["candidate_family_birthdate"]) && $dataparents[$i]["candidate_family_birthdate"]<>"")?reverseDate($dataparents[$i]["candidate_family_birthdate"]):"").'
-				</td>
+			// 	<td width="17%" height="35px" style="border: 0.1mm solid black;" align="left">
+			// 	'.((isset($dataparents[$i]["candidate_family_rip"]) && $dataparents[$i]["candidate_family_rip"]=="Alive")?"":"<i>[RIP]</i>").' '.$dataparents[$i]["candidate_family_name"].'
+			// 	</td>
 
 
-				<td width="15%" height="35px" style="border: 0.1mm solid black;" >
-				'.$dataparents[$i]["candidate_family_lastedu"].'
-				</td>
+			// 	<td width="15%" height="35px" style="border: 0.1mm solid black;" align="center">
+			// 	'.$dataparents[$i]["candidate_family_birthplace"].' , '.((isset($dataparents[$i]["candidate_family_birthdate"]) && $dataparents[$i]["candidate_family_birthdate"]<>"")?reverseDate($dataparents[$i]["candidate_family_birthdate"]):"").'
+			// 	</td>
 
-				<td width="15%" height="35px" style="border: 0.1mm solid black;" >
-				'.$dataparents[$i]["candidate_family_lastjob"].'
-				</td>
 
-				<td width="15%" height="35px" style="border: 0.1mm solid black;" >
-				'.$dataparents[$i]["candidate_family_company"].'
-				</td>
-			</tr>';
-			$ur++;
+			// 	<td width="15%" height="35px" style="border: 0.1mm solid black;" >
+			// 	'.$dataparents[$i]["candidate_family_lastedu"].'
+			// 	</td>
+
+			// 	<td width="15%" height="35px" style="border: 0.1mm solid black;" >
+			// 	'.$dataparents[$i]["candidate_family_lastjob"].'
+			// 	</td>
+
+			// 	<td width="15%" height="35px" style="border: 0.1mm solid black;" >
+			// 	'.$dataparents[$i]["candidate_family_company"].'
+			// 	</td>
+			// </tr>';
+			// $ur++;
+			// }
+
+			$ur = 1;
+			for ($i = 0; $i < 2; $i++) {
+				if (isset($dataparents[$i])) {
+					$html .= '
+					<tr>
+						<td width="3%" height="35px" style="border: 0.1mm solid black;">'.$ur.'</td>
+						<td width="10%" height="35px" style="border: 0.1mm solid black;">'.$dataparents[$i]["candidate_family_relation"].'</td>
+						<td width="17%" height="35px" style="border: 0.1mm solid black;" align="left">'.((isset($dataparents[$i]["candidate_family_rip"]) && $dataparents[$i]["candidate_family_rip"] == "Alive") ? "" : "<i>[RIP]</i>").' '.$dataparents[$i]["candidate_family_name"].'</td>
+						<td width="15%" height="35px" style="border: 0.1mm solid black;" align="center">'.$dataparents[$i]["candidate_family_birthplace"].' , '.((isset($dataparents[$i]["candidate_family_birthdate"]) && $dataparents[$i]["candidate_family_birthdate"] <> "") ? reverseDate($dataparents[$i]["candidate_family_birthdate"]) : "").'</td>
+						<td width="15%" height="35px" style="border: 0.1mm solid black;">'.$dataparents[$i]["candidate_family_lastedu"].'</td>
+						<td width="15%" height="35px" style="border: 0.1mm solid black;">'.$dataparents[$i]["candidate_family_lastjob"].'</td>
+						<td width="15%" height="35px" style="border: 0.1mm solid black;">'.$dataparents[$i]["candidate_family_company"].'</td>
+					</tr>';
+					$ur++;
+				}
 			}
 			
 			/* siblings */
@@ -1505,74 +1562,74 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 			
 
 
-			$ur=1;
-			for($i=0;$i<8;$i++) {
-			$html.='
-			<tr>
-				<td width="3%" height="35px" style="border: 0.1mm solid black;" >'.$ur.'</td>
+			// $ur=1;
+			// for($i=0;$i<8;$i++) {
+			// $html.='
+			// <tr>
+			// 	<td width="3%" height="35px" style="border: 0.1mm solid black;" >'.$ur.'</td>
 				
-				<td width="10%" height="35px" style="border: 0.1mm solid black;" >
-				'.$datasiblings[$i]["candidate_family_relation"].'
-				</td>
+			// 	<td width="10%" height="35px" style="border: 0.1mm solid black;" >
+			// 	'.$datasiblings[$i]["candidate_family_relation"].'
+			// 	</td>
 
-				<td width="17%" height="35px" style="border: 0.1mm solid black;" align="left">
-				'.((isset($datasiblings[$i]["candidate_family_rip"]) && $datasiblings[$i]["candidate_family_rip"]=="RIP")?"<i>[RIP]</i>":"").' '.$datasiblings[$i]["candidate_family_name"].'
-				</td>
-
-
-				<td width="15%" height="35px" style="border: 0.1mm solid black;" align="center">
-				'.$datasiblings[$i]["candidate_family_birthplace"].' , '.((isset($datasiblings[$i]["candidate_family_birthdate"]) && $datasiblings[$i]["candidate_family_birthdate"]<>"")?reverseDate($datasiblings[$i]["candidate_family_birthdate"]):"").'
-				</td>
+			// 	<td width="17%" height="35px" style="border: 0.1mm solid black;" align="left">
+			// 	'.((isset($datasiblings[$i]["candidate_family_rip"]) && $datasiblings[$i]["candidate_family_rip"]=="RIP")?"<i>[RIP]</i>":"").' '.$datasiblings[$i]["candidate_family_name"].'
+			// 	</td>
 
 
-				<td width="15%" height="35px" style="border: 0.1mm solid black;" >
-				'.$datasiblings[$i]["candidate_family_lastedu"].'
-				</td>
+			// 	<td width="15%" height="35px" style="border: 0.1mm solid black;" align="center">
+			// 	'.$datasiblings[$i]["candidate_family_birthplace"].' , '.((isset($datasiblings[$i]["candidate_family_birthdate"]) && $datasiblings[$i]["candidate_family_birthdate"]<>"")?reverseDate($datasiblings[$i]["candidate_family_birthdate"]):"").'
+			// 	</td>
 
-				<td width="15%" height="35px" style="border: 0.1mm solid black;" >
-				'.$datasiblings[$i]["candidate_family_lastjob"].'
-				</td>
 
-				<td width="15%" height="35px" style="border: 0.1mm solid black;" >
-				'.$datasiblings[$i]["candidate_family_company"].'
-				</td>
-			</tr>';
-			$ur++;
+			// 	<td width="15%" height="35px" style="border: 0.1mm solid black;" >
+			// 	'.$datasiblings[$i]["candidate_family_lastedu"].'
+			// 	</td>
+
+			// 	<td width="15%" height="35px" style="border: 0.1mm solid black;" >
+			// 	'.$datasiblings[$i]["candidate_family_lastjob"].'
+			// 	</td>
+
+			// 	<td width="15%" height="35px" style="border: 0.1mm solid black;" >
+			// 	'.$datasiblings[$i]["candidate_family_company"].'
+			// 	</td>
+			// </tr>';
+			// $ur++;
+			// }
+
+			$ur = 1;
+			for ($i = 0; $i < 8; $i++) {
+				if (isset($datasiblings[$i])) {
+					$html .= '
+					<tr>
+						<td width="3%" height="35px" style="border: 0.1mm solid black;">'.$ur.'</td>
+						<td width="10%" height="35px" style="border: 0.1mm solid black;">'.$datasiblings[$i]["candidate_family_relation"].'</td>
+						<td width="17%" height="35px" style="border: 0.1mm solid black;" align="left">'.((isset($datasiblings[$i]["candidate_family_rip"]) && $datasiblings[$i]["candidate_family_rip"] == "RIP") ? "<i>[RIP]</i>" : "").' '.$datasiblings[$i]["candidate_family_name"].'</td>
+						<td width="15%" height="35px" style="border: 0.1mm solid black;" align="center">'.$datasiblings[$i]["candidate_family_birthplace"].' , '.((isset($datasiblings[$i]["candidate_family_birthdate"]) && $datasiblings[$i]["candidate_family_birthdate"] <> "") ? reverseDate($datasiblings[$i]["candidate_family_birthdate"]) : "").'</td>
+						<td width="15%" height="35px" style="border: 0.1mm solid black;">'.$datasiblings[$i]["candidate_family_lastedu"].'</td>
+						<td width="15%" height="35px" style="border: 0.1mm solid black;">'.$datasiblings[$i]["candidate_family_lastjob"].'</td>
+						<td width="15%" height="35px" style="border: 0.1mm solid black;">'.$datasiblings[$i]["candidate_family_company"].'</td>
+					</tr>';
+					$ur++;
+				}
 			}
+
 			
 			/* part spouse */
-			for($i=0;$i<1;$i++) {
-			$html.='
-			<tr>
-				<td width="3%" height="35px" style="border: 0.1mm solid black; background-color:#eeeeee;" ></td>
-				
-				<td width="10%" height="35px" style="border: 0.1mm solid black; background-color:#eeeeee;" >
-				'.$dataspouse[$i]["candidate_family_relation"].'
-				</td>
-
-				<td width="17%" height="35px" style="border: 0.1mm solid black; background-color:#eeeeee;" align="left">
-				'.((isset($dataspouse[$i]["candidate_family_rip"]) && $dataspouse[$i]["candidate_family_rip"]=="RIP")?"<i>[RIP]</i>":"").' '.$dataspouse[$i]["candidate_family_name"].'
-				</td>
-
-
-				<td width="15%" height="35px" style="border: 0.1mm solid black; background-color:#eeeeee;" align="center">
-				'.$dataspouse[$i]["candidate_family_birthplace"].' , '.((isset($dataspouse[$i]["candidate_family_birthdate"]) && $dataspouse[$i]["candidate_family_birthdate"]<>"")?reverseDate($dataspouse[$i]["candidate_family_birthdate"]):"").'
-				</td>
-
-
-				<td width="15%" height="35px" style="border: 0.1mm solid black; background-color:#eeeeee;" >
-				'.$dataspouse[$i]["candidate_family_lastedu"].'
-				</td>
-
-				<td width="15%" height="35px" style="border: 0.1mm solid black; background-color:#eeeeee;" >
-				'.$dataspouse[$i]["candidate_family_lastjob"].'
-				</td>
-
-				<td width="15%" height="35px" style="border: 0.1mm solid black; background-color:#eeeeee;" >
-				'.$dataspouse[$i]["candidate_family_company"].'
-				</td>
-			</tr>';
-			}
+			for ($i = 0; $i < 1; $i++) {
+				if (isset($dataspouse[$i])) {
+					$html .= '
+					<tr>
+						<td width="3%" height="35px" style="border: 0.1mm solid black; background-color:#eeeeee;"></td>
+						<td width="10%" height="35px" style="border: 0.1mm solid black; background-color:#eeeeee;">'.$dataspouse[$i]["candidate_family_relation"].'</td>
+						<td width="17%" height="35px" style="border: 0.1mm solid black; background-color:#eeeeee;" align="left">'.((isset($dataspouse[$i]["candidate_family_rip"]) && $dataspouse[$i]["candidate_family_rip"] == "RIP") ? "<i>[RIP]</i>" : "").' '.$dataspouse[$i]["candidate_family_name"].'</td>
+						<td width="15%" height="35px" style="border: 0.1mm solid black; background-color:#eeeeee;" align="center">'.$dataspouse[$i]["candidate_family_birthplace"].' , '.((isset($dataspouse[$i]["candidate_family_birthdate"]) && $dataspouse[$i]["candidate_family_birthdate"] <> "") ? reverseDate($dataspouse[$i]["candidate_family_birthdate"]) : "").'</td>
+						<td width="15%" height="35px" style="border: 0.1mm solid black; background-color:#eeeeee;">'.$dataspouse[$i]["candidate_family_lastedu"].'</td>
+						<td width="15%" height="35px" style="border: 0.1mm solid black; background-color:#eeeeee;">'.$dataspouse[$i]["candidate_family_lastjob"].'</td>
+						<td width="15%" height="35px" style="border: 0.1mm solid black; background-color:#eeeeee;">'.$dataspouse[$i]["candidate_family_company"].'</td>
+					</tr>';
+				}
+			}		
 
 			/* children */
 			$html.='
@@ -1585,42 +1642,23 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 				usort($datachildren, 'date_compare');
 
 
-			$ur=1;
-			for($i=0;$i<5;$i++) {
-			$html.='
-			<tr>
-				<td width="3%" height="35px" style="border: 0.1mm solid black;" >'.$ur.'</td>
+				$ur = 1;
+				for ($i = 0; $i < count($datachildren); $i++) {
+					$html .= '
+					<tr>
+						<td width="3%" height="35px" style="border: 0.1mm solid black;">'.$ur.'</td>
+						<td width="10%" height="35px" style="border: 0.1mm solid black;">'.$datachildren[$i]["candidate_family_relation"].'</td>
+						<td width="17%" height="35px" style="border: 0.1mm solid black;" align="left">'.((isset($datachildren[$i]["candidate_family_rip"]) && $datachildren[$i]["candidate_family_rip"] == "RIP") ? "<i>[RIP]</i>" : "").' '.$datachildren[$i]["candidate_family_name"].'</td>
+						<td width="15%" height="35px" style="border: 0.1mm solid black;" align="center">'.$datachildren[$i]["candidate_family_birthplace"].' , '.((isset($datachildren[$i]["candidate_family_birthdate"]) && $datachildren[$i]["candidate_family_birthdate"] <> "") ? reverseDate($datachildren[$i]["candidate_family_birthdate"]) : "").'</td>
+						<td width="15%" height="35px" style="border: 0.1mm solid black;">'.$datachildren[$i]["candidate_family_lastedu"].'</td>
+						<td width="15%" height="35px" style="border: 0.1mm solid black;">'.$datachildren[$i]["candidate_family_lastjob"].'</td>
+						<td width="15%" height="35px" style="border: 0.1mm solid black;">'.$datachildren[$i]["candidate_family_company"].'</td>
+					</tr>';
+					$ur++;
+				}
 				
-				<td width="10%" height="35px" style="border: 0.1mm solid black;" >
-				'.$datachildren[$i]["candidate_family_relation"].'
-				</td>
-
-				<td width="17%" height="35px" style="border: 0.1mm solid black;" align="left">
-				'.((isset($datachildren[$i]["candidate_family_rip"]) && $datachildren[$i]["candidate_family_rip"]=="RIP")?"<i>[RIP]</i>":"").' '.$datachildren[$i]["candidate_family_name"].'
-				</td>
-
-
-				<td width="15%" height="35px" style="border: 0.1mm solid black;" align="center">
-				'.$datachildren[$i]["candidate_family_birthplace"].' , '.((isset($datachildren[$i]["candidate_family_birthdate"]) && $datachildren[$i]["candidate_family_birthdate"]<>"")?reverseDate($datachildren[$i]["candidate_family_birthdate"]):"").'
-				</td>
-
-
-				<td width="15%" height="35px" style="border: 0.1mm solid black;" >
-				'.$datachildren[$i]["candidate_family_lastedu"].'
-				</td>
-
-				<td width="15%" height="35px" style="border: 0.1mm solid black;" >
-				'.$datachildren[$i]["candidate_family_lastjob"].'
-				</td>
-
-				<td width="15%" height="35px" style="border: 0.1mm solid black;" >
-				'.$datachildren[$i]["candidate_family_company"].'
-				</td>
-			</tr>';
-			$ur++;
-			}
-			
-			$html .='</table>';
+				$html .= '</table>';
+				
 			
 			/* hobi */
 			$html .='
@@ -1657,25 +1695,22 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 
 				</tr>
 				';
-				for($i=0;$i<3;$i++) {
-				$html .='
-				<tr>
-					<td width="60%" height="20px" style="border: 0.1mm solid black;" >
-					'.substr($dataorg[$i]["candidate_organization_name"],0,50).'
-					</td>
-
-					<td width="20%" height="20px" style="border: 0.1mm solid black;" >
-					'.$dataorg[$i]["candidate_organization_start"].' - '.$dataorg[$i]["candidate_organization_end"].'
-					</td>
-
-					<td width="20%" height="20px" style="border: 0.1mm solid black;" >
-					'.$dataorg[$i]["candidate_organization_role"].'
-					</td>
-				</tr>
-				';
-					
+				for ($i = 0; $i < count($dataorg); $i++) {
+					$html .= '
+					<tr>
+						<td width="60%" height="20px" style="border: 0.1mm solid black;">
+							'.substr($dataorg[$i]["candidate_organization_name"], 0, 50).'
+						</td>
+						<td width="20%" height="20px" style="border: 0.1mm solid black;">
+							'.$dataorg[$i]["candidate_organization_start"].' - '.$dataorg[$i]["candidate_organization_end"].'
+						</td>
+						<td width="20%" height="20px" style="border: 0.1mm solid black;">
+							'.$dataorg[$i]["candidate_organization_role"].'
+						</td>
+					</tr>';
 				}
-				$html .='</table></div><div style="clear:both;"></div>';
+				
+				$html .= '</table></div><div style="clear:both;"></div>';
 				
 			
 				/* questionaire chapter 1 */
@@ -1761,51 +1796,93 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 			//print_r($datajob);exit;
 			
 			
-			for($i=0;$i<3;$i++) {
-				$alamat=str_replace("<br>", ", ", $datajob[$i]["candidate_jobexp_address"]);
-				$alamat=substr($alamat,0,100);
-				//echo "alamat ".$alamat[$i]."<br>";
-				$html .='
-				<tr>
-					<td width="50%" rowspan="2" height="220px" style="border: 0.1mm solid black;" valign="top"><b>Nama :</b> '.$datajob[$i]["candidate_jobexp_company"].'<br />
-					<b>Alamat :</b> '.$alamat.'<br />
-					<b>Telepon :</b> '.$datajob[$i]["candidate_jobexp_phone"].'<br />
-					<b>Jenis usaha :</b> '.$datajob[$i]["candidate_jobexp_lob"].'<br />
-					<b>Atasan:</b> '.$datajob[$i]["candidate_jobexp_spvname"].' <i>('.$datajob[$i]["candidate_jobexp_spvposition"].')</i><br>
-					<b>Bawahan:</b> '.$datajob[$i]["candidate_jobexp_subposition"].' <i>('.$datajob[$i]["candidate_jobexp_subnumber"].' orang)</i><br><br>
-					<b>Deskripsi Pekerjaan :</b>
-					<br>'.substr($datajob[$i]["candidate_jobexp_desc"],0,250).'
+			// for($i=0;$i<3;$i++) {
+			// 	$alamat=str_replace("<br>", ", ", $datajob[$i]["candidate_jobexp_address"]);
+			// 	$alamat=substr($alamat,0,100);
+			// 	//echo "alamat ".$alamat[$i]."<br>";
+			// 	$html .='
+			// 	<tr>
+			// 		<td width="50%" rowspan="2" height="220px" style="border: 0.1mm solid black;" valign="top"><b>Nama :</b> '.$datajob[$i]["candidate_jobexp_company"].'<br />
+			// 		<b>Alamat :</b> '.$alamat.'<br />
+			// 		<b>Telepon :</b> '.$datajob[$i]["candidate_jobexp_phone"].'<br />
+			// 		<b>Jenis usaha :</b> '.$datajob[$i]["candidate_jobexp_lob"].'<br />
+			// 		<b>Atasan:</b> '.$datajob[$i]["candidate_jobexp_spvname"].' <i>('.$datajob[$i]["candidate_jobexp_spvposition"].')</i><br>
+			// 		<b>Bawahan:</b> '.$datajob[$i]["candidate_jobexp_subposition"].' <i>('.$datajob[$i]["candidate_jobexp_subnumber"].' orang)</i><br><br>
+			// 		<b>Deskripsi Pekerjaan :</b>
+			// 		<br>'.substr($datajob[$i]["candidate_jobexp_desc"],0,250).'
 
-					</td>
-					<td width="5%" rowspan="2" height="25px" style="border: 0.1mm solid black;" valign="top">
-					'.((isset($datajob[$i]["candidate_jobexp_start"]) && $datajob[$i]["candidate_jobexp_start"]<>"" )?date("M Y", strtotime($datajob[$i]["candidate_jobexp_start"])):"").'
-					</td>
-					<td width="5%" rowspan="2" height="25px" style="border: 0.1mm solid black;" valign="top">
-					'.((isset($datajob[$i]["candidate_jobexp_end"]) && $datajob[$i]["candidate_jobexp_end"]<>"" )?date("M Y", strtotime($datajob[$i]["candidate_jobexp_end"])):"").'
-					</td>
-					<td width="15%" height="110px" style="border: 0.1mm solid black;" valign="top">
-					<b>JABATAN</b><br />
-					'.$datajob[$i]["candidate_jobexp_position"].'
+			// 		</td>
+			// 		<td width="5%" rowspan="2" height="25px" style="border: 0.1mm solid black;" valign="top">
+			// 		'.((isset($datajob[$i]["candidate_jobexp_start"]) && $datajob[$i]["candidate_jobexp_start"]<>"" )?date("M Y", strtotime($datajob[$i]["candidate_jobexp_start"])):"").'
+			// 		</td>
+			// 		<td width="5%" rowspan="2" height="25px" style="border: 0.1mm solid black;" valign="top">
+			// 		'.((isset($datajob[$i]["candidate_jobexp_end"]) && $datajob[$i]["candidate_jobexp_end"]<>"" )?date("M Y", strtotime($datajob[$i]["candidate_jobexp_end"])):"").'
+			// 		</td>
+			// 		<td width="15%" height="110px" style="border: 0.1mm solid black;" valign="top">
+			// 		<b>JABATAN</b><br />
+			// 		'.$datajob[$i]["candidate_jobexp_position"].'
 
-					</td>
-					<td width="25%" rowspan="2" height="220px" style="border: 0.1mm solid black;" valign="top">
-					<b>Alasan Pengunduran diri :</b>
-					<br />'.substr($datajob[$i]["candidate_jobexp_leaving"],0,250).'
+			// 		</td>
+			// 		<td width="25%" rowspan="2" height="220px" style="border: 0.1mm solid black;" valign="top">
+			// 		<b>Alasan Pengunduran diri :</b>
+			// 		<br />'.substr($datajob[$i]["candidate_jobexp_leaving"],0,250).'
 
-					</td>
+			// 		</td>
 
-				</tr>
-				<tr>
-					<td height="110px" style="border: 0.1mm solid black;" valign="top">
-					<b>GAJI BERSIH /BLN</b><br /><br />
-					'.((isset($datajob[$i]["candidate_jobexp_salary"]) && $datajob[$i]["candidate_jobexp_salary"]<>"" && $datajob[$i]["candidate_jobexp_salary"]>0)?showRupiah($datajob[$i]["candidate_jobexp_salary"]):"<i>no data</i>" ).'
-					<br /><br />
-					<b>Jumlah Karyawan :</b>
-					<br />'.$datajob[$i]["candidate_jobexp_numemployee"].'
-					</td>
-				</tr>
-				';
+			// 	</tr>
+			// 	<tr>
+			// 		<td height="110px" style="border: 0.1mm solid black;" valign="top">
+			// 		<b>GAJI BERSIH /BLN</b><br /><br />
+			// 		'.((isset($datajob[$i]["candidate_jobexp_salary"]) && $datajob[$i]["candidate_jobexp_salary"]<>"" && $datajob[$i]["candidate_jobexp_salary"]>0)?showRupiah($datajob[$i]["candidate_jobexp_salary"]):"<i>no data</i>" ).'
+			// 		<br /><br />
+			// 		<b>Jumlah Karyawan :</b>
+			// 		<br />'.$datajob[$i]["candidate_jobexp_numemployee"].'
+			// 		</td>
+			// 	</tr>
+			// 	';
+			// }
+
+			for ($i = 0; $i < count($datajob); $i++) {
+				if ($i < 2) {
+					$alamat = str_replace("<br>", ", ", $datajob[$i]["candidate_jobexp_address"]);
+					$alamat = substr($alamat, 0, 100);
+					$html .= '
+						<tr>
+							<td width="50%" rowspan="2" height="220px" style="border: 0.1mm solid black;" valign="top">
+								<b>Nama :</b> '.$datajob[$i]["candidate_jobexp_company"].'<br />
+								<b>Alamat :</b> '.$alamat.'<br />
+								<b>Telepon :</b> '.$datajob[$i]["candidate_jobexp_phone"].'<br />
+								<b>Jenis usaha :</b> '.$datajob[$i]["candidate_jobexp_lob"].'<br />
+								<b>Atasan:</b> '.$datajob[$i]["candidate_jobexp_spvname"].' <i>('.$datajob[$i]["candidate_jobexp_spvposition"].')</i><br>
+								<b>Bawahan:</b> '.$datajob[$i]["candidate_jobexp_subposition"].' <i>('.$datajob[$i]["candidate_jobexp_subnumber"].' orang)</i><br><br>
+								<b>Deskripsi Pekerjaan :</b><br>'.substr($datajob[$i]["candidate_jobexp_desc"], 0, 250).'
+							</td>
+							<td width="5%" rowspan="2" height="25px" style="border: 0.1mm solid black;" valign="top">
+								'.((isset($datajob[$i]["candidate_jobexp_start"]) && $datajob[$i]["candidate_jobexp_start"] <> "") ? date("M Y", strtotime($datajob[$i]["candidate_jobexp_start"])) : "").'
+							</td>
+							<td width="5%" rowspan="2" height="25px" style="border: 0.1mm solid black;" valign="top">
+								'.((isset($datajob[$i]["candidate_jobexp_end"]) && $datajob[$i]["candidate_jobexp_end"] <> "") ? date("M Y", strtotime($datajob[$i]["candidate_jobexp_end"])) : "").'
+							</td>
+							<td width="15%" height="110px" style="border: 0.1mm solid black;" valign="top">
+								<b>JABATAN</b><br />
+								'.$datajob[$i]["candidate_jobexp_position"].'
+							</td>
+							<td width="25%" rowspan="2" height="220px" style="border: 0.1mm solid black;" valign="top">
+								<b>Alasan Pengunduran diri :</b><br />'.substr($datajob[$i]["candidate_jobexp_leaving"], 0, 250).'
+							</td>
+						</tr>
+						<tr>
+							<td height="110px" style="border: 0.1mm solid black;" valign="top">
+								<b>GAJI BERSIH /BLN</b><br /><br />
+								'.((isset($datajob[$i]["candidate_jobexp_salary"]) && $datajob[$i]["candidate_jobexp_salary"] <> "" && $datajob[$i]["candidate_jobexp_salary"] > 0) ? showRupiah($datajob[$i]["candidate_jobexp_salary"]) : "<i>no data</i>").'
+								<br /><br />
+								<b>Jumlah Karyawan :</b><br />'.$datajob[$i]["candidate_jobexp_numemployee"].'
+							</td>
+						</tr>
+					';
+				}
 			}
+			
 			
 			
 			$html .='</table>';
@@ -1916,8 +1993,8 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 			$selesai="selesai convert ke pdf karyawan ".$_POST["candidate_id"]." : ".date("Y-m-d  H:i:s");
 			write_errorlogs($selesai,0);
 			
-			echo $html;
-			exit;			
+			// echo $html;
+			// exit;			
 			
 		}
 		
