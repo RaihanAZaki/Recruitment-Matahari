@@ -65,7 +65,7 @@ else {
 						<?php
 						if(isset($candidate_apply_stage) && $candidate_apply_stage=="user-screening") {
 						?>
-						<td><input type="checkbox" class="chkbx" name="chkbx_<?php echo $i; ?>" id="chkbx_<?php echo $i; ?>" value="<? echo $datalist[$i]["candidate_id"];?>" ></td>
+						<!-- <td><input type="checkbox" class="chkbx" name="chkbx_<?php echo $i; ?>" id="chkbx_<?php echo $i; ?>" value="<? echo $datalist[$i]["candidate_id"];?> -->
 						<?php
 						}
 						?>
@@ -99,7 +99,7 @@ else {
 					<?php
 					}
 					?>
-					<tr>
+					<!-- <tr>
 						<td colspan="7" align="left">
 						<form name="sendToUser" method="post" action="<?php echo _PATHURL;?>/letsprocess.php">	
 							<input type="hidden" name="send_for_screening" id="send_for_screening" value="">
@@ -109,7 +109,7 @@ else {
 							<input type="submit" id="btnSubmitToUser" class="btn btn-primary btn-sm" value="SEND CHECKED CANDIDATE TO USER" disabled="disabled">
 						</form>
 						</td>
-					</tr>
+					</tr> -->
 				</tbody>
 			</table>
 			

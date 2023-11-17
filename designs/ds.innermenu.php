@@ -65,7 +65,6 @@
               $menu2["menu_name"],
               array(
                 "resume",
-                "documents"
               )
             )
           ) {

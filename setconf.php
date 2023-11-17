@@ -15,17 +15,36 @@
 		$_database["sqlhost"] = "localhost";						// local
 		$_database["username"] = "root";
 		$_database["password"] = "";
-		$_database["databasename"] = "tester"; //develop
+		$_database["databasename"] = "mpp-recruitment"; //develop
 		//$_database["databasename"] = "mpprecruitment0419";
 		define("_PATHURL","http://localhost/mpprecruitment");
 	}
-	else{
-		// $_database["sqlhost"] = "localhost";						// online
-		// $_database["username"] = "mpprecruitment";
-		// $_database["password"] = "6e9UYNtDjNCxKPqS";
-		// $_database["databasename"] = "hpm_mpprecruitment";
-		// define("_PATHURL","http://recruitment.hypermart.co.id");
-	}
+	// else{
+	// 	// $_database["sqlhost"] = "localhost";						// online
+	// 	// $_database["username"] = "mpprecruitment";
+	// 	// $_database["password"] = "6e9UYNtDjNCxKPqS";
+	// 	// $_database["databasename"] = "hpm_mpprecruitment";
+	// 	// define("_PATHURL","http://recruitment.hypermart.co.id");
+	// }
+
+
+	
+	// $_database = [
+	// 	'sqlhost' => 'db',
+	// 	'username' => 'root',
+	// 	'password' => 'mpprecruitment',
+	// 	'databasename' => 'mpp-recruitment'
+	// ];
+	
+	// $mysqli = new mysqli($_database['sqlhost'], $_database['username'], $_database['password'], $_database['databasename']);
+	
+	// if ($mysqli->connect_error) {
+	// 	die("Koneksi database gagal: " . $mysqli->connect_error);
+	// } else {
+	// 	define("_PATHURL", "http://localhost:2022");
+	// }
+	
+
 
 	define("_PATHDIRECTORY",dirname(__FILE__));
 	define("_PATHERRORLOG",_PATHDIRECTORY."/errorlogs");
@@ -45,6 +64,7 @@
 	define("_MAXAPPLY",3);
 
 	$connection_type = _DATACONNTYPE; 
+
 
 	
 	function cari_file($directory,$regexp="",$record=0) {
@@ -99,8 +119,8 @@
 			//case 2:	$connection=new mysqli($sql_host,$user_name,$passwd,$dbname) or die($error_message);break;
 			case 2: $connection=mysqli_connect($sql_host,$user_name,$passwd,$dbname) or die ($error_message);break;
 			
-			default:$connection=mysql_connect($sql_host,$user_name,$passwd)or die($error_message);
-								mysql_select_db($dbname,$connection) or die($error_message);break;
+			default:$connection=mysqli_connect($sql_host,$user_name,$passwd)or die($error_message);
+								mysqli_select_db($dbname,$connection) or die($error_message);break;
 		}
 		return $connection;
 		
@@ -111,7 +131,7 @@
 		if (!isset($connection_type)) global $connection_type;
 
 		if ($connection_type==2) mysqli_close();
-		else mysql_close();
+		else mysqli_close();
 	}
 	
 	
@@ -159,16 +179,16 @@
 		} else {
 			if ($parameters) {
 				foreach ($parameters as &$val) {
-					$val = mysql_real_escape_string($val);
+					$val = mysqli_real_escape_string($val);
 				}
 				$querying = vsprintf(str_replace("?", "'%s'", $query_statement), $parameters);
-			} else {
+			} else {	
 				$querying = $query_statement;
 			}
 			
-			$result = mysql_query($querying, $activate_connection);
+			$result = mysqli_query($querying, $activate_connection);
 			if (!$result) {
-				write_errorlogs(mysql_error(), 2);
+				write_errorlogs(mysqli_error(), 2);
 			}
 		}
 		
@@ -195,7 +215,7 @@
 			}
 			else
 			{
-				write_errorlogs(mysql_error(),2);
+				write_errorlogs(mysqli_error(),2);
 			}
 
 			return false;
@@ -222,7 +242,7 @@
 	function querying_numrows($result)	{
 		global $connection_type;
 		if ($connection_type==2) return mysqli_num_rows($result);
-		else return mysql_num_rows($result);
+		else return mysqli_num_rows($result);
 	}
 	
 	function sqlGetData($result, $connection_type = null) {
@@ -236,7 +256,7 @@
 				$data[] = $row;
 			}
 		} else {
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = mysqli_fetch_array($result)) {
 				$data[] = $row;
 			}
 		}

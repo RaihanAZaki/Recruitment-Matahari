@@ -103,17 +103,6 @@ candidate_country, candidate_idtype, candidate_idcard, candidate_hp1, candidate_
 					<input type="text" class="form-control validate[required, custom[phone]]" name="cellphone1" id="cellphone1" title="Masukkan nomor telepon genggam Anda" placeholder="Enter your cellular phone number" value="<?php echo (isset($_SESSION["session"]["cellphone1"]))?$_SESSION["session"]["cellphone1"]:"";?>">
 				</div>
 			</div>
-
-			<div class="form-group">
-				<div class="col-md-3">
-					<div class="right bold">Curriculum vitae &nbsp;<span class="asterisk">*</span></div>
-					<div class="right caption_indo80 novpadding" style="padding-right:15px;">Riwayat hidup</div>
-				</div>
-				<div class="col-md-4">
-				<input type="file" class="form-control" name="curriculum" id="curriculum" accept=".pdf" value="<?php echo (isset($_SESSION["session"]["curriculum"]))?$_SESSION["session"]["curriculum"]:"";?>">
-				</div>
-			</div>
-
 		
 
 			<?php

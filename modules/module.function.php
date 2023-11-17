@@ -64,7 +64,7 @@ function sanitize_get($input) {
 		}
 		else
 		{
-			$output = mysql_real_escape_string($input);
+			$output = mysqli_real_escape_string($input);
 		}
 	}
 	return $output;
@@ -110,7 +110,7 @@ function sanitize_post($input) {
 		}
 		else
 		{
-			$output = mysql_real_escape_string($input);
+			$output = mysqli_real_escape_string($input);
 		}
 	}
 	return $output;
@@ -149,7 +149,7 @@ function clean_show($output) {
 // }
 
 function getCity() {
-	 $query=querying("SELECT CityCode as city_id, CityState as city_province, CityName as city_name FROM City ORDER BY CityName ASC");
+	 $query=querying("SELECT CityCode as city_id, CityState as city_province, CityName as city_name FROM city ORDER BY CityName ASC");
 	 $data=sqlGetData($query);
 	 return $data;
  }
@@ -327,6 +327,15 @@ function function_sending_email($variable) {
 	
     
     // Konfigurasi SMTP
+    // //HYPERMART.CO.ID 
+    // $mailer->Host = "smtp.hypermart.co.id";
+    // $mailer->Username = "recruiter@hypermart.co.id";
+    // $mailer->Password = "09February2023!";
+    // $mailer->SMTPAuth = true;
+    // $mailer->SMTPSecure = "";
+    // $mailer->Port = 25;
+
+    // GMAIL
     $mailer->Host = "smtp.gmail.com";
     $mailer->Username = "rehantesterr@gmail.com";
     $mailer->Password = "nktjuhougpfkudms";
@@ -454,11 +463,11 @@ function referall() {
     if (isset($_POST["email_usulan"])) $_POST["email_usulan"] = sanitize_post($_POST["email_usulan"]);
     if (isset($_POST["posisi"])) $_POST["posisi"] = sanitize_post($_POST["posisi"]);
     if (isset($_POST["email"])) $_POST["email"] = sanitize_post($_POST["email"]);
+    if (isset($_POST["nama_pengusul"])) $_POST["nama_pengusul"] = sanitize_post($_POST["nama_pengusul"]);
     if (isset($_POST["telp"])) $_POST["telp"] = sanitize_post($_POST["telp"]);
-
     if (isset($_GET)) $_GET = sanitize_post($_GET);
 
-$query = querying("INSERT INTO m_calonusulan (usulan_name, usulan_email, email_pengusul	, posisi, telp_pengusul) VALUES (?, ?, ?, ?, ?)", array($_POST["nama_usulan"], $_POST["email_usulan"], $_POST["email"], $_POST["posisi"], $_POST["telp"]));
+$query = querying("INSERT INTO m_referall (usulan_name, usulan_email, email_pengusul, posisi, usulan_telp, nama_pengusul) VALUES (?, ?, ?, ?, ?, ?)", array($_POST["nama_usulan"], $_POST["email_usulan"], $_POST["email"], $_POST["posisi"], $_POST["telp"], $_POST["nama_pengusul"]));
 
 
 
@@ -469,26 +478,22 @@ $query = querying("INSERT INTO m_calonusulan (usulan_name, usulan_email, email_p
         $variablemail["sender"]     = 'recruitment@hypermart.co.id';
         $variablemail["from"]       = "recruitment@hypermart.co.id";
         $variablemail["fromname"]   = "Registration PT. Matahari Putra Prima";
+        $variablemail["nama"]       = $_POST["nama_pengusul"];
         $variablemail["to"]         = $_POST["email_usulan"];
         $variablemail["toName"]     = $_POST["nama_usulan"];
         $variablemail["bcc"]        = "shakti.santoso@hypermart.co.id";
         $variablemail["bcc"]        = "recruitment@hypermart.co.id";
 
-        $variablemail["subject"]    = "[PT. Matahari Putra Prima] Email Activation";
+        $variablemail["subject"]    = "[PT. Matahari Putra Prima] Referall Job";
         $variablemail["content"]    = "
-        <p>Dear ".$_POST["nama_usulan"].", <br>Thank you for registering via our on-line recruitment website.<br>In order to activate your account, kindly click the link below, not later than <b>".date("d M y",strtotime($expiry_date))."</b>.<br><br>
-        <a href="._PATHURL."/useractivation.php?usr=".coded($_POST["email_usulan"]."|".$expiry_date)."&a=".$register_activation_code.">
-        Activate my account</a><br><br>
-        or simply copy and then paste the link below to your web browser,<br><br>
-         "._PATHURL."/useractivation.php?usr=".coded($_POST["email_usulan"]."|".$expiry_date)."&a=".$register_activation_code."
+        <p>Dear ".$_POST["nama_usulan"].", <br>".$_POST["nama_pengusul"]." has recommended you to apply for a position  ".$_POST["posisi"]." at PT. Matahari Putra Prima Tbk.<br>For further information, kindly click the link below, not later than <b>".date("d M y",strtotime($expiry_date))."</b>.<br><br>
+        <a href="._PATHURL."/index.php?mod=vacancy&>
+        Visit Website MPPA</a><br>
         <br><br>In case our email has been delivered into your SPAM / Bulk / Trash, kindly click \"Not Spam\" button to make sure that every single email from us is not going to your SPAM / Bulk / Trash folder.<br><br><br><br>
         <b>Best Regards,<br><br/>Matahari Putra Prima<br>Recruitment Team</b></p><hr>
-        <p>Yang terhormat ".$_POST["name_usulan"].", <br>Terimakasih telah melakukan pendaftaran melalui situs pendaftaran online kami.<br>Untuk mengaktifkan akun Anda, silahkan klik link di bawah ini selambatnya pada tanggal <b>".date("d M y",strtotime($expiry_date))."</b>.<br><br>
-        <a href="._PATHURL."/useractivation.php?usr=".coded($_POST["email_usulan"]."|".$expiry_date)."&a=".$register_activation_code.">
-        Aktifkan akun saya</a><br><br>
-        atau buka link berikut ini di perambah situs Anda,<br><br>
-         "._PATHURL."/useractivation.php?usr=".coded($_POST["email_usulan"]."|".$expiry_date)."&a=".$register_activation_code."
-        <br><br>Jika email kami masuk ke folder SPAM/ Bulk/ Trash, mohon klik tombol \"Not Spam\" agar selanjutnya email kami dapat terkirim langsung ke inbox Anda.<br><br><br><br>
+        <p>Yang terhormat ".$_POST["name_usulan"].", <br>".$_POST["nama_pengusul"]." telah merekomendasikanmu untuk mengajukan lamaran di posisi ".$_POST["posisi"]." pada perusahaan PT. Matahari Putra Prima Tbk.<br>Untuk informasi selanjutnya, silahkan klik link di bawah ini selambatnya pada tanggal <b>".date("d M y",strtotime($expiry_date))."</b>.<br><br>
+        <a href="._PATHURL."/index.php?mod=vacancy&>
+        Kunjungi situs MPPA</a><br><br><br>Jika email kami masuk ke folder SPAM/ Bulk/ Trash, mohon klik tombol \"Not Spam\" agar selanjutnya email kami dapat terkirim langsung ke inbox Anda.<br><br><br><br>
         <b>Hormat kami,<br><br/>Tim Rekrutmen Matahari Putra Prima</b></p>
         ";
         
@@ -537,24 +542,24 @@ function showRupiah($angka) {
 
 
 //tambahan shakti 18 oct 2017
-function code4csharp($textnya) {
-	$iv = "45287112549354892144548565456541";
-	$key = "anjueolkdiwpoida";
-	$text = $textnya;
+// function code4csharp($textnya) {
+// 	$iv = "45287112549354892144548565456541";
+// 	$key = "anjueolkdiwpoida";
+// 	$text = $textnya;
 
-	// to append string with trailing characters as for PKCS7 padding scheme
-	$block = mcrypt_get_block_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
-	$padding = $block - (strlen($text) % $block);
-	$text .= str_repeat(chr($padding), $padding);
+// 	// to append string with trailing characters as for PKCS7 padding scheme
+// 	$block = mcrypt_get_block_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
+// 	$padding = $block - (strlen($text) % $block);
+// 	$text .= str_repeat(chr($padding), $padding);
 
-	$crypttext = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $text, MCRYPT_MODE_CBC, $iv);
+// 	$crypttext = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $text, MCRYPT_MODE_CBC, $iv);
 
-	// this is not needed here            
-	//$crypttext = urlencode($crypttext);
+// 	// this is not needed here            
+// 	//$crypttext = urlencode($crypttext);
 
-	$crypttext64=base64_encode($crypttext);
-	return $crypttext64;
-}
+// 	$crypttext64=base64_encode($crypttext);
+// 	return $crypttext64;
+// }
 
 //tambahan shakti 25 September 2019
 

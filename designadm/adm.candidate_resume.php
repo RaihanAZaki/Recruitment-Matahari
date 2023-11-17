@@ -26,8 +26,8 @@ else {
 		$data["candidate_religion"]=(isset($_SESSION["session"]["candidate_religion"]) && $_SESSION["session"]["candidate_religion"]<>"")?$_SESSION["session"]["candidate_religion"]:$dataresume[0]["candidate_religion"];
 		$data["candidate_race"]=(isset($_SESSION["session"]["candidate_race"]) && $_SESSION["session"]["candidate_race"]<>"")?$_SESSION["session"]["candidate_race"]:$dataresume[0]["candidate_race"];
 
-		$data["candidate_bodyheight"]=(isset($_SESSION["session"]["candidate_bodyheight"]) && $_SESSION["session"]["candidate_bodyheight"]<>"")?$_SESSION["session"]["candidate_bodyheight"]:$dataresume[0]["candidate_bodyheight"];
-		$data["candidate_bodyweight"]=(isset($_SESSION["session"]["candidate_bodyweight"]) && $_SESSION["session"]["candidate_bodyweight"]<>"")?$_SESSION["session"]["candidate_bodyweight"]:$dataresume[0]["candidate_bodyweight"];
+		// $data["candidate_bodyheight"]=(isset($_SESSION["session"]["candidate_bodyheight"]) && $_SESSION["session"]["candidate_bodyheight"]<>"")?$_SESSION["session"]["candidate_bodyheight"]:$dataresume[0]["candidate_bodyheight"];
+		// $data["candidate_bodyweight"]=(isset($_SESSION["session"]["candidate_bodyweight"]) && $_SESSION["session"]["candidate_bodyweight"]<>"")?$_SESSION["session"]["candidate_bodyweight"]:$dataresume[0]["candidate_bodyweight"];
 
 		$data["candidate_bloodtype"]=(isset($_SESSION["session"]["candidate_bloodtype"]) && $_SESSION["session"]["candidate_bloodtype"]<>"")?$_SESSION["session"]["candidate_bloodtype"]:$dataresume[0]["candidate_bloodtype"];
 		$data["candidate_sim_a"]=(isset($_SESSION["session"]["candidate_sim_a"]) && $_SESSION["session"]["candidate_sim_a"]<>"")?$_SESSION["session"]["candidate_sim_a"]:$dataresume[0]["candidate_sim_a"];
@@ -40,8 +40,8 @@ else {
 		$data["candidate_c_address"]=(isset($_SESSION["session"]["candidate_c_address"]) && $_SESSION["session"]["candidate_c_address"]<>"")?$_SESSION["session"]["candidate_c_address"]:$dataresume[0]["candidate_c_address"];
 		$data["candidate_c_city"]=(isset($_SESSION["session"]["candidate_c_city"]) && $_SESSION["session"]["candidate_c_city"]<>"")?$_SESSION["session"]["candidate_c_city"]:$dataresume[0]["candidate_c_city"];
 		$data["candidate_c_postcode"]=(isset($_SESSION["session"]["candidate_c_postcode"]) && $_SESSION["session"]["candidate_c_postcode"]<>"")?$_SESSION["session"]["candidate_c_postcode"]:$dataresume[0]["candidate_c_postcode"];
-		$data["candidate_hp2"]=(isset($_SESSION["session"]["candidate_hp2"]) && $_SESSION["session"]["candidate_hp2"]<>"")?$_SESSION["session"]["candidate_hp2"]:$dataresume[0]["candidate_hp2"];
-		$data["candidate_phone"]=(isset($_SESSION["session"]["candidate_phone"]) && $_SESSION["session"]["candidate_phone"]<>"")?$_SESSION["session"]["candidate_phone"]:$dataresume[0]["candidate_phone"];
+		// $data["candidate_hp2"]=(isset($_SESSION["session"]["candidate_hp2"]) && $_SESSION["session"]["candidate_hp2"]<>"")?$_SESSION["session"]["candidate_hp2"]:$dataresume[0]["candidate_hp2"];
+		// $data["candidate_phone"]=(isset($_SESSION["session"]["candidate_phone"]) && $_SESSION["session"]["candidate_phone"]<>"")?$_SESSION["session"]["candidate_phone"]:$dataresume[0]["candidate_phone"];
 		$data["candidate_cp_name1"]=(isset($_SESSION["session"]["candidate_cp_name1"]) && $_SESSION["session"]["candidate_cp_name1"]<>"")?$_SESSION["session"]["candidate_cp_name1"]:$dataresume[0]["candidate_cp_name1"];
 		$data["candidate_cp_relation1"]=(isset($_SESSION["session"]["candidate_cp_relation1"]) && $_SESSION["session"]["candidate_cp_relation1"]<>"")?$_SESSION["session"]["candidate_cp_relation1"]:$dataresume[0]["candidate_cp_relation1"];
 		$data["candidate_cp_phone1"]=(isset($_SESSION["session"]["candidate_cp_phone1"]) && $_SESSION["session"]["candidate_cp_phone1"]<>"")?$_SESSION["session"]["candidate_cp_phone1"]:$dataresume[0]["candidate_cp_phone1"];
@@ -156,20 +156,6 @@ else {
 							<input type="text" class="form-control validate[required,custom[phone]]" name="candidate_hp1" id="candidate_hp1" value="<?php echo (isset($dataresume[0]["candidate_hp1"]) && $dataresume[0]["candidate_hp1"]<>"")?$dataresume[0]["candidate_hp1"]:"";?>">
 						</div>
 					</div>
-
-					<div class="form-group">
-						<label class="control-label col-md-3" for="candidate_hp2">Cellular number 2:</label>
-						<div class="col-md-4">
-							<input type="text" class="form-control validate[custom[phone]]" name="candidate_hp2" id="candidate_hp2" value="<?php echo (isset($data["candidate_hp2"]) && $data["candidate_hp2"]<>"")?$data["candidate_hp2"]:"";?>" placeholder="Enter your secondary cellular number">
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label class="control-label col-md-3" for="homephone">Home phone:</label>
-						<div class="col-md-4">
-							<input type="text" class="form-control validate[custom[phone]]" name="homephone" id="homephone"  value="<?php echo (isset($data["candidate_phone"]) && $data["candidate_phone"]<>"")?$data["candidate_phone"]:"";?>" placeholder="Enter your home phone number">
-						</div>
-					</div>
 					
 					<div class="form-group">
 						<label class="control-label col-md-3" for="candidate_religion">Religion: &nbsp;<span class="asterisk">*</span></label>
@@ -194,20 +180,6 @@ else {
 							<div class="button-group">
 								<input name="candidate_marital" id="candidate_marital" class="form-control validate[required]">
 							</div>
-						</div>
-					</div>
-					
-					<div class="form-group">
-					<label for="candidate_height" class="col-md-3 control-label">Body height</label>
-						<div class="col-sm-4">
-								<input type="text" class="form-control input-group-md"  name="candidate_bodyheight" id="candidate_bodyheight" value="<?php echo (isset($data["candidate_bodyheight"]) && $data["candidate_bodyheight"]<>"")?$data["candidate_bodyheight"]:"000.00";?>"/>
-						</div>
-					</div>
-
-					<div class="form-group">
-					<label for="candidate_weight" class="col-sm-3 control-label">Body weight</label>
-						<div class="col-sm-4">
-								<input type="text" class="form-control input-group-md"  name="candidate_bodyweight" id="candidate_bodyweight" value="<?php echo (isset($data["candidate_bodyweight"]) && $data["candidate_bodyweight"]<>"")?$data["candidate_bodyweight"]:"00.00";?>"/>
 						</div>
 					</div>
 					
@@ -421,26 +393,26 @@ else {
 $(document).ready(function(){
 
 	$('#birthplace').magicSuggest({
-	    resultAsString: true,
-		required: true,
-	    maxSelection: 1,
-	    data: '<?php echo _PATHURL;?>/application/api.city.php',
-		name: 'place_of_birth',
-		<?php
-		if(isset($data["candidate_birthplace"]) && $data["candidate_birthplace"]<>"") {
-		?>
-		value: ['<?php echo $data["candidate_birthplace"];?>'],
-		<?php
-		}
-		else {
-		?>
-		placeholder: 'Please choose from the available list',
-		<?php
-		}
-		?>		
-		valueField: 'city_name',
-	    displayField: 'city_name'
-	});	
+    required: true,
+    maxSelection: 1,
+    data: '<?php echo _PATHURL;?>/application/api.city.php',
+    name: 'place_of_birth',
+    <?php
+    if(isset($data["candidate_birthplace"]) && $data["candidate_birthplace"]<>"") {
+    ?>
+    value: ['<?php echo $data["candidate_birthplace"];?>'],
+    <?php
+    }
+    else {
+    ?>
+    placeholder: 'Please choose from the available list',
+    <?php
+    }
+    ?>      
+    valueField: 'city_name',
+    displayField: 'city_name'
+});
+
 
 	
 	$('#candidate_religion').magicSuggest({

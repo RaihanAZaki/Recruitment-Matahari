@@ -171,7 +171,7 @@ function upload_candidateFile() {
 		
 		
 		
-		else if( ($_POST["candidate_file_type"]=="coverletter" || $_POST["candidate_file_type"]=="ijazah" || $_POST["candidate_file_type"]=="transcript") && strtolower($extension)<>strtolower($_POST["fileExt"])) {
+		else if( ($_POST["candidate_file_type"]=="coverletter" || $_POST["candidate_file_type"]=="ijazah" || $_POST["candidate_file_type"]=="transcript" || $_POST["candidate_file_type"]=="curriculum") && strtolower($extension)<>strtolower($_POST["fileExt"])) {
 			header("location: "._PATHURL."/index.php?mod=documents&gal=".coded("1")."&mess=".coded("Only ".strtoupper($_POST["fileExt"])." file is allowed.<br><i>Hanya file dalam format ".strtoupper($_POST["fileExt"])." yang boleh diupload.</i>")."#".$_POST["candidate_file_type"]);
 			return false;
 			exit;

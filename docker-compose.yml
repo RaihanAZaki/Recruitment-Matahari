@@ -1,0 +1,75 @@
+version: '4'
+
+services:
+  app:
+    build: .
+    image: mpprecruitment
+    container_name: mpprecruitment
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html
+      - ./docker/php.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - mpprecruitment
+
+  webserver:
+    image: nginx:alpine
+    container_name: nginxmpprecruitment
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "2022:80"
+    volumes:
+      - .:/var/www/html
+      - ./docker/:/etc/nginx/conf.d/
+    depends_on:
+      - db
+    networks:
+      - mpprecruitment
+
+  
+  db:
+    image: mysql:5.7
+    container_name: db
+    restart: always
+    tty: true
+    ports:
+      - "20222:3306" # Menghubungkan port MySQL di dalam container ke port MySQL lokal
+    volumes:
+      - lbdata:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "mpprecruitment" # Gantilah dengan kata sandi MySQL root yang sesuai
+      MYSQL_USER: "root" # Gantilah dengan nama pengguna MySQL yang sesuai
+      MYSQL_PASSWORD: "mpprecruitment" # Gantilah dengan kata sandi MySQL yang sesuai
+      MYSQL_DATABASE: "mpp-recruitment" # Gantilah dengan nama database yang sesuai
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - mpprecruitment
+
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pmampprecruitment
+    links: 
+      - db
+    restart: always
+    ports:
+      - 7000:80
+    networks:
+      - mpprecruitment
+
+# NETWORK
+networks:
+  mpprecruitment:
+    driver: bridge
+
+# VOLUME
+volumes:
+  lbdata:
+    driver: local
+

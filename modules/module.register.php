@@ -9,15 +9,15 @@ function register_checkEmail() {
 	if(count($data1)==0 && count($data2)==0) return false;	else return true;
 }
 
-function register_checkMobile() {
-	$query=querying("SELECT register_id FROM m_register WHERE candidate_hp1=? or candidate_hp2=? ORDER BY register_id ASC LIMIT 1",array($_POST["cellphone1"],$_POST["cellphone1"]));
-	$data1 = sqlGetData($query);
+// function register_checkMobile() {
+// 	$query=querying("SELECT register_id FROM m_register WHERE candidate_hp1=? ORDER BY register_id ASC LIMIT 1",array($_POST["cellphone1"],$_POST["cellphone1"]));
+// 	$data1 = sqlGetData($query);
 	
-	$query=querying("SELECT a.register_id FROM log_auth a LEFT JOIN m_candidate b ON a.log_auth_id=b.log_auth_id WHERE b.candidate_hp1=? or b.candidate_hp2=? ORDER BY a.register_id ASC LIMIT 1",array($_POST["cellphone1"],$_POST["cellphone1"]));
-	$data2 = sqlGetData($query);
+// 	$query=querying("SELECT a.register_id FROM log_auth a LEFT JOIN m_candidate b ON a.log_auth_id=b.log_auth_id WHERE b.candidate_hp1=? ORDER BY a.register_id ASC LIMIT 1",array($_POST["cellphone1"],$_POST["cellphone1"]));
+// 	$data2 = sqlGetData($query);
 			
-	if( count($data1)==0 && count($data2)==0 ) return false;	else return true;
-}
+// 	if( count($data1)==0 && count($data2)==0 ) return false;	else return true;
+// }
 
 // function register_checkIDCard() {
 // 	$query = querying("SELECT register_id FROM m_register WHERE candidate_idcard = ? ORDER BY register_id ASC LIMIT 1",array($_POST["nomor_ktp"]));
@@ -27,51 +27,51 @@ function register_checkMobile() {
 // 	$d_id_candidate = sqlGetData($query);
 // 	if(count($d_id_reg)==0 && count($d_id_candidate)==0) return false; else return true;
 // }
-function register_checkIDCard() {
-    if (isset($_POST["nomor_ktp"])) {
-        $query = querying("SELECT register_id FROM m_register WHERE candidate_idcard = ? ORDER BY register_id ASC LIMIT 1", array($_POST["nomor_ktp"]));
-        if ($query) {
-            $d_id_reg = sqlGetData($query);
-            if (count($d_id_reg) == 0) {
-                $query = querying("SELECT candidate_id FROM m_candidate WHERE candidate_idcard = ? ORDER BY candidate_id ASC LIMIT 1", array($_POST["nomor_ktp"]));
-                if ($query) {
-                    $d_id_candidate = sqlGetData($query);
-                    if (count($d_id_candidate) == 0) {
-                        return false;
-                    }
-                } else {
-                    // Penanganan error jika query kedua gagal
-                    write_errorlogs(mysqli_error($activate_connection), 2);
-                }
-            }
-        } else {
-            // Penanganan error jika query pertama gagal
-            write_errorlogs(mysqli_error($activate_connection), 2);
-        }
-    }
+// function register_checkIDCard() {
+//     if (isset($_POST["nomor_ktp"])) {
+//         $query = querying("SELECT register_id FROM m_register WHERE candidate_idcard = ? ORDER BY register_id ASC LIMIT 1", array($_POST["nomor_ktp"]));
+//         if ($query) {
+//             $d_id_reg = sqlGetData($query);
+//             if (count($d_id_reg) == 0) {
+//                 $query = querying("SELECT candidate_id FROM m_candidate WHERE candidate_idcard = ? ORDER BY candidate_id ASC LIMIT 1", array($_POST["nomor_ktp"]));
+//                 if ($query) {
+//                     $d_id_candidate = sqlGetData($query);
+//                     if (count($d_id_candidate) == 0) {
+//                         return false;
+//                     }
+//                 } else {
+//                     // Penanganan error jika query kedua gagal
+//                     write_errorlogs(mysqli_error($activate_connection), 2);
+//                 }
+//             }
+//         } else {
+//             // Penanganan error jika query pertama gagal
+//             write_errorlogs(mysqli_error($activate_connection), 2);
+//         }
+//     }
 
-    return true;
-}
+//     return true;
+// }
 	
 /*tambahan check tgl Lahir di IDCard 23 Sept 2019 */	
-function register_checkBirthDateID($postedbirthdate,$jeniskelamin,$postedidcard) {
-	//echo "posted birthdate=".$postedbirthdate."<br>";
-	$explodetgl=explode("-",$postedbirthdate);
+// function register_checkBirthDateID($postedbirthdate,$jeniskelamin,$postedidcard) {
+// 	//echo "posted birthdate=".$postedbirthdate."<br>";
+// 	$explodetgl=explode("-",$postedbirthdate);
 	
-	//echo "jenis kelamin=".$jeniskelamin."<br>";
+// 	//echo "jenis kelamin=".$jeniskelamin."<br>";
 	
-	if($jeniskelamin=="male") $ddfix=$explodetgl[0];
-	if($jeniskelamin=="female") $ddfix=$explodetgl[0]+40;
+// 	if($jeniskelamin=="male") $ddfix=$explodetgl[0];
+// 	if($jeniskelamin=="female") $ddfix=$explodetgl[0]+40;
 	
-	$tgllahirid=substr($postedidcard,6,6);
-	$tgllahirexplode=$ddfix.$explodetgl[1].substr($explodetgl[2],2,2);
-	//echo "ddfix based on sex=".$ddfix."<br>";
-	//echo "tgl lahir di ktp=".$tgllahirid."<br>";
-	//echo "tgl lahir konversi posted=".$tgllahirexplode."<br>";
+// 	$tgllahirid=substr($postedidcard,6,6);
+// 	$tgllahirexplode=$ddfix.$explodetgl[1].substr($explodetgl[2],2,2);
+// 	//echo "ddfix based on sex=".$ddfix."<br>";
+// 	//echo "tgl lahir di ktp=".$tgllahirid."<br>";
+// 	//echo "tgl lahir konversi posted=".$tgllahirexplode."<br>";
 	
-	if($tgllahirid==$tgllahirexplode) return false; else return true;
-	//exit();
-}
+// 	if($tgllahirid==$tgllahirexplode) return false; else return true;
+// 	//exit();
+// }
 	
 function register_samePerson($candidate_name,$candidate_birthdate) {
 	$query = querying("SELECT candidate_id, candidate_email, candidate_name, candidate_birthdate, log_auth_id FROM m_candidate WHERE candidate_name=? AND candidate_birthdate=? ORDER BY candidate_id ASC LIMIT 1",array($candidate_name,$candidate_birthdate));
@@ -107,19 +107,10 @@ function register_signUp() {
 
 		if (isset($_POST["full_name"])) $_POST["full_name"] = sanitize_post($_POST["full_name"]);
 		if (isset($_POST["email1"])) $_POST["email1"] = sanitize_post($_POST["email1"]);
-		// if (isset($_POST["sex"])) $_POST["sex"] = sanitize_post($_POST["sex"]);
-		// if (isset($_POST["place_of_birth"])) $_POST["place_of_birth"] = sanitize_post($_POST["place_of_birth"]);
-		// if (isset($_POST["birthdate"])) $_POST["birthdate"] = sanitize_post($_POST["birthdate"]);
-		// if (isset($_POST["nationality"])) $_POST["nationality"] = sanitize_post($_POST["nationality"]);
-		// if (isset($_POST["country"])) $_POST["country"] = sanitize_post($_POST["country"]);
-		// if (isset($_POST["nomor_passport"])) $_POST["nomor_passport"] = sanitize_post($_POST["nomor_passport"]);
-		// if (isset($_POST["nomor_ktp"])) $_POST["nomor_ktp"] = sanitize_post($_POST["nomor_ktp"]);
 		if (isset($_POST["email2"])) $_POST["email2"] = sanitize_post($_POST["email2"]);
 		if (isset($_POST["pwd1"])) $_POST["pwd1"] = sanitize_post($_POST["pwd1"]);
 		if (isset($_POST["pwd2"])) $_POST["pwd2"] = sanitize_post($_POST["pwd2"]);
 		if (isset($_POST["cellphone1"])) $_POST["cellphone1"] = sanitize_post($_POST["cellphone1"]);
-		// if (isset($_POST["cellphone2"])) $_POST["cellphone2"] = sanitize_post($_POST["cellphone2"]);
-		if (isset($_POST["curriculum"])) $_POST["curriculum"] = sanitize_post($_POST["curriculum"]);
 		
 
 		if (isset($_GET)) $_GET = sanitize_post($_GET);		
@@ -142,23 +133,6 @@ function register_signUp() {
 	}
 	
 	if (!isset($_POST["email1"]) or $_POST["email1"] == "") 		$missteps[] = 1;
-	// if (!isset($_POST["sex"]) or $_POST["sex"] == "") 		$missteps[] = 2;
-	// if (!isset($pob) or $pob == "") 		$missteps[] = 4;
-	// if (!isset($_POST["birthdate"]) or $_POST["birthdate"] == "") 		$missteps[] = 5;
-	// if (!isset($_POST["nationality"]) or $_POST["nationality"] == "") 		$missteps[] = 7;
-	// if (isset($_POST["nationality"]) && $_POST["nationality"]=="wna" && $_POST["country"] == "") 		$missteps[] = 8;
-	// if (isset($_POST["nationality"]) && $_POST["nationality"]=="wna" && (!isset($_POST["nomor_passport"]) || $_POST["nomor_passport"] == "") ) 		$missteps[] = 10;
-	// if (isset($_POST["nationality"]) && $_POST["nationality"]=="wni" && (!isset($_POST["nomor_ktp"]) || $_POST["nomor_ktp"] == ""  || (strlen($_POST["nomor_ktp"]) < 15) || (strlen($_POST["nomor_ktp"]) > 16) )) 		$missteps[] = 37;
-	
-	/* tambahan untuk cek KTP 23 Sept 2019 */
-	// if (isset($_POST["nationality"]) && $_POST["nationality"]=="wni" && isset($_POST["nomor_ktp"]) && $_POST["nomor_ktp"]<>"" && isset($_POST["birthdate"]) && $_POST["birthdate"]<>"" && (register_checkBirthDateID($_POST["birthdate"],$_POST["sex"],$_POST["nomor_ktp"]) )) 		$missteps[] = 37;
-	// if (isset($_POST["nomor_ktp"]) && register_checkIDCard($_POST["nomor_ktp"])) {
-	// 	if (!in_array(37, $missteps)) {
-	// 		$missteps[] = 38;
-	// 	}
-	// }
-	
-	
 	if (isset($_POST["email1"]) && !filter_var($_POST["email1"], FILTER_VALIDATE_EMAIL))	$missteps[] = 34;
 	if (!isset($_POST["email2"]) or $_POST["email2"] == "") $missteps[] = 35;
 	if (isset($_POST["email2"]) && $_POST["email2"] <> $_POST["email1"]) $missteps[] = 36;
@@ -169,8 +143,8 @@ function register_signUp() {
 	
 	if (!isset($_POST["cellphone1"]) or $_POST["cellphone1"] == "") $missteps[] = 43;
 		
-	if (isset($_POST["cellphone1"]) && register_checkMobile())  $missteps[] = 44;
-	if (_WITHCAPTCHA=="y" && isset($response->is_valid) && $response->is_valid != true) $missteps[] = 45;
+	// if (isset($_POST["cellphone1"]) && register_checkMobile())  $missteps[] = 44;
+	// if (_WITHCAPTCHA=="y" && isset($response->is_valid) && $response->is_valid != true) $missteps[] = 45;
 
 	
 	// print_r($missteps);
@@ -187,12 +161,6 @@ function register_signUp() {
 		$notice = json_encode($notice);
 		
 		$_SESSION["session"] = $_POST;
-		
-		
-		
-		if(isset($pob) && $pob<>"") {
-				$_SESSION["session"]["place_of_birth"]=$pob;
-		}
 		
 		//print_r ($_SESSION["session"]);exit;
 		
@@ -224,9 +192,9 @@ function register_signUp() {
 		
 		
 		$query = querying("INSERT INTO m_register
-(candidate_name, candidate_email, candidate_passwd,candidate_hp1, curriculum, register_date, register_expiry_date, register_activation_code)
-VALUES (?, ?, ?, ?, ?, NOW(), ?, ?)", array($_POST["full_name"], $_POST["email1"], $_POST["pwd1"],
-$_POST["cellphone1"], $_POST["curriculum"], $expiry_date, $register_activation_code ) );
+			(candidate_name, candidate_email, candidate_passwd,candidate_hp1, register_date, register_expiry_date, register_activation_code)
+			VALUES (?, ?, ?, ?, ?, NOW(),  ?)", array($_POST["full_name"], $_POST["email1"], $_POST["pwd1"],
+			$_POST["cellphone1"], $expiry_date, $register_activation_code ) );
 		
 
 		if ($query)
@@ -485,9 +453,9 @@ function register_resendAct() {
 function register_insertToMCandidate($data) {
 	
 		if (querying("INSERT INTO m_candidate
-	(log_auth_id, candidate_name, candidate_email, candidate_birthplace, candidate_birthdate, candidate_gender, candidate_nationality, candidate_country, candidate_idtype, candidate_idcard, candidate_hp1, candidate_hp2, candidate_phone, status_id, user_insert, date_insert, user_update, date_update)
-	VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, NOW())",
-		array($data["log_auth_id"], $data["candidate_name"], $data["candidate_email"], $data["candidate_birthplace"], $data["candidate_birthdate"], $data["candidate_gender"], $data["candidate_nationality"], $data["candidate_country"], $data["candidate_idtype"], $data["candidate_idcard"], $data["candidate_hp1"], $data["candidate_hp2"], $data["candidate_phone"], "active", $data["log_auth_id"], $data["log_auth_id"]) )) return true;
+	(log_auth_id, candidate_name, candidate_email, candidate_hp1, status_id, user_insert, date_insert, user_update, date_update)
+	VALUES (?, ?, ?, ?, ?, ?,  NOW(), ?, NOW())",
+		array($data["log_auth_id"], $data["candidate_name"], $data["candidate_email"], $data["candidate_hp1"], "active", $data["log_auth_id"], $data["log_auth_id"]) )) return true;
 		else return false;	
 }
 	

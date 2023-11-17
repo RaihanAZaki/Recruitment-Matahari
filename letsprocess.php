@@ -16,6 +16,9 @@
 		$mod="";	
 	}
 
+	//if (($_GET["mod"]) == "downloadAllData") {
+		//$mod = $_GET["mod"];
+	//}
 	//echo "mod=".$mod;exit;
 	
 	$moveext = 0; // flag transfer submit
@@ -76,8 +79,16 @@
 			case "adm_downloadResume":adm_downloadResume(); break;
 			case "adm_downloadFullTabel":adm_downloadFullTabel(); break;
 			case "adm_exportExcel":adm_exportExcel(); break;
+			case "adm_exportCsvDataForProint":adm_exportCsvDataForProint(); break;
+			case "adm_exportCsvEduForProint":adm_exportCsvEduForProint(); break;
 			case "adm_exportExcelForProint":adm_exportExcelForProint(); break;
-			
+			case "adm_exportCsvFamForProint":adm_exportCsvFamForProint(); break;
+			case "adm_exportCsvJobForProint":adm_exportCsvJobForProint(); break;
+			case "adm_exportCsvIDCardForProint":adm_exportCsvIDCardForProint(); break;
+			case "createZipFile":createZipFile(); break;
+			case "downloadAllData":getAllDataCandidate();break;
+			case "executeExportCsvFunctions":executeExportCsvFunctions();break;
+			case "executeAll":executeAll();break;
 			
 			
 			case "adm_sendCvToUser":adm_sendCvToUser(); break;

@@ -2300,7 +2300,7 @@ function admin_upload_candidateDelFileOthers() {
 				
 				if (!isset($_POST["cellphone1"]) or $_POST["cellphone1"] == "") $missteps[] = 43;
 					
-				if (isset($_POST["cellphone1"]) && register_checkMobile())  $missteps[] = 44;
+				// if (isset($_POST["cellphone1"]) && register_checkMobile())  $missteps[] = 44;
 
 				/*
 				print_r($missteps);
@@ -2352,11 +2352,11 @@ function admin_upload_candidateDelFileOthers() {
 					
 					$query = querying("INSERT INTO m_register
 			(candidate_name, candidate_email, candidate_passwd, candidate_birthplace, candidate_birthdate, candidate_gender, candidate_nationality, candidate_country, 
-			candidate_idtype, candidate_idcard, candidate_hp1, candidate_hp2, candidate_phone, register_date, register_expiry_date, register_activation_code)
+			candidate_idtype, candidate_idcard, candidate_hp1, register_date, register_expiry_date, register_activation_code)
 			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?)", array($_POST["full_name"], $_POST["email1"], $_POST["pwd1"], $_POST["place_of_birth"][0], 
 			$candidate_birthdate, $_POST["sex"], $_POST["nationality"], ((isset($_POST["nationality"]) && $_POST["nationality"]=="wni")?"Indonesia":$_POST["country"]), 
 			((isset($_POST["nationality"]) && $_POST["nationality"]=="wni")?"KTP":"Passport"), ((isset($_POST["nationality"]) && $_POST["nationality"]=="wni")?$_POST["nomor_ktp"]:$_POST["nomor_passport"]), 
-			$_POST["cellphone1"], $_POST["cellphone2"], $_POST["homephone"], $expiry_date, $register_activation_code ) );
+			$_POST["cellphone1"], $expiry_date, $register_activation_code ) );
 					
 
 					if ($query)
@@ -2372,7 +2372,7 @@ function admin_upload_candidateDelFileOthers() {
 							exit;
 						}
 						
-						$query = querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, candidate_birthplace, candidate_birthdate, candidate_gender, candidate_nationality, candidate_country, candidate_idtype, candidate_idcard, candidate_hp1, candidate_hp2, candidate_phone, register_date, register_activation_code
+						$query = querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, candidate_birthplace, candidate_birthdate, candidate_gender, candidate_nationality, candidate_country, candidate_idtype, candidate_idcard, candidate_hp1, register_date, register_activation_code
 						FROM m_register WHERE candidate_email= ? ORDER BY register_id ASC LIMIT 1",array($_POST["email1"]));
 						$data = sqlGetData($query);
 						$galat = 1;
@@ -2431,9 +2431,9 @@ function admin_upload_candidateDelFileOthers() {
 			function admin_insertToMCandidate($data) {
 				
 					if (querying("INSERT INTO m_candidate
-				(log_auth_id, candidate_name, candidate_email, candidate_birthplace, candidate_birthdate, candidate_gender, candidate_nationality, candidate_country, candidate_idtype, candidate_idcard, candidate_hp1, candidate_hp2, candidate_phone, status_id, user_insert, date_insert, user_update, date_update)
+				(log_auth_id, candidate_name, candidate_email, candidate_birthplace, candidate_birthdate, candidate_gender, candidate_nationality, candidate_country, candidate_idtype, candidate_idcard, candidate_hp1, status_id, user_insert, date_insert, user_update, date_update)
 				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, NOW())",
-					array($data["log_auth_id"], $data["candidate_name"], $data["candidate_email"], $data["candidate_birthplace"], $data["candidate_birthdate"], $data["candidate_gender"], $data["candidate_nationality"], $data["candidate_country"], $data["candidate_idtype"], $data["candidate_idcard"], $data["candidate_hp1"], $data["candidate_hp2"], $data["candidate_phone"], "active", $_SESSION["log_auth_id"], $_SESSION["log_auth_id"]) )) return true;
+					array($data["log_auth_id"], $data["candidate_name"], $data["candidate_email"], $data["candidate_birthplace"], $data["candidate_birthdate"], $data["candidate_gender"], $data["candidate_nationality"], $data["candidate_country"], $data["candidate_idtype"], $data["candidate_idcard"], $data["candidate_hp1"], "active", $_SESSION["log_auth_id"], $_SESSION["log_auth_id"]) )) return true;
 					else return false;	
 			}
 			

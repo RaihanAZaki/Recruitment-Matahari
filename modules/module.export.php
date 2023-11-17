@@ -8,12 +8,12 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 	
 	function export_DataEdu() {
 		
-		if(isset($_POST["candidate_id"]) && $_POST["candidate_id"]<>"") {		
+		if(isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"]<>"") {		
 			$query=querying("SELECT a.*
 			FROM m_candidate_edu a LEFT JOIN t_candidate_apply b ON a.candidate_id=b.candidate_id
 			LEFT JOIN m_job_vacancy c ON b.job_vacancy_id=c.job_vacancy_id 
 			WHERE a.export_flag=? AND a.candidate_id=? AND c.status_id=? AND b.candidate_apply_status=? ORDER BY a.candidate_id, FIELD (candidate_edu_degree,'Doctoral - S3', 'Master - S2', 'Bachelor - S1', 'Diploma', 'Highschool - SMA', 'Junior Highschool - SMP', 'Elementary - SD')", 
-			array('0',$_POST["candidate_id"],'open','join'));	
+			array('0',$_REQUEST["candidate_id"],'open','join'));	
 		}
 		
 		else {
@@ -41,12 +41,12 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 	
 	
 	function export_DataFam() {
-		if(isset($_POST["candidate_id"]) && $_POST["candidate_id"]<>"") {
+		if(isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"]<>"") {
 		$query=querying("SELECT a.* FROM m_candidate_family a 
 		LEFT JOIN t_candidate_apply b ON a.candidate_id=b.candidate_id
 		LEFT JOIN m_job_vacancy c ON b.job_vacancy_id=c.job_vacancy_id 		
 		WHERE a.export_flag=? AND a.candidate_id=? AND c.status_id=? AND b.candidate_apply_status=? ORDER BY a.candidate_id, candidate_family_birthdate", 
-		array('0',$_POST["candidate_id"],'open','join'));
+		array('0',$_REQUEST["candidate_id"],'open','join'));
 		}
 		else {
 		$query=querying("SELECT a.* FROM m_candidate_family a 
@@ -72,12 +72,12 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 	
 	
 	function export_DataJob() {
-		if(isset($_POST["candidate_id"]) && $_POST["candidate_id"]<>"") {
+		if(isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"]<>"") {
 		$query=querying("SELECT a.* FROM m_candidate_jobexp a 
 		LEFT JOIN t_candidate_apply b ON a.candidate_id=b.candidate_id
 		LEFT JOIN m_job_vacancy c ON b.job_vacancy_id=c.job_vacancy_id 	
 		WHERE a.export_flag=? AND a.candidate_id=? AND c.status_id=? AND b.candidate_apply_status=?
-		ORDER BY a.candidate_id, candidate_jobexp_end", array('0',$_POST["candidate_id"],'open','join'));
+		ORDER BY a.candidate_id, candidate_jobexp_end", array('0',$_REQUEST["candidate_id"],'open','join'));
 		}
 		else {
 		$query=querying("SELECT a.* FROM m_candidate_jobexp a 
@@ -102,8 +102,8 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 	
 	
 	function export_DataOrg() {
-		if(isset($_POST["candidate_id"]) && $_POST["candidate_id"]<>"") {
-		$query=querying("SELECT * FROM m_candidate_organization WHERE export_flag=? AND candidate_id=?  ORDER BY candidate_id, candidate_organization_end", array('0',$_POST["candidate_id"]));
+		if(isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"]<>"") {
+		$query=querying("SELECT * FROM m_candidate_organization WHERE export_flag=? AND candidate_id=?  ORDER BY candidate_id, candidate_organization_end", array('0',$_REQUEST["candidate_id"]));
 		}
 		else {
 		$query=querying("SELECT * FROM m_candidate_organization WHERE export_flag=? ORDER BY candidate_id, candidate_organization_end", array('0'));			
@@ -113,8 +113,8 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 	}
 	
 	function export_DataLang() {
-		if(isset($_POST["candidate_id"]) && $_POST["candidate_id"]<>"") {
-		$query=querying("SELECT * FROM m_candidate_language WHERE export_flag=? AND candidate_id=? ORDER BY candidate_id, candidate_language_id", array('0',$_POST["candidate_id"]));
+		if(isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"]<>"") {
+		$query=querying("SELECT * FROM m_candidate_language WHERE export_flag=? AND candidate_id=? ORDER BY candidate_id, candidate_language_id", array('0',$_REQUEST["candidate_id"]));
 		}
 		else {
 		$query=querying("SELECT * FROM m_candidate_language WHERE export_flag=? ORDER BY candidate_id, candidate_language_id", array('0'));
@@ -124,8 +124,8 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 	}
 	
 	function export_DataFile() {
-		if(isset($_POST["candidate_id"]) && $_POST["candidate_id"]<>"") {
-		$query=querying("SELECT * FROM m_candidate_file WHERE export_flag=? AND candidate_id=? ORDER BY candidate_id, candidate_file_id", array('0', $_POST["candidate_id"]));
+		if(isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"]<>"") {
+		$query=querying("SELECT * FROM m_candidate_file WHERE export_flag=? AND candidate_id=? ORDER BY candidate_id, candidate_file_id", array('0', $_REQUEST["candidate_id"]));
 		}
 		else {
 		$query=querying("SELECT * FROM m_candidate_file WHERE export_flag=? ORDER BY candidate_id, candidate_file_id", array('0'));
@@ -135,8 +135,8 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 	}
 	
 	function export_DataFileOther() {
-		if(isset($_POST["candidate_id"]) && $_POST["candidate_id"]<>"") {
-		$query=querying("SELECT * FROM m_candidate_fileothers WHERE export_flag=? AND candidate_id=? ORDER BY candidate_id, candidate_file_id", array('0',$_POST["candidate_id"]));
+		if(isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"]<>"") {
+		$query=querying("SELECT * FROM m_candidate_fileothers WHERE export_flag=? AND candidate_id=? ORDER BY candidate_id, candidate_file_id", array('0',$_REQUEST["candidate_id"]));
 		}
 		else {
 		$query=querying("SELECT * FROM m_candidate_fileothers WHERE export_flag=? ORDER BY candidate_id, candidate_file_id", array('0'));
@@ -146,8 +146,8 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 	}
 	
 	function export_DataSkill() {
-		if(isset($_POST["candidate_id"]) && $_POST["candidate_id"]<>"") {
-		$query=querying("SELECT * FROM m_candidate_skill WHERE export_flag=? AND candidate_id=? ORDER BY candidate_id, candidate_skill_id", array('0',$_POST["candidate_id"]));
+		if(isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"]<>"") {
+		$query=querying("SELECT * FROM m_candidate_skill WHERE export_flag=? AND candidate_id=? ORDER BY candidate_id, candidate_skill_id", array('0',$_REQUEST["candidate_id"]));
 		}
 		else {
 		$query=querying("SELECT * FROM m_candidate_skill WHERE export_flag=? ORDER BY candidate_id, candidate_skill_id", array('0'));
@@ -157,7 +157,7 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 	}
 	
 	function export_DataCandidate() {
-		if(isset($_POST["candidate_id"]) && $_POST["candidate_id"]<>"") {
+		if(isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"]<>"") {
 		$query=querying("SELECT a.candidate_apply_id, a.candidate_id, a.candidate_email, a.job_vacancy_id, 
 			a.candidate_apply_date, a.candidate_apply_stage, a.candidate_apply_status,
 			a.OrgCode, a.JobTtlCode, a.LocationCode, a.ContractStart, a.ContractEnd,
@@ -167,7 +167,7 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 			FROM t_candidate_apply a LEFT JOIN m_job_vacancy b ON a.job_vacancy_id=b.job_vacancy_id 
 			LEFT JOIN m_candidate c ON a.candidate_id=c.candidate_id 
 			WHERE b.status_id=? AND c.export_flag=? AND c.candidate_id=? GROUP BY a.candidate_id ORDER BY a.candidate_id ASC",
-			array("open","0",$_POST["candidate_id"]));	
+			array("open","0",$_REQUEST["candidate_id"]));	
 		}
 		else {
 		$query=querying("SELECT a.candidate_apply_id, a.candidate_id, a.candidate_email, a.job_vacancy_id, 
@@ -189,7 +189,7 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 	
 	//tambahan shakti 2017_09_10
 	function export_DataCandidateJoin() {
-		if(isset($_POST["candidate_id"]) && $_POST["candidate_id"]<>"") {
+		if(isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"]<>"") {
 		$query=querying("SELECT a.candidate_apply_id, a.candidate_id, a.candidate_email, a.job_vacancy_id, 
 			a.candidate_apply_date, a.candidate_apply_stage, a.candidate_apply_status,
 			a.OrgCode, a.JobTtlCode, a.LocationCode, a.ContractStart, a.ContractEnd, a.candidate_homebase,
@@ -202,7 +202,7 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 			LEFT JOIN log_auth d ON b.log_auth_id=d.log_auth_id
 			LEFT JOIN m_employee e ON d.employee_id=e.employee_id
 			WHERE b.status_id=? AND c.export_flag=? AND c.candidate_id=? AND a.candidate_apply_status=? GROUP BY a.candidate_id ORDER BY a.candidate_id ASC",
-			array("open","0",$_POST["candidate_id"],"join"));	
+			array("open","0",$_REQUEST["candidate_id"],"join"));	
 		}
 		else {
 		$query=querying("SELECT a.candidate_apply_id, a.candidate_id, a.candidate_email, a.job_vacancy_id, 
@@ -328,7 +328,7 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 	
 	
 	function export_DataSuccessfulCandidate() {
-		if(isset($_POST["candidate_id"]) && $_POST["candidate_id"]<>"") {
+		if(isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"]<>"") {
 		$query=querying("SELECT a.candidate_apply_id, a.candidate_id, a.candidate_email, a.job_vacancy_id, 
 			a.candidate_apply_date, a.candidate_apply_stage, a.candidate_apply_status,
 			b.job_vacancy_id, b.job_vacancy_name, b.job_vacancy_city, b.job_vacancy_desc, 
@@ -338,7 +338,7 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 			FROM t_candidate_apply a LEFT JOIN m_job_vacancy b ON a.job_vacancy_id=b.job_vacancy_id 
 			LEFT JOIN m_candidate c ON a.candidate_id=c.candidate_id 
 			WHERE b.status_id=? AND c.export_flag=? AND c.candidate_id=? GROUP BY a.candidate_id ORDER BY a.candidate_id ASC",
-			array("open","0",$_POST["candidate_id"]));	
+			array("open","0",$_REQUEST["candidate_id"]));	
 		}
 		else {
 		$query=querying("SELECT a.candidate_apply_id, a.candidate_id, a.candidate_email, a.job_vacancy_id, 
@@ -358,10 +358,11 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 
 	}
 	
+	
 
 	/* UPDATE RAIHAN 2023 */
 	function adm_exportExcel() {
-		if (isset($_POST["type"]) && $_POST["type"] !== "") {
+		if (isset($_REQUEST["type"]) && $_REQUEST["type"] !== "") {
 			$datacandidate = export_DataCandidate();
 			$dataedu = export_DataEdu();
 			$datafam = export_DataFam();
@@ -375,9 +376,11 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 
 
 			require './vendor/autoload.php';
-			$spreadsheet = new Spreadsheet();
+			$spreadsheet = new Spreadsheet([
+				'tempDir' => sys_get_temp_dir() . DIRECTORY_SEPARATOR
+			]);
 
-			$namafile=(isset($_POST["candidate_id"]) && $_POST["candidate_id"]<>"")?"candidate_".$_POST["type"]."_".date("YmdHis")."_".$_POST["candidate_id"].".xls":"candidate_".$_POST["type"]."_".date("YmdHis").".xls";
+			$namafile=(isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"]<>"")?"candidate_".$_REQUEST["type"]."_".date("YmdHis")."_".$_REQUEST["candidate_id"].".xls":"candidate_".$_REQUEST["type"]."_".date("YmdHis").".xls";
 			header('Content-Type: application/vnd.ms-excel');
 			header('Content-Disposition: attachment;filename="'.$namafile.'"');
 			header('Cache-Control: max-age=0');
@@ -411,41 +414,39 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 			->setCellValue('H1', 'CanCityBirth')			
 			->setCellValue('I1', 'CanBloodType')			
 			->setCellValue('J1', 'CanRace')			
-			->setCellValue('K1', 'CanReligion')			
-			->setCellValue('L1', 'CanHeight')			
-			->setCellValue('M1', 'CanWeight')			
-			->setCellValue('N1', 'CanResAddress')			
-			->setCellValue('O1', 'CanResCity')			
-			->setCellValue('P1', 'CanResZipCode')			
-			->setCellValue('Q1', 'CanResStatus')			
-			->setCellValue('R1', 'CanResStart')			
-			->setCellValue('S1', 'CanResPhone')			
-			->setCellValue('T1', 'CanOriAddress')			
-			->setCellValue('U1', 'CanOriCity')			
-			->setCellValue('V1', 'CanOriZipCode')			
-			->setCellValue('W1', 'CanOriStatus')			
-			->setCellValue('X1', 'CanOriStart')			
-			->setCellValue('Y1', 'CanOriPhone')			
-			->setCellValue('Z1', 'CanHandphone')			
-			->setCellValue('AA1', 'CanEmail')			
-			->setCellValue('AB1', 'CanCitizen.')
-			->setCellValue('AC1', 'CanSource.')
-			->setCellValue('AD1', 'CanSourceNote.')
-			->setCellValue('AE1', 'CanFrontTitle.')
-			->setCellValue('AF1', 'CanEndTitle.')
-			->setCellValue('AG1', 'CanEntryDate.')
-			->setCellValue('AH1', 'CanApplyDate.')
-			->setCellValue('AI1', 'CanCurrency.')
-			->setCellValue('AJ1', 'CanExpSal.')
-			->setCellValue('AK1', 'CanAdvNo.')
-			->setCellValue('AL1', 'UpdDate.')
-			->setCellValue('AM1', 'CanOrg.')
-			->setCellValue('AN1', 'UpdUser.')
-			->setCellValue('AO1', 'UpdFlag.')
-			->setCellValue('AP1', 'CanLocRecruit.')
-			->setCellValue('AQ1', 'CanLocRecruitCity.')
-			->setCellValue('AR1', 'CanExpType.')
-			->setCellValue('AS1', 'CanAvailability.')			
+			->setCellValue('K1', 'CanReligion')					
+			->setCellValue('L1', 'CanResAddress')			
+			->setCellValue('M1', 'CanResCity')			
+			->setCellValue('N1', 'CanResZipCode')			
+			->setCellValue('O1', 'CanResStatus')			
+			->setCellValue('P1', 'CanResStart')			
+			->setCellValue('Q1', 'CanResPhone')			
+			->setCellValue('R1', 'CanOriAddress')			
+			->setCellValue('S1', 'CanOriCity')			
+			->setCellValue('T1', 'CanOriZipCode')			
+			->setCellValue('U1', 'CanOriStatus')			
+			->setCellValue('V1', 'CanOriStart')			
+			->setCellValue('W1', 'CanOriPhone')			
+			->setCellValue('X1', 'CanHandphone')			
+			->setCellValue('Y1', 'CanEmail')			
+			->setCellValue('Z1', 'CanCitizen.')
+			->setCellValue('AA1', 'CanSource.')
+			->setCellValue('AB1', 'CanSourceNote.')
+			->setCellValue('AC1', 'CanFrontTitle.')
+			->setCellValue('AD1', 'CanEndTitle.')
+			->setCellValue('AE1', 'CanEntryDate.')
+			->setCellValue('AF1', 'CanApplyDate.')
+			->setCellValue('AG1', 'CanCurrency.')
+			->setCellValue('AH1', 'CanExpSal.')
+			->setCellValue('AI1', 'CanAdvNo.')
+			->setCellValue('AJ1', 'UpdDate.')
+			->setCellValue('AK1', 'CanOrg.')
+			->setCellValue('AL1', 'UpdUser.')
+			->setCellValue('AM1', 'UpdFlag.')
+			->setCellValue('AN1', 'CanLocRecruit.')
+			->setCellValue('AO1', 'CanLocRecruitCity.')
+			->setCellValue('AP1', 'CanExpType.')
+			->setCellValue('AQ1', 'CanAvailability.')			
 			;
 			/* Sheet Candidate */
 
@@ -473,50 +474,48 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 				$worksheet1->setCellValue('K'.$rows, $datacandidate[$i]["candidate_religion"]);	
 				$worksheet1->getStyle('K'.$rows)->getAlignment()->setWrapText(true);
 				
-				$worksheet1->setCellValue('L'.$rows, $datacandidate[$i]["candidate_bodyheight"]);	
-				$worksheet1->setCellValue('M'.$rows, $datacandidate[$i]["candidate_bodyweight"]);	
-				$worksheet1->setCellValue('N'.$rows, $datacandidate[$i]["candidate_c_address"]);
-				$worksheet1->getStyle('N'.$rows)->getAlignment()->setWrapText(true);
+				$worksheet1->setCellValue('L'.$rows, $datacandidate[$i]["candidate_c_address"]);
+				$worksheet1->getStyle('L'.$rows)->getAlignment()->setWrapText(true);
 				
-				$worksheet1->setCellValue('O'.$rows, $datacandidate[$i]["candidate_c_city"]);	
-				$worksheet1->getStyle('O'.$rows)->getAlignment()->setWrapText(true);				
+				$worksheet1->setCellValue('M'.$rows, $datacandidate[$i]["candidate_c_city"]);	
+				$worksheet1->getStyle('M'.$rows)->getAlignment()->setWrapText(true);				
 				
-				$worksheet1->setCellValue('P'.$rows, $datacandidate[$i]["candidate_c_postcode"]);	
+				$worksheet1->setCellValue('N'.$rows, $datacandidate[$i]["candidate_c_postcode"]);	
+				$worksheet1->setCellValue('O'.$rows, "");	
+				$worksheet1->setCellValue('P'.$rows, "");	
 				$worksheet1->setCellValue('Q'.$rows, "");	
-				$worksheet1->setCellValue('R'.$rows, "");	
-				$worksheet1->setCellValue('S'.$rows, "");	
-				$worksheet1->setCellValue('T'.$rows, $datacandidate[$i]["candidate_p_address"]);	
-				$worksheet1->getStyle('T'.$rows)->getAlignment()->setWrapText(true);
+				$worksheet1->setCellValue('R'.$rows, $datacandidate[$i]["candidate_p_address"]);	
+				$worksheet1->getStyle('R'.$rows)->getAlignment()->setWrapText(true);
 				
-				$worksheet1->setCellValue('U'.$rows, $datacandidate[$i]["candidate_p_city"]);	
-				$worksheet1->getStyle('U'.$rows)->getAlignment()->setWrapText(true);
+				$worksheet1->setCellValue('S'.$rows, $datacandidate[$i]["candidate_p_city"]);	
+				$worksheet1->getStyle('S'.$rows)->getAlignment()->setWrapText(true);
 				
-				$worksheet1->setCellValue('V'.$rows, $datacandidate[$i]["candidate_p_postcode"]);	
+				$worksheet1->setCellValue('T'.$rows, $datacandidate[$i]["candidate_p_postcode"]);	
+				$worksheet1->setCellValue('U'.$rows, "");	
+				$worksheet1->setCellValue('V'.$rows, "");	
 				$worksheet1->setCellValue('W'.$rows, "");	
-				$worksheet1->setCellValue('X'.$rows, "");	
-				$worksheet1->setCellValue('Y'.$rows, "");	
-				$worksheet1->setCellValue('Z'.$rows, $datacandidate[$i]["candidate_hp1"]);	
-				$worksheet1->setCellValue('AA'.$rows, $datacandidate[$i]["candidate_email"]);	
-				$worksheet1->setCellValue('AB'.$rows, $datacandidate[$i]["candidate_country"]);	
-				$worksheet1->getStyle('AB'.$rows)->getAlignment()->setWrapText(true);
+				$worksheet1->setCellValue('X'.$rows, $datacandidate[$i]["candidate_hp1"]);	
+				$worksheet1->setCellValue('Y'.$rows, $datacandidate[$i]["candidate_email"]);	
+				$worksheet1->setCellValue('Z'.$rows, $datacandidate[$i]["candidate_country"]);	
+				$worksheet1->getStyle('Z'.$rows)->getAlignment()->setWrapText(true);
 				
+				$worksheet1->setCellValue('AA'.$rows, "");	
+				$worksheet1->setCellValue('AB'.$rows, "");	
 				$worksheet1->setCellValue('AC'.$rows, "");	
 				$worksheet1->setCellValue('AD'.$rows, "");	
-				$worksheet1->setCellValue('AE'.$rows, "");	
+				$worksheet1->setCellValue('AE'.$rows, $datacandidate[$i]["date_insert"]);	
 				$worksheet1->setCellValue('AF'.$rows, "");	
-				$worksheet1->setCellValue('AG'.$rows, $datacandidate[$i]["date_insert"]);	
-				$worksheet1->setCellValue('AH'.$rows, "");	
+				$worksheet1->setCellValue('AG'.$rows, "");	
+				$worksheet1->setCellValue('AH'.$rows, $datacandidate[$i]["candidate_expected_salary"]);	
 				$worksheet1->setCellValue('AI'.$rows, "");	
-				$worksheet1->setCellValue('AJ'.$rows, $datacandidate[$i]["candidate_expected_salary"]);	
+				$worksheet1->setCellValue('AJ'.$rows, $datacandidate[$i]["date_update"]);	
 				$worksheet1->setCellValue('AK'.$rows, "");	
-				$worksheet1->setCellValue('AL'.$rows, $datacandidate[$i]["date_update"]);	
+				$worksheet1->setCellValue('AL'.$rows, $datacandidate[$i]["user_update"]);	
 				$worksheet1->setCellValue('AM'.$rows, "");	
-				$worksheet1->setCellValue('AN'.$rows, $datacandidate[$i]["user_update"]);	
+				$worksheet1->setCellValue('AN'.$rows, "");	
 				$worksheet1->setCellValue('AO'.$rows, "");	
 				$worksheet1->setCellValue('AP'.$rows, "");	
 				$worksheet1->setCellValue('AQ'.$rows, "");	
-				$worksheet1->setCellValue('AR'.$rows, "");	
-				$worksheet1->setCellValue('AS'.$rows, "");	
 				//tambahan untuk input ke tabel t_sync_proint 29 April 2016
 				querying("INSERT INTO t_sync_proint (candidate_id, t_sync_status, date_insert, user_insert, date_update, user_update)
 				VALUES (?, 0, NOW(), ?, NOW(), ?)",array($datacandidate[$i]["candidate_id"],$_SESSION["log_auth_id"],$_SESSION["log_auth_id"]));
@@ -1012,7 +1011,7 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 
 // 	function adm_exportExcel() {
 // 		//echo "module download";
-// 		if(isset($_POST["type"]) && $_POST["type"]<>"") {
+// 		if(isset($_REQUEST["type"]) && $_REQUEST["type"]<>"") {
 
 // 			$datacandidate=export_DataCandidate();
 // 			$dataedu=export_DataEdu();
@@ -1032,7 +1031,7 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 // 			// $objPHPExcel = new PHPExcel();
 // 			$objPHPExcel = new Spreadsheet();
 			
-// 			$namafile=(isset($_POST["candidate_id"]) && $_POST["candidate_id"]<>"")?"candidate_".$_POST["type"]."_".date("YmdHis")."_".$_POST["candidate_id"].".xls":"candidate_".$_POST["type"]."_".date("YmdHis").".xls";
+// 			$namafile=(isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"]<>"")?"candidate_".$_REQUEST["type"]."_".date("YmdHis")."_".$_REQUEST["candidate_id"].".xls":"candidate_".$_REQUEST["type"]."_".date("YmdHis").".xls";
 // 			header('Content-Type: application/vnd.ms-excel');
 // 			header('Content-Disposition: attachment;filename="'.$namafile.'"');
 // 			header('Cache-Control: max-age=0');
@@ -1382,7 +1381,7 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 // 						->setCellValue('O1', 'UpdUser')			
 // 						->setCellValue('P1', 'UpdFlag')			
 // 						->setCellValue('Q1', 'Description')			
-// 						->setCellValue('R1', 'FgCase')			
+// 						->setCellValue('R1', 'FgCase')																																																
 // 						->setCellValue('S1', 'Performance')			
 // 						->setCellValue('T1', 'SprName')			
 // 						->setCellValue('U1', 'SprPhone')			
@@ -1677,32 +1676,19 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 	//tambahan shakti 2017-09-10
 	function adm_exportExcelForProint() {
 		//echo "module download for Proint";
-		if(isset($_POST["type"]) && $_POST["type"]<>"") {
+		if(isset($_REQUEST["type"]) && $_REQUEST["type"]<>"") {
 			//tambahan shakti 25 Juni 2018
 			$recruit_pic=getRecruiterPic($_SESSION["log_auth_id"]);
 			
 			$datacandidate=export_DataCandidateJoin();
-			//print_r($datacandidate);exit;
-			//$dataedu=export_DataEdu();
-			// $datafam=export_DataFam();
 			$datajobexp=export_DataJob();
-			//$dataorg=export_DataOrg();
-			//$datalang=export_DataLang();
-			//$datafile=export_DataFile();
-			//$datafileother=export_DataFileOther();
-			//$dataskill=export_DataSkill();
-						
-			//print_r(getCityCode("Baturaja"));		exit;	
-			//print_r($dataedu);exit;
-			/** Include PHPExcel */
-			// require_once(_INCLUDEDIRECTORY."/excel/PHPExcel.php");	
-			// require_once(_INCLUDEDIRECTORY."/PHPExcel-1.8/Classes/PHPExcel.php");	
 
 			// Create new PHPExcel object
 			require './vendor/autoload.php';
 			$spreadsheet = new Spreadsheet();
 			
-			$namafile=(isset($_POST["candidate_id"]) && $_POST["candidate_id"]<>"")?"candidate_".$_POST["type"]."_".date("YmdHis")."_".$_POST["candidate_id"].".xls":"candidate_".$_POST["type"]."_".date("YmdHis").".xls";
+			$namafile=(isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"]<>"")?"candidate_".$_REQUEST["type"]."_".date("YmdHis")."_".$_REQUEST["candidate_id"].".xls":"candidate_".$_REQUEST["type"]."_".date("YmdHis").".xls";
+			// $file = fopen($namafile, 'w');
 			header('Content-Type: application/vnd.ms-excel');
 			header('Content-Disposition: attachment;filename="'.$namafile.'"');
 			header('Cache-Control: max-age=0');
@@ -1716,6 +1702,8 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 			->setDescription("Generate by system.")
 			->setKeywords("proposed candidate")
 			->setCategory("User Screening");
+			// ->setTempDir(sys_get_temp_dir().DIRECTORY_SEPARATOR."");
+        // ->save($path);
 
 			$worksheet1 = $spreadsheet->getActiveSheet();
 			$worksheet2 = $spreadsheet->createSheet();
@@ -2373,7 +2361,7 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 
 			$worksheet4->getStyle(
 				'A1:' . 
-				$worksheet4->getHighestColumn() . 
+				$worksheet4->getHighestColumn() .  
 				$worksheet4->getHighestRow()
 			)->applyFromArray($styleArray);	  					
 			// Rename worksheet
@@ -2400,7 +2388,7 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 				$worksheet5->setCellValue('A'.$rows, $datacandidate[$i]["candidate_id"]);	
 				$worksheet5->setCellValue('B'.$rows, $datacandidate[$i]["candidate_idtype"]);	
 				//$worksheet5->setCellValue('C'.$rows, $datacandidate[$i]["candidate_idcard"]);	
-				$worksheet5->setCellValueExplicit('C'.$rows, $datacandidate[$i]["candidate_idcard"], PHPExcel_Cell_DataType::TYPE_STRING);
+				$worksheet5->setCellValueExplicit('C'.$rows, $datacandidate[$i]["candidate_idcard"], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
 
 
 				$worksheet5->setCellValue('D'.$rows, "NULL");	
@@ -2439,15 +2427,15 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 			
 
 			// Set active sheet index to the first sheet, so Excel opens this as the first sheet
-			$writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
-			$writer->save($namafile);
+			$filepath = sys_get_temp_dir().DIRECTORY_SEPARATOR."Xlsx";
+			$writer->save($filepath);
 	
 			// Mengirimkan file Excel sebagai unduhan
-			ob_end_clean();
+			// ob_end_clean();
 			header('Content-Type: application/vnd.ms-excel');
-			header('Content-Disposition: attachment; filename="' . $namafile . '"');
+			header('Content-Disposition: attachment; filename="' . $file . '"');
 			header('Cache-Control: max-age=0');
-			$writer->save('php://output');
+			// $writer->save('php://output');
 			exit;
 			
 			
@@ -2471,8 +2459,1504 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 		return $proint_id;
 		
 	}
+
+
+	// DATA CANDIDATE
+	function adm_exportCsvDataForProint($isDownload = true) {
+		if(isset($_REQUEST["type"]) && $_REQUEST["type"]<>"") {
+			$recruit_pic = getRecruiterPic($_SESSION["log_auth_id"]);
+	
+			$datacandidate = export_DataCandidateJoin();
+			$datajobexp=export_DataJob();
+	
+			$filename1 = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"]<>"") ? "Candidate_Data".$_REQUEST["type"]."_".date("YmdHis")."_".$_REQUEST["candidate_id"].".csv" : "candidate_".$_REQUEST["type"]."_".date("YmdHis").".csv";
+			$filepath1 = 'cand_files/csv/Candidate/'.$filename1;
+			
+			if ($isDownload){
+			header('Content-Type: text/csv');
+			header('Content-Disposition: attachment; filename="'.$filename1.'"');
+			header('Pragma: no-cache');
+			header('Expires: 0');
+	
+			}
+			
+			$file = fopen($filepath1, 'w');
+	
+			$header = array(
+				'CanId.',
+				'EmpName',
+				'EmpOrganization',
+				"EmpJobTitle",
+				"EmpJobLevel",
+				"EmpType",
+				"EmpCompany",
+				"EmpLocation",
+				"EmpLabour",
+				"EmpCostCtre",
+				"EmpDateBirth",
+				"EmpCityBirth",
+				"EmpSex",
+				"EmpBloodType",
+				"EmpCitizen",
+				"EmpRace",
+				"EmpReligion",
+				"EmpMaritalSt",
+				"EmpStartDate",
+				"EmpSignDate",
+				"EmpJoinDate",
+				"EmpDecision",
+				"EmpCreateDate",
+				"EmpDescription",
+				"EmpEffecDate",
+				"EmpInitiator",
+				"EmpDecStart",
+				"EmpDecEnd",
+				"EmpPhoto",
+				"EmpContractStart",
+				"EmpContractEnd",
+				"EmpSKType",
+				"EmpEmail",
+				"EmpLocRecruit",
+				"EmpWinLogin",
+				"EmpWinPassword",
+				"EmpWinLoginFlag",
+				"SKCostCtre",
+				"UserGroup",
+				"FgForeignLabor",
+				"OUCode",
+				"UpdDate",
+				"UpdUser",
+				"UpdFlag",
+				"RefNmbr",
+				"EmpResAddr",
+				"EmpResCity",
+				"EmpResZipCode",
+				"EmpResPhone",
+				"EmpResStatus",
+				"EmpResStart",
+				"EmpOriAddr",
+				"EmpOriCity",
+				"EmpOriZipCode",
+				"EmpOriPhone",
+				"EmpOriStatus",
+				"EmpOriStart",
+				"FgStatus",
+				"AuthTemp",
+				"RejectBy",
+				"RejectDesc",
+				"ReportTo",
+				"EmpLocRecruitCity",
+				"EmpValId",
+				"EmpValJobTtl",
+				"EmpValOrg",
+				"EmpApprId",
+				"EmpApprJobTtl",
+				"EmpApprOrg",
+				"RefSource",
+				"RefName"
+			);
+	
+			fputcsv($file, $header);
+	
+			for ($i = 0; $i < count($datacandidate); $i++) {
+				// Gender transformation
+				$gender = ($datacandidate[$i]["candidate_gender"] == "male") ? "M" : "F";
+			
+				// Additional Shakti code
+				$candidate_homebase = (isset($datacandidate[$i]["candidate_homebase"]) && $datacandidate[$i]["candidate_homebase"] != "" && $datacandidate[$i]["candidate_homebase"] != null) ? $datacandidate[$i]["candidate_homebase"] : "1411";
+			
+				// Religion transformation
+				$agama = null;
+				if ($datacandidate[$i]["candidate_religion"] == "Islam") {
+					$agama = "ISLAM";
+				} else if ($datacandidate[$i]["candidate_religion"] == "Roman Catholic") {
+					$agama = "KATHOLIK";
+				} else if ($datacandidate[$i]["candidate_religion"] == "Protestant") {
+					$agama = "KRISTEN";
+				} else if ($datacandidate[$i]["candidate_religion"] == "Hindu") {
+					$agama = "HINDU";
+				} else if ($datacandidate[$i]["candidate_religion"] == "Budhist") {
+					$agama = "BUDDHA";
+				} else if ($datacandidate[$i]["candidate_religion"] == "Confucianism") {
+					$agama = "KONG HU CU";
+				} else {
+					$agama = "LAINNYA";
+				}
+			
+				// Marital status transformation
+				$statusnikah = null;
+				if ($datacandidate[$i]["candidate_marital"] == "Single") {
+					$statusnikah = "BELUM NIKAH";
+				}
+				if ($datacandidate[$i]["candidate_marital"] == "Married") {
+					$statusnikah = "NIKAH";
+				}
+				if (($datacandidate[$i]["candidate_marital"] == "Divorce" || $datacandidate[$i]["candidate_marital"] == "Separated") && $gender == "M") {
+					$statusnikah = "DUDA";
+				}
+				if (($datacandidate[$i]["candidate_marital"] == "Divorce" || $datacandidate[$i]["candidate_marital"] == "Separated") && $gender == "F") {
+					$statusnikah = "JANDA";
+				}
+			
+				// Nationality transformation
+				$warganegara = ($datacandidate[$i]["candidate_nationality"] == 'wni') ? 'INA' : 'WNA';
+			
+				// City code transformations
+				$pcity = (isset($datacandidate[$i]["candidate_p_city"]) && $datacandidate[$i]["candidate_p_city"] != "") ? getCityCode($datacandidate[$i]["candidate_p_city"]) : "NULL";
+				$ccity = (isset($datacandidate[$i]["candidate_c_city"]) && $datacandidate[$i]["candidate_c_city"] != "") ? getCityCode($datacandidate[$i]["candidate_c_city"]) : "NULL";
+				$birthplace=(isset($datacandidate[$i]["candidate_birthplace"]) && $datacandidate[$i]["candidate_birthplace"]!="")?getCityCode($datacandidate[$i]["candidate_birthplace"]):"NULL";
+
+				switch ($datacandidate[$i]["job_vacancy_type"]) {
+					case "Daily Worker":
+						$emptype="DAILY WORKER";
+						break;
+					case "Internship":
+						$emptype="MAGANG";
+						break;
+					case "Contract":
+						$emptype="KONTRAK";
+						break;
+					case "Permanent":
+						$emptype="TETAP";
+						break;
+					case "Contract Retirement":
+						$emptype="KONTRAK PENSIUN";
+						break;
+					case "M T P":
+						$emptype="M T P";
+						break;
+					case "Probation":
+						$emptype="PERCOBAAN";
+						break;
+					case "LAKU PANDAI":
+						$emptype="LAKU PANDAI";
+						break;						
+					default:
+						$emptype="DAILY WORKER";
+				 }
+				 
+			
+			
+			foreach ($datacandidate as $row) {
+				$csvData = array(
+					$row["candidate_id"],
+					$row["candidate_name"],
+					$row["OrgCode"],
+					$row["JobTtlCode"],
+					$row["job_vacancy_grade"],
+					$emptype,
+					"HHPR",
+					$row["LocationCode"],
+					"NULL",
+					"costcenter",
+					$row["candidate_birthdate"],
+					$birthplace,
+					$gender,
+					$row["candidate_bloodtype"],
+					$warganegara,
+					$row["candidate_race"],
+					$agama,
+					$statusnikah,
+					$row["ContractStart"],
+					$row["ContractStart"],
+					$row["ContractStart"],
+					"NULL",
+					$row["ContractStart"],
+					"NULL",
+					$row["ContractStart"],
+					$row["employee_nik"],
+					$row["ContractStart"],
+					"NULL",
+					"NULL",
+					$row["ContractStart"],
+					$row["ContractEnd"],
+					'rekrut',
+					$row["candidate_email"],
+					"901",
+					"NULL",
+					"NULL",
+					"NULL",
+					"NULL",
+					"NULL",
+					$warganegara=="INA",
+					"NULL",
+					date("Y-m-d H:i:s"),
+					$recruit_pic,
+					"Y",
+					"NULL",
+					$row["candidate_c_address"],
+					$ccity,
+					$row["candidate_c_postcode"],
+					$row["candidate_hp1"],
+					"NULL",
+					"NULL",
+					$row ["candidate_p_address"],	
+					$pcity,
+					$row["candidate_p_postcode"],
+					$candidate_homebase,
+					"NULL",
+					"NULL",
+					"NULL",
+					"NULL",
+					"NULL",
+					"NULL",
+					"NULL",
+					$candidate_homebase,
+					"NULL",
+					"NULL",
+					"NULL",
+					"NULL",
+					"NULL",
+					"NULL",
+					"NULL",
+				);		
+			}
+	
+				fputcsv($file, $csvData);
+
+			}
+	
+			fclose($file);
+			if ($isDownload) { 
+			exit();
+			}
+		}
+	}
+
+	// // CANDIDATE EDUCATION
+	// function adm_exportCsvEduForProint ($isDownload = true)
+	// {
+	// 	if (isset($_REQUEST["type"]) && $_REQUEST["type"] !== "") {
+	// 		$recruit_pic = getRecruiterPic($_SESSION["log_auth_id"]);
+	// 		$datacandidate = export_DataCandidateJoin();
+	// 		$dataedu = export_DataEdu();
+
+
+	// 		$filename2 = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"] !== "") ? "Candidate_Education" . $_REQUEST["type"] . "_" . date("YmdHis") . "_" . $_REQUEST["candidate_id"] . ".csv" : "candidate_" . $_REQUEST["type"] . "_" . date("YmdHis") . ".csv";
+	// 		$filepath2 = 'cand_files/csv/CanEdu/' . $filename2;
+
+	// 		$file = fopen($filepath2, 'w');
+
+	// 		// Write the column headers
+	// 		$headers = array(
+	// 			'CanId.',
+	// 			'EmpEduStatus',
+	// 			'EmpEduSeq',
+	// 			'EmpEduLevel',
+	// 			'EmpEduMajor',
+	// 			'EmpEduName',
+	// 			'EmpEduIns',
+	// 			'EmpEduCity',
+	// 			'EmpEduGraduate',
+	// 			'EmpEduGrade',
+	// 			'EmpEduResult',
+	// 			'EmpEduFrontTitle',
+	// 			'EmpEduEndTitle',
+	// 			'FgDefault',
+	// 			'UpdDate',
+	// 			'UpdUser',
+	// 			'UpdFlag'
+	// 		);
+	// 		fputcsv($file, $headers);
+
+	// 		// Ambil data edu sesuai dengan list candidate_id nya
+	// 		foreach ($datacandidate as $candidate) {
+	// 			$dataedu = export_DataEduRev($candidate["candidate_id"]);
+	// 			$k = 0;
+
+	// 			foreach ($dataedu as $edu) {
+	// 				$lastedu = "N";
+	// 				$k++;
+
+	// 				switch ($edu["candidate_edu_degree"]) {
+	// 					case "Doctoral - S3":
+	// 						$degree = "S3";
+	// 						break;
+	// 					case "Master - S2":
+	// 						$degree = "S2";
+	// 						break;
+	// 					case "Bachelor - S1":
+	// 						$degree = "S1";
+	// 						break;
+	// 					case "Diploma":
+	// 						$degree = "D3";
+	// 						break;
+	// 					case "Highschool - SMA":
+	// 						$degree = "SLTA";
+	// 						break;
+	// 					case "Junior Highschool - SMP":
+	// 						$degree = "SLTP";
+	// 						break;
+	// 					case "Elementary - SD":
+	// 						$degree = "SD";
+	// 						break;
+	// 					default:
+	// 						$degree = "SLTA";
+	// 				}
+
+	// 				if ($k === 1) {
+	// 					$lastedu = "Y";
+	// 				}
+
+	// 				$rowData = array(
+	// 					$edu["candidate_id"],
+	// 					"F",
+	// 					$k,
+	// 					$degree,
+	// 					strtoupper(isset($edu["candidate_edu_major"]) && $edu["candidate_edu_major"] !== "" ? $edu["candidate_edu_major"] : "NULL"),
+	// 					"NULL",
+	// 					strtoupper(isset($edu["candidate_edu_institution"]) && $edu["candidate_edu_institution"] !== "" ? $edu["candidate_edu_institution"] : "NULL"),
+	// 					strtoupper(isset($edu["candidate_edu_city"]) && $edu["candidate_edu_city"] !== "" ? getCityCode($edu["candidate_edu_city"]) : $edu["candidate_edu_city"]),
+	// 					$edu["candidate_edu_end"],
+	// 					$edu["candidate_edu_gpa"],
+	// 					"BERIJAZAH",
+	// 					"NULL",
+	// 					"NULL",
+	// 					$lastedu,
+	// 					$edu["date_update"],
+	// 					$recruit_pic,
+	// 					"Y"
+	// 				);
+	// 				fputcsv($file, $rowData);
+	// 			}
+	// 		}
+	// 		fclose($file);
+
+	// 		// Download the CSV file
+	// 		if ($isDownload) {
+	// 		header('Content-Type: text/csv');
+	// 		header('Content-Disposition: attachment; filename="' . $filename2 . '"');
+	// 		header('Pragma: no-cache');
+	// 		header('Expires: 0');
+	// 		readfile($filepath2);
+	// 		exit();
+	// 		}
+			
+	// 	}
+	// }
+
+	function adm_exportCsvEduForProint($isDownload = true)
+	{
+		if (isset($_REQUEST["type"]) && $_REQUEST["type"] !== "") {
+			$recruit_pic = getRecruiterPic($_SESSION["log_auth_id"]);
+			$datacandidate = export_DataCandidateJoin();
+			$processedEdu = array(); // Array to keep track of processed education records
+	
+			$filename2 = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"] !== "") ? "Candidate_Education" . $_REQUEST["type"] . "_" . date("YmdHis") . "_" . $_REQUEST["candidate_id"] . ".csv" : "candidate_" . $_REQUEST["type"] . "_" . date("YmdHis") . ".csv";
+			$filepath2 = 'cand_files/csv/CanEdu/' . $filename2;
+	
+			$file = fopen($filepath2, 'w');
+	
+			// Write the column headers
+			$headers = array(
+				'CanId.',
+				'EmpEduStatus',
+				'EmpEduSeq',
+				'EmpEduLevel',
+				'EmpEduMajor',
+				'EmpEduName',
+				'EmpEduIns',
+				'EmpEduCity',
+				'EmpEduGraduate',
+				'EmpEduGrade',
+				'EmpEduResult',
+				'EmpEduFrontTitle',
+				'EmpEduEndTitle',
+				'FgDefault',
+				'UpdDate',
+				'UpdUser',
+				'UpdFlag'
+			);
+			fputcsv($file, $headers);
+	
+			foreach ($datacandidate as $candidate) {
+				$dataedu = export_DataEduRev($candidate["candidate_id"]);
+	
+				foreach ($dataedu as $edu) {
+					$EduKey = $candidate["candidate_id"] . '_' . $edu["candidate_edu_major"];
+	
+					if (!isset($processedEdu[$EduKey])) {
+						$degree = "SLTA"; // Default value for degree
+	
+						switch ($edu["candidate_edu_degree"]) {
+							case "Doctoral - S3":
+								$degree = "S3";
+								break;
+							case "Master - S2":
+								$degree = "S2";
+								break;
+							case "Bachelor - S1":
+								$degree = "S1";
+								break;
+							case "Diploma":
+								$degree = "D3";
+								break;
+							case "Highschool - SMA":
+								$degree = "SLTA";
+								break;
+							case "Junior Highschool - SMP":
+								$degree = "SLTP";
+								break;
+							case "Elementary - SD":
+								$degree = "SD";
+								break;
+							// Add more cases for other education levels if needed
+						}
+	
+						$rowData = array(
+							$edu["candidate_id"],
+							"F",
+							1, // Set EmpEduSeq to 1 as we are only printing one education record for each candidate
+							$degree,
+							strtoupper(isset($edu["candidate_edu_major"]) && $edu["candidate_edu_major"] !== "" ? $edu["candidate_edu_major"] : "NULL"),
+							"NULL",
+							strtoupper(isset($edu["candidate_edu_institution"]) && $edu["candidate_edu_institution"] !== "" ? $edu["candidate_edu_institution"] : "NULL"),
+							strtoupper(isset($edu["candidate_edu_city"]) && $edu["candidate_edu_city"] !== "" ? getCityCode($edu["candidate_edu_city"]) : $edu["candidate_edu_city"]),
+							$edu["candidate_edu_end"],
+							$edu["candidate_edu_gpa"],
+							"BERIJAZAH",
+							"NULL",
+							"NULL",
+							"Y", // Set EmpEduFrontTitle to "Y" for the first education record
+							$edu["date_update"],
+							$recruit_pic,
+							"Y"
+						);
+						fputcsv($file, $rowData);
+	
+						$processedEdu[$EduKey] = true; // Mark the education record as processed
+					}
+				}
+			}
+	
+			fclose($file);
+	
+			// Download the CSV file
+			if ($isDownload) {
+				header('Content-Type: text/csv');
+				header('Content-Disposition: attachment; filename="' . $filename2 . '"');
+				header('Pragma: no-cache');
+				header('Expires: 0');
+				readfile($filepath2);
+				exit();
+			}
+		}
+	}
 	
 	
 	
-} // end of authorized area.
+
+
+
+	// FAMILY CANDIDATE
+	// function adm_exportCsvFamForProint($isDownload=true)
+	// {
+	// 	if (isset($_REQUEST["type"]) && $_REQUEST["type"] !== "") {
+	// 		$recruit_pic = getRecruiterPic($_SESSION["log_auth_id"]);
+	// 		$datacandidate = export_DataCandidateJoin();
+
+	// 		$filename3 = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"] !== "") ? "Candidate_Family" . $_REQUEST["type"] . "_" . date("YmdHis") . "_" . $_REQUEST["candidate_id"] . ".csv" : "candidate_" . $_REQUEST["type"] . "_" . date("YmdHis") . ".csv";
+	// 		$filepath3 = 'cand_files/csv/CanFamily/' . $filename3;
+
+	// 		$file = fopen($filepath3, 'w');
+
+	// 		// Write the column headers
+	// 		$headers = array(
+	// 			"CanId.","EmpFamRelation","EmpFamName","EmpFamEmpId","EmpFamCityBirth","EmpFamDateBrith","EmpFamSex","EmpFamAddress","EmpFamResAddr","EmpFamPhone","EmpFamHp","EmpFamIdCard","EmpFamEdu","EmpFamEduIns",
+	// 			"EmpFamOccupation","EmpFamComp","EmpCompAddr","EmpFamAlive","EmpFamNo","MaritalSt","EmpFamMaritalDate","EmploymentSt","FgMedical","FgSchool","EmpPTKP","UpdDate","UpdUser","UpdFlag"
+	// 		);
+	// 		fputcsv($file, $headers);
+
+	// 		$rows=1;	
+	// 		for($j=0;$j<count($datacandidate);$j++)
+	// 		{
+	// 			$datafam=export_DataFamRev($datacandidate[$j]["candidate_id"]);
+	// 			$kakak=0;
+	// 			$adik=0;
+	// 			$anak=0;
+	// 			for($i=0;$i<count($datafam);$i++) {
+	// 				$rows++;
+					
+	// 				switch ($datafam[$i]["candidate_family_lastedu"]) {
+	// 					case "Doctoral - S3":
+	// 						$degree="S3";
+	// 						break;
+	// 					case "Master - S2":
+	// 						$degree="S2";
+	// 						break;
+	// 					case "Bachelor - S1":
+	// 						$degree="S1";
+	// 						break;
+	// 					case "Diploma":
+	// 						$degree="D3";
+	// 						break;
+	// 					case "Highschool - SMA":
+	// 						$degree="SLTA";
+	// 						break;
+	// 					case "Junior Highschool - SMP":
+	// 						$degree="SLTP";
+	// 						break;
+	// 					case "Elementary - SD":
+	// 						$degree="SD";
+	// 						break;
+	// 					default:
+	// 						$degree="SLTA";
+	// 				}
+					
+	// 				//cek jenis kelamin candidate
+					// $candidatesex=getCandidateSex($datafam[$i]["candidate_id"]);
+					// $candidatedob=getCandidateDob($datafam[$i]["candidate_id"]);
+					
+													
+					// if($candidatesex=="M" && $datafam[$i]["candidate_family_relation"]=="Spouse") 
+					// {
+					// 	$fmrelation="ISTRI";
+					// 	$fmsex="F";
+					// }
+					// if($candidatesex=="F" && $datafam[$i]["candidate_family_relation"]=="Spouse") 
+					// {
+					// 	$fmrelation="SUAMI";
+					// 	$fmsex="M";
+					// }
+					// if($candidatedob>$datafam[$i]["candidate_family_birthdate"] && $datafam[$i]["candidate_family_relation"]!="Spouse" && $datafam[$i]["candidate_family_relation"]!="Father" && $datafam[$i]["candidate_family_relation"]!="Mother" && $datafam[$i]["candidate_family_relation"]!="Son" && $datafam[$i]["candidate_family_relation"]!="Daughter") 
+					// {
+					// 	$kakak++;
+					// 	$fmrelation="KAKAK KE-".$kakak;
+					// }
+					// if($candidatedob<=$datafam[$i]["candidate_family_birthdate"] && $datafam[$i]["candidate_family_relation"]!="Spouse" && $datafam[$i]["candidate_family_relation"]!="Father" && $datafam[$i]["candidate_family_relation"]!="Mother" && $datafam[$i]["candidate_family_relation"]!="Son" && $datafam[$i]["candidate_family_relation"]!="Daughter") 
+					// {
+					// 	$adik++;
+					// 	$fmrelation="ADIK KE-".$adik;
+					// }
+					// if($datafam[$i]["candidate_family_relation"]=="Son" || $datafam[$i]["candidate_family_relation"]=="Daughter")
+					// {
+					// 	$anak++;
+					// 	$fmrelation="ANAK KE-".$anak;
+					// }
+					// if($datafam[$i]["candidate_family_relation"]=="Father")
+					// {
+					// 	$fmrelation="AYAH";
+					// }
+					// if($datafam[$i]["candidate_family_relation"]=="Mother")
+					// {
+					// 	$fmrelation="IBU";
+					// } else {
+					// 	"NULL";
+					// }
+					
+					// if($datafam[$i]["candidate_family_relation"]=="Brother" || $datafam[$i]["candidate_family_relation"]=="Son" || $datafam[$i]["candidate_family_relation"]=="Father")
+					// {
+					// 	$fmsex="M";
+					// }
+					// if($datafam[$i]["candidate_family_relation"]=="Sister" || $datafam[$i]["candidate_family_relation"]=="Daughter" || $datafam[$i]["candidate_family_relation"]=="Mother")
+					// {
+					// 	$fmsex="F";
+					// }
+										
+					
+	// 				$rowData = array(
+	// 					$datafam[$i]["candidate_id"],
+	// 					$fmrelation,
+	// 					strtoupper($datafam[$i]["candidate_family_name"]),
+	// 					"NULL",
+	// 					$datafam[$i]["candidate_family_birthplace"],
+	// 					$datafam[$i]["candidate_family_birthdate"],
+	// 					$fmsex,
+	// 					"NULL",
+	// 					"NULL",
+	// 					"NULL",
+	// 					"NULL",
+	// 					"NULL",
+	// 					$degree,
+	// 					"NULL",
+	// 					strtoupper($datafam[$i]["candidate_family_lastjob"]),
+	// 					strtoupper($datafam[$i]["candidate_family_company"]),
+	// 					"NULL",
+	// 					(isset($datafam[$i]["candidate_family_rip"]) && $datafam[$i]["candidate_family_rip"] == "Alive") ? "Y" : "N",
+	// 					"NULL",
+	// 					"NULL",
+	// 					"NULL",
+	// 					"NULL",
+	// 					"NULL",
+	// 					"NULL",
+	// 					"NULL",
+	// 					$datafam[$i]["date_update"],
+	// 					$recruit_pic,
+	// 					"Y"
+	// 				);
+	// 				fputcsv($file, $rowData);
+	// 			}
+	// 		}
+
+	// 		fclose($file);
+
+	// 		// Download the CSV file
+			
+	// 		if ($isDownload) {
+	// 			header('Content-Type: text/csv');
+	// 			header('Content-Disposition: attachment; filename="' . $filename3 . '"');
+	// 			header('Pragma: no-cache');
+	// 			header('Expires: 0');
+	// 			readfile($filepath3);
+	// 			exit();
+	// 			}
+	// 	}
+	// }
+
+	function adm_exportCsvFamForProint($isDownload = true)
+	{
+		if (isset($_REQUEST["type"]) && $_REQUEST["type"] !== "") {
+			$recruit_pic = getRecruiterPic($_SESSION["log_auth_id"]);
+			$datacandidate = export_DataCandidateJoin();
+	
+			$filename3 = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"] !== "") ? "Candidate_Family" . $_REQUEST["type"] . "_" . date("YmdHis") . "_" . $_REQUEST["candidate_id"] . ".csv" : "candidate_" . $_REQUEST["type"] . "_" . date("YmdHis") . ".csv";
+			$filepath3 = 'cand_files/csv/CanFamily/' . $filename3;
+	
+			$file = fopen($filepath3, 'w');
+	
+			// Write the column headers
+			$headers = array(
+				"CanId.", "EmpFamRelation", "EmpFamName", "EmpFamEmpId", "EmpFamCityBirth", "EmpFamDateBrith", "EmpFamSex", "EmpFamAddress", "EmpFamResAddr", "EmpFamPhone", "EmpFamHp", "EmpFamIdCard", "EmpFamEdu", "EmpFamEduIns",
+				"EmpFamOccupation", "EmpFamComp", "EmpCompAddr", "EmpFamAlive", "EmpFamNo", "MaritalSt", "EmpFamMaritalDate", "EmploymentSt", "FgMedical", "FgSchool", "EmpPTKP", "UpdDate", "UpdUser", "UpdFlag"
+			);
+			fputcsv($file, $headers);
+	
+			$processedFamIDs = array(); // Array to keep track of processed family members
+	
+			foreach ($datacandidate as $candidate) {
+				$datafam = export_DataFamRev($candidate["candidate_id"]);
+	
+				foreach ($datafam as $fam) {
+					$famKey = $fam["candidate_family_id"]; // Use the family member ID as the key
+	
+					if (!in_array($famKey, $processedFamIDs)) {
+						$degree = "SLTA"; // Default value for degree
+	
+						switch ($fam["candidate_family_lastedu"]) {
+							case "Doctoral - S3":
+								$degree = "S3";
+								break;
+							case "Master - S2":
+								$degree = "S2";
+								break;
+							case "Bachelor - S1":
+								$degree = "S1";
+								break;
+							case "Diploma":
+								$degree = "D3";
+								break;
+							case "Highschool - SMA":
+								$degree = "SLTA";
+								break;
+							case "Junior Highschool - SMP":
+								$degree = "SLTP";
+								break;
+							case "Elementary - SD":
+								$degree = "SD";
+								break;
+						}
+	
+						// Rest of the family relation handling logic remains unchanged
+					$candidatesex=getCandidateSex($fam["candidate_id"]);
+					$candidatedob=getCandidateDob($fam["candidate_id"]);
+					
+													
+					if($candidatesex=="M" && $fam["candidate_family_relation"]=="Spouse") 
+					{
+						$fmrelation="ISTRI";
+						$fmsex="F";
+					}
+					if($candidatesex=="F" && $fam["candidate_family_relation"]=="Spouse") 
+					{
+						$fmrelation="SUAMI";
+						$fmsex="M";
+					}
+					if($candidatedob>$fam["candidate_family_birthdate"] && $fam["candidate_family_relation"]!="Spouse" && $fam["candidate_family_relation"]!="Father" && $fam["candidate_family_relation"]!="Mother" && $fam["candidate_family_relation"]!="Son" && $fam["candidate_family_relation"]!="Daughter") 
+					{
+						$kakak = '';
+						$kakak++;
+
+						$fmrelation="KAKAK KE-".$kakak;
+					}
+					if($candidatedob<=$fam["candidate_family_birthdate"] && $fam["candidate_family_relation"]!="Spouse" && $fam["candidate_family_relation"]!="Father" && $fam["candidate_family_relation"]!="Mother" && $fam["candidate_family_relation"]!="Son" && $fam["candidate_family_relation"]!="Daughter") 
+					{
+						$adik++;
+						$fmrelation="ADIK KE-".$adik;
+					}
+					if($fam["candidate_family_relation"]=="Son" || $fam["candidate_family_relation"]=="Daughter")
+					{
+						$anak++;
+						$fmrelation="ANAK KE-".$anak;
+					}
+					if($fam["candidate_family_relation"]=="Father")
+					{
+						$fmrelation="AYAH";
+					}
+					if($fam["candidate_family_relation"]=="Mother")
+					{
+						$fmrelation="IBU";
+					} else {
+						"NULL";
+					}
+					
+					if($fam["candidate_family_relation"]=="Brother" || $fam["candidate_family_relation"]=="Son" || $fam["candidate_family_relation"]=="Father")
+					{
+						$fmsex="M";
+					}
+					if($fam["candidate_family_relation"]=="Sister" || $fam["candidate_family_relation"]=="Daughter" || $fam["candidate_family_relation"]=="Mother")
+					{
+						$fmsex="F";
+					}
+	
+						$rowData = array(
+							$fam["candidate_id"],
+							$fmrelation,
+							strtoupper($fam["candidate_family_name"]),
+							"NULL",
+							$fam["candidate_family_birthplace"],
+							$fam["candidate_family_birthdate"],
+							$fmsex,
+							"NULL",
+							"NULL",
+							"NULL",
+							"NULL",
+							"NULL",
+							$degree,
+							"NULL",
+							strtoupper($fam["candidate_family_lastjob"]),
+							strtoupper($fam["candidate_family_company"]),
+							"NULL",
+							(isset($fam["candidate_family_rip"]) && $fam["candidate_family_rip"] == "Alive") ? "Y" : "N",
+							"NULL",
+							"NULL",
+							"NULL",
+							"NULL",
+							"NULL",
+							"NULL",
+							"NULL",
+							$fam["date_update"],
+							$recruit_pic,
+							"Y"
+						);
+						fputcsv($file, $rowData);
+	
+						$processedFamIDs[] = $famKey; // Add the family member ID to the processed array
+					}
+				}
+			}
+	
+			fclose($file);
+	
+			// Download the CSV file
+			if ($isDownload) {
+				header('Content-Type: text/csv');
+				header('Content-Disposition: attachment; filename="' . $filename3 . '"');
+				header('Pragma: no-cache');
+				header('Expires: 0');
+				readfile($filepath3);
+				exit();
+			}
+		}
+	}
+	
+
+
+	function adm_exportCsvJobForProint($isDownload = true)
+	{
+		if (isset($_REQUEST["type"]) && $_REQUEST["type"] !== "") {
+			$recruit_pic = getRecruiterPic($_SESSION["log_auth_id"]);
+			$datacandidate = export_DataCandidateJoin();
+	
+			$filename4 = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"] !== "") ? "Candidate_Experience" . $_REQUEST["type"] . "_" . date("YmdHis") . "_" . $_REQUEST["candidate_id"] . ".csv" : "candidate_" . $_REQUEST["type"] . "_" . date("YmdHis") . ".csv";
+			$filepath4 = 'cand_files/csv/CanExperience/' . $filename4;
+	
+			$file = fopen($filepath4, 'w');
+	
+			// Write the column headers
+			$headers = array(
+				'CanId.',
+				'Sequence',
+				'CompanyName',
+				'CompanyAddress',
+				'CompanyCity',
+				'CompanyZipCode',
+				'CompanyPhone',
+				'JobStart',
+				'JobEnd',
+				'JobTitle',
+				'SalaryStart',
+				'SalaryEnd',
+				'TerminationReason',
+				'UpdDate',
+				'UpdUser',
+				'UpdFlag',
+				'Description',
+				'FgCase',
+				'Performance',
+				'SprName',
+				'SprPhone',
+			);
+			fputcsv($file, $headers);
+	
+			$processedJobExp = array(); // Array untuk menyimpan informasi pengalaman kerja yang sudah diproses
+	
+			foreach ($datacandidate as $candidate) {
+				$datajobexp = export_DataJobRev($candidate["candidate_id"]);
+				foreach ($datajobexp as $jobexp) {
+					$jobExpKey = $candidate["candidate_id"] . '_' . $jobexp["candidate_jobexp_id"];
+					
+					// Periksa apakah pengalaman kerja sudah diproses sebelumnya
+					if (!isset($processedJobExp[$jobExpKey])) {
+						$rowData = array(
+							$candidate["candidate_id"],
+							"",
+							$jobexp["candidate_jobexp_company"],
+							$jobexp["candidate_jobexp_address"],
+							"",
+							"",
+							$jobexp["candidate_jobexp_phone"],
+							$jobexp["candidate_jobexp_start"],
+							$jobexp["candidate_jobexp_end"],
+							$jobexp["candidate_jobexp_spvposition"],
+							"",
+							$jobexp["candidate_jobexp_salary"],
+							$jobexp["candidate_jobexp_leaving"],
+							"",
+							$jobexp["date_update"],
+							$jobexp["user_update"],
+							"",
+							$jobexp["candidate_jobexp_desc"],
+							"",
+							"",
+							$jobexp["candidate_jobexp_spvname"],
+							""
+						);
+						fputcsv($file, $rowData);
+	
+						// Tandai pengalaman kerja sebagai sudah diproses
+						$processedJobExp[$jobExpKey] = true;
+					}
+				}
+			}
+	
+			fclose($file);
+	
+			// Download the CSV file
+			if ($isDownload) {
+				header('Content-Type: text/csv');
+				header('Content-Disposition: attachment; filename="' . $filename4 . '"');
+				header('Pragma: no-cache');
+				header('Expires: 0');
+				readfile($filepath4);
+				exit();
+			}
+		}
+	}
+	
+	
+	
+
+// ID CARD CANDIDATE
+function adm_exportCsvIDCardForProint($isDownload=true)
+{
+	if (isset($_REQUEST["type"]) && $_REQUEST["type"] !== "") {
+		$recruit_pic = getRecruiterPic($_SESSION["log_auth_id"]);
+		$datacandidate = export_DataCandidateJoin();
+		$dataedu = export_DataEdu();
+
+		$filename5 = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"] !== "") ? "Candidate_IDCard" . $_REQUEST["type"] . "_" . date("YmdHis") . "_" . $_REQUEST["candidate_id"] . ".csv" : "candidate_" . $_REQUEST["type"] . "_" . date("YmdHis") . ".csv";
+		$filepath5 = 'cand_files/csv/CanIDCard/' . $filename5;
+
+		$file = fopen($filepath5, 'w');
+
+		// Write the column headers
+		$headers = array(
+			"EmpId.",
+			'EmpCardType',
+			'EmpCardNumber',
+			'EmpCardPublisher',
+			'EmpCardExpired',
+			'UpdDate',			
+			'UpdUser',
+			'UpdFlag',			
+			'CardDesc',			
+		);
+		fputcsv($file, $headers);
+
+		$rows = 1;
+		$csvData = array();
+		
+		for ($i = 0; $i < count($datacandidate); $i++) {
+			$rows++;
+		
+			$rowData = array(
+				$datacandidate[$i]["candidate_id"],
+				$datacandidate[$i]["candidate_idtype"],
+				$datacandidate[$i]["candidate_idcard"],
+				"NULL",
+				"NULL",
+				$datacandidate[$i]["date_update"],
+				$recruit_pic,
+				"Y",
+				"NULL"
+			);
+				fputcsv($file, $rowData);
+			}
+
+		fclose($file);
+
+		// Download the CSV file
+		if ($isDownload) {
+			header('Content-Type: text/csv');
+			header('Content-Disposition: attachment; filename="' . $filename5 . '"');
+			header('Pragma: no-cache');
+			header('Expires: 0');
+			readfile($filepath5);
+			exit();
+			}
+	}
+}
+
+function createZipFile() {
+	$zip = new ZipArchive();
+	$zipFilename = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"]<>"") ? "Candidate_Zip".$_REQUEST["type"]."_".date("YmdHis")."_".$_REQUEST["candidate_id"].".zip" : "candidate_".$_REQUEST["type"]."_".date("YmdHis").".zip";
+	$tempZipFilename = $zipFilename;
+
+	$filename1 = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"]<>"") ? "Candidate_Data".$_REQUEST["type"]."_".date("YmdHis")."_".$_REQUEST["candidate_id"].".csv" : "candidate_".$_REQUEST["type"]."_".date("YmdHis").".csv";
+	$filepath1 = 'cand_files/csv/Candidate/'.$filename1;
+
+	$filename2 = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"] !== "") ? "Candidate_Education" . $_REQUEST["type"] . "_" . date("YmdHis") . "_" . $_REQUEST["candidate_id"] . ".csv" : "candidate_" . $_REQUEST["type"] . "_" . date("YmdHis") . ".csv";
+	$filepath2 = 'cand_files/csv/CanEdu/' . $filename2;
+
+	$filename3 = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"] !== "") ? "Candidate_Family" . $_REQUEST["type"] . "_" . date("YmdHis") . "_" . $_REQUEST["candidate_id"] . ".csv" : "candidate_" . $_REQUEST["type"] . "_" . date("YmdHis") . ".csv";
+	$filepath3 = 'cand_files/csv/CanFamily/' . $filename3;
+
+	$filename4 = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"] !== "") ? "Candidate_Experience" . $_REQUEST["type"] . "_" . date("YmdHis") . "_" . $_REQUEST["candidate_id"] . ".csv" : "candidate_" . $_REQUEST["type"] . "_" . date("YmdHis") . ".csv";
+	$filepath4 = 'cand_files/csv/CanExperience/' . $filename4;
+
+	$filename5 = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"] !== "") ? "Candidate_IDCard" . $_REQUEST["type"] . "_" . date("YmdHis") . "_" . $_REQUEST["candidate_id"] . ".csv" : "candidate_" . $_REQUEST["type"] . "_" . date("YmdHis") . ".csv";
+	$filepath5 = 'cand_files/csv/CanIDCard/' . $filename5;
+	
+	adm_exportCsvDataForProint(false);
+	adm_exportCsvEduForProint(false);
+	adm_exportCsvFamForProint(false);
+	adm_exportCsvJobForProint(false);
+	adm_exportCsvIDCardForProint(false);
+
+	if ($zip->open($tempZipFilename, ZipArchive::CREATE) === true) {
+		// Add the CSV files to the ZIP
+		$zip->addFile($filepath1, $filename1);
+		$zip->addFile($filepath2, $filename2); 
+		$zip->addFile($filepath3, $filename3);
+		$zip->addFile($filepath4, $filename4);
+		$zip->addFile($filepath5, $filename5);
+
+		$zip->close();
+
+		// Move the temporary ZIP file to a publicly accessible directory
+		rename($tempZipFilename, "public_folder/" . $zipFilename);
+
+		// Set headers to download the ZIP file
+		header('Content-Type: application/zip');
+		header('Content-Disposition: attachment; filename="' . $zipFilename . '"');
+		header('Pragma: no-cache');
+		header('Expires: 0');
+
+		// Output the contents of the ZIP file
+		readfile("public_folder/" . $zipFilename);
+		exit();
+	} else {
+		echo "Failed to create ZIP file.";
+	}
+}
+
+function conn(){
+	$serverName = "REHANG\\SQLEXPRESS";
+	$database = "TestHyper";
+	$uid = "";
+	$pwd = "";
+
+	$connOptions = array(
+		"Database" => $database,
+		"UID" => $uid,
+		"PWD" => $pwd
+	);
+	$conn = sqlsrv_connect($serverName, $connOptions);
+	if ($conn === false) {
+		die("Connection failed: " . print_r(sqlsrv_errors(), true));
+	} else {
+		echo('koneksi berhasil');
+	}
+	return $conn;
+}
+
+function ImportIDCard() {
+	$conn = conn();
+
+	// Validasi input
+	$candidate_id = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"] !== "") ? $_REQUEST["candidate_id"] : null;
+	$type = (isset($_REQUEST["type"]) && $_REQUEST["type"] !== "") ? $_REQUEST["type"] : null;
+
+	if (!$candidate_id || !$type) {
+		die("Invalid input data.");
+	}
+
+	// Generate file name
+	$filename5 = "Candidate_IDCard{$type}_" . date("YmdHis") . "_{$candidate_id}.csv";
+	$filepath5 = 'cand_files/csv/CanIDCard/' . $filename5;
+
+	$file_handle = fopen($filepath5, "r");
+	// $contents = fread($file_handle, filesize($filepath5));
+	// $test = str_getcsv($contents, ",", "\n");
+	// echo($test[0]);exit;
+
+	if (!$file_handle) {
+		die("Failed to open CSV file.");
+	}
+
+	// Read the first (and only) row from the CSV file
+	// $column = fgetcsv($file_handle);
+	$out = array();
+	while ($line = fgetcsv($file_handle)) {
+		$out = $line;
+	}
+	
+	fclose($file_handle);
+
+	$EmpId = (int) $out[0];
+	// echo($EmpId);exit;
+	$EmpCardType = $out[1];
+	$EmpCardNumber = (int) $out[2]; // Convert to integer
+	$EmpCardPublisher = $out[3];
+	$EmpCardExpired = date("Y-m-d H:i:s", strtotime($out[4]));
+	$UpdDate = date("Y-m-d H:i:s", strtotime($out[5])); // Convert to date format
+	$UpdUser = $out[6];
+	$UpdFlag = (int) $out[7]; // Convert to integer
+	$CardDesc = $out[8];
+
+	// Prepare and execute the SQL query using prepared statement
+	$sql = "INSERT INTO dbo.Kartu (EmpId, EmpCardType, EmpCardNumber, EmpCardPublisher, EmpCardExpired, UpdDate, UpdUser, UpdFlag, CardDesc) 
+			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	$params = array($EmpId, $EmpCardType, $EmpCardNumber, $EmpCardPublisher, $EmpCardExpired, $UpdDate, $UpdUser, $UpdFlag, $CardDesc);
+
+	$stmt = sqlsrv_prepare($conn, $sql, $params);
+
+	if ($stmt === false) {
+		die(print_r(sqlsrv_errors(), true));
+	}
+
+	if (sqlsrv_execute($stmt)) {
+		echo 'Data imported successfully!';
+	} else {
+		echo 'Failed to import data: ' . print_r(sqlsrv_errors(), true);
+		echo '<br>';
+		echo 'Problematic Row Data: ' . print_r($out, true);
+	}
+}
+	
+// Function to import education data from CSV file
+function ImportEdu()
+{
+    $conn = conn();
+    $filename2 = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"] !== "") ? "Candidate_Education" . $_REQUEST["type"] . "_" . date("YmdHis") . "_" . $_REQUEST["candidate_id"] . ".csv" : "candidate_" . $_REQUEST["type"] . "_" . date("YmdHis") . ".csv";
+    $filepath2 = 'cand_files/csv/CanEdu/' . $filename2;
+
+    $file = $filepath2;
+    $file_handle = fopen($file, "r");
+
+    $headerSkipped = false; // Flag to skip the first row (header) in the CSV
+
+    while ($line = fgetcsv($file_handle)) {
+        if (!$headerSkipped) {
+            $headerSkipped = true;
+            continue; // Skip the header row
+        }
+
+        $out = $line;
+
+        $CanId = (int) $out[0];
+        $EmpEduStatus = $out[1];
+        $EmpEduSeq = $out[2]; // Convert to integer
+        $EmpEduLevel = $out[3];
+        $EmpEduMajor =  $out[4];
+        $EmpEduName = $out[5]; // Convert to date format
+        $EmpEduIns = $out[6];
+        $EmpEduCity = (int) $out[7]; // Convert to integer
+        $EmpEduGraduate = (int) $out[8];
+        $EmpEduGrade = (float) $out[9];
+        $EmpEduResult = $out[10];
+        $EmpEduFrontTitle = $out[11]; // Convert to integer
+        $EmpEduEndTitle = $out[12];
+        $FgDefault = (int) $out[13];
+        $UpdDate = date("Y-m-d H:i:s", strtotime($out[14]));
+        $UpdUser = $out[15]; // Convert to integer
+        $UpdFlag = $out[16];
+
+        $sql = "INSERT INTO dbo.Edukasi (CanId, EmpEduStatus, EmpEduSeq, EmpEduLevel, EmpEduMajor, EmpEduName, EmpEduIns, EmpEduCity, EmpEduGraduate, EmpEduGrade, EmpEduResult, EmpEduFrontTitle, EmpEduEndTitle, FgDefault, UpdDate, UpdUser, UpdFlag) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $params = array($CanId, $EmpEduStatus, $EmpEduSeq, $EmpEduLevel, $EmpEduMajor, $EmpEduName, $EmpEduIns, $EmpEduCity, $EmpEduGraduate, $EmpEduGrade, $EmpEduResult, $EmpEduFrontTitle, $EmpEduEndTitle, $FgDefault, $UpdDate, $UpdUser, $UpdFlag);
+
+        $stmt = sqlsrv_prepare($conn, $sql, $params);
+
+        if ($stmt === false) {
+            die(print_r(sqlsrv_errors(), true));
+        }
+
+        if (sqlsrv_execute($stmt)) {
+            echo 'Data imported successfully!';
+        } else {
+            echo 'Failed to import data: ' . print_r(sqlsrv_errors(), true);
+            echo '<br>';
+            echo 'Problematic Row Data: ' . print_r($out, true);
+        }
+    }
+
+    fclose($file_handle);
+}
+
+
+
+function ImportExp() {
+	$conn = conn();
+	$filename4 = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"] !== "") ? "Candidate_Experience" . $_REQUEST["type"] . "_" . date("YmdHis") . "_" . $_REQUEST["candidate_id"] . ".csv" : "candidate_" . $_REQUEST["type"] . "_" . date("YmdHis") . ".csv";
+	$filepath4 = 'cand_files/csv/CanExperience/' . $filename4;
+    $file = $filepath4;
+    $file_handle = fopen($file, "r");
+
+    $headerSkipped = false; // Flag to skip the first row (header) in the CSV
+
+    while ($line = fgetcsv($file_handle)) {
+        if (!$headerSkipped) {
+            $headerSkipped = true;
+            continue; // Skip the header row
+        }
+		
+		$out = $line;
+
+            $CanId = (int) $out[0];
+            $Sequence = $out[1];
+            $CompanyName = $out[2];
+            $CompanyAddress = $out[3];
+            $CompanyCity =  $out[4];
+            $CompanyZipCode = (int) $out[5];
+            $CompanyPhone = (int) $out[6];
+            $JobStart = date("Y-m-d H:i:s", strtotime($out[7]));
+            $JobEnd = date("Y-m-d H:i:s", strtotime($out[8]));
+            $JobTitle = $out[9];
+            $SalaryStart = (float) $out[10];
+            $SalaryEnd = (float) $out[11];
+            $TerminationReason = $out[12];
+            $UpdDate = date("Y-m-d H:i:s", strtotime($out[13]));
+            $UpdUser = date("Y-m-d H:i:s", strtotime($out[14]));
+            $UpdFlag = (int) $out[15];
+            $Description = $out[16];
+            $FgCase = $out[17];
+            $Performance = $out[18];
+            $SprName = $out[19];
+            $SprPhone = (int) $out[20];
+    
+            $sql = "INSERT INTO dbo.Pengalaman (CanId, Sequence, CompanyName, CompanyAddress, CompanyCity, CompanyZipCode, CompanyPhone, JobStart, JobEnd, JobTitle, SalaryStart, SalaryEnd, TerminationReason, UpdDate, UpdUser, UpdFlag, Description, FgCase, Performance, SprName, SprPhone) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    
+            $params = array(
+                $CanId, $Sequence, $CompanyName, $CompanyAddress, $CompanyCity, $CompanyZipCode, $CompanyPhone, $JobStart, $JobEnd,
+                $JobTitle, $SalaryStart, $SalaryEnd, $TerminationReason, $UpdDate, $UpdUser, $UpdFlag, $Description, $FgCase, $Performance, $SprName, $SprPhone
+            );
+    
+            $stmt = sqlsrv_prepare($conn, $sql, $params);
+    
+            if ($stmt === false) {
+                die(print_r(sqlsrv_errors(), true));
+            }
+    
+            if (sqlsrv_execute($stmt)) {
+                echo 'Data imported successfully!';
+            } else {
+                echo 'Failed to import data: ' . print_r(sqlsrv_errors(), true);
+                echo '<br>';
+                echo 'Problematic Row Data: ' . print_r($out, true);
+            }
+		}
+        fclose($file_handle);
+}
+
+    function ImportFam() {
+		$conn = conn();
+
+		$filename3 = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"] !== "") ? "Candidate_Family" . $_REQUEST["type"] . "_" . date("YmdHis") . "_" . $_REQUEST["candidate_id"] . ".csv" : "candidate_" . $_REQUEST["type"] . "_" . date("YmdHis") . ".csv";
+		$filepath3 = 'cand_files/csv/CanFamily/' . $filename3;
+        $file = $filepath3;
+        $file_handle = fopen($file, "r");
+		$out = array();
+
+		$headerSkipped = false; 
+
+		while ($line = fgetcsv($file_handle)) {
+			if (!$headerSkipped) {
+				$headerSkipped = true;
+				continue; // Skip the header row
+			}
+			
+			$out = $line;
+
+		for($i = 0; $i < 5 ; $i++) {
+			$CanId = (int) $out[0];
+			$EmpFamRelation = $out[1];
+			$EmpFamName = $out[2];
+			$EmpFamEmpId = (int) $out[3];
+			$EmpFamCityBirth =  $out[4];
+			$EmpFamDateBrith = date("Y-m-d H:i:s", strtotime($out[5]));
+			$EmpFamSex = $out[6];
+			$EmpFamAddress = $out[7];
+			$EmpFamResAddr = $out[8];
+			$EmpFamPhone = (int) $out[9];
+			$EmpFamHp = (int) $out[10];
+			$EmpFamIdCard = (int) $out[11];
+			$EmpFamEdu = $out[12];
+			$EmpFamEduIns = $out[13];
+			$EmpFamOccupation = $out[14];
+			$EmpFamComp = $out[15];
+			$EmpCompAddr = $out[16];
+			$EmpFamAlive = $out[17];
+			$EmpFamNo = (int) $out[18];
+			$MaritalSt = $out[19];
+			$EmpFamMaritalDate = $out[20];
+			$EmploymentSt = $out[21];
+			$FgMedical = $out[22];
+			$FgSchool = $out[23];
+			$EmpPTKP = $out[24];
+			$UpdDate = date("Y-m-d H:i:s", strtotime($out[25]));
+			$UpdUser = $out[26];
+			$UpdFlag = $out[27];
+
+			$sql = "INSERT INTO dbo.Keluarga (CanId, EmpFamRelation, EmpFamName, EmpFamEmpId, EmpFamCityBirth, EmpFamDateBrith, EmpFamSex, EmpFamAddress, EmpFamResAddr, EmpFamPhone, EmpFamHp, EmpFamIdCard, EmpFamEdu, EmpFamEduIns, EmpFamOccupation, EmpFamComp, EmpCompAddr, EmpFamAlive, EmpFamNo, MaritalSt, EmpFamMaritalDate, EmploymentSt, FgMedical, FgSchool, EmpPTKP, UpdDate, UpdUser, UpdFlag) 
+			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	
+			$params = array(
+				$CanId, $EmpFamRelation, $EmpFamName, $EmpFamEmpId, $EmpFamCityBirth, $EmpFamDateBrith, $EmpFamSex, $EmpFamAddress, $EmpFamResAddr, $EmpFamPhone, $EmpFamHp, $EmpFamIdCard, $EmpFamEdu, $EmpFamEduIns, $EmpFamOccupation, $EmpFamComp, $EmpCompAddr, $EmpFamAlive, $EmpFamNo, $MaritalSt, $EmpFamMaritalDate, $EmploymentSt, $FgMedical, $FgSchool, $EmpPTKP, $UpdDate, $UpdUser, $UpdFlag
+			);
+		}
+	
+			$stmt = sqlsrv_prepare($conn, $sql, $params);
+	
+			if ($stmt === false) {
+				die(print_r(sqlsrv_errors(), true));
+			}
+	
+			if (sqlsrv_execute($stmt)) {
+				echo 'Data imported successfully!';
+			} else {
+				echo 'Failed to import data: ' . print_r(sqlsrv_errors(), true);
+				echo '<br>';
+				echo 'Problematic Row Data: ' . print_r($out, true);
+			}
+		}
+
+		fclose($file_handle);
+    }   
+
+
+function ImportData() {		
+		$conn = conn();
+		$filename1 = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"]<>"") ? "Candidate_Data".$_REQUEST["type"]."_".date("YmdHis")."_".$_REQUEST["candidate_id"].".csv" : "candidate_".$_REQUEST["type"]."_".date("YmdHis").".csv";
+		
+		$filepath1 = 'cand_files/csv/Candidate/'.$filename1;
+		
+        $file = $filepath1;
+
+        $file_handle = fopen($file, "r");
+		$out = array();
+		while ($line = fgetcsv($file_handle)) {
+		$out = $line;
+		}
+
+		fclose($file_handle);
+		$CanId = (int) $out[0];
+		$EmpName = $out[1];
+		$EmpOrganization = $out[2];
+		$EmpJobTitle = (int) $out[3];
+		$EmpJobLevel = $out[4];
+		$EmpType = $out[5];
+		$EmpCompany = $out[6];
+		$EmpLocation = $out[7];
+		$EmpLabour = $out[8];
+		$EmpCostCtre = $out[9];
+		$EmpDateBirth = date("Y-m-d H:i:s", strtotime($out[10]));
+		$EmpCityBirth = (int) $out[11];
+		$EmpSex = $out[12];
+		$EmpBloodType = $out[13];
+		$EmpCitizen = $out[14];
+		$EmpRace = $out[15];
+		$EmpReligion = $out[16];
+		$EmpMaritalSt = $out[17];
+		$EmpStartDate = date("Y-m-d H:i:s", strtotime($out[18]));
+		$EmpSignDate = date("Y-m-d H:i:s", strtotime($out[19]));
+		$EmpJoinDate = date("Y-m-d H:i:s", strtotime($out[20]));
+		$EmpDecision = $out[21];
+		$EmpCreateDate = date("Y-m-d H:i:s", strtotime($out[22]));
+		$EmpDescription = $out[23];
+		$EmpEffecDate = date("Y-m-d H:i:s", strtotime($out[24]));
+		$EmpInitiator = $out[25];
+		$EmpDecStart = date("Y-m-d H:i:s", strtotime($out[26]));
+		$EmpDecEnd = date("Y-m-d H:i:s", strtotime($out[27]));
+		$EmpPhoto = $out[28];
+		$EmpContractStart = date("Y-m-d H:i:s", strtotime($out[29]));
+		$EmpContractEnd = date("Y-m-d H:i:s", strtotime($out[30]));
+		$EmpSKType = $out[31];
+		$EmpEmail = $out[32];
+		$EmpLocRecruit = $out[33];
+		$EmpWinLogin = $out[34];
+		$EmpWinPassword = $out[35];
+		$EmpWinLoginFlag = $out[36];
+		$SKCostCtre = $out[37];
+		$UserGroup = $out[38];
+		$FgForeignLabor = $out[39];
+		$OUCode = $out[40];
+		$UpdDate = date("Y-m-d H:i:s", strtotime($out[41]));
+		$UpdUser = $out[41];
+		$UpdFlag = $out[42];
+		$RefNmbr = $out[43];
+		$EmpResAddr = $out[44];
+		$EmpResCity = (int) $out[45];
+		$EmpResZipCode = (int) $out[46];
+		$EmpResPhone = (int) $out[47];
+		$EmpResStatus = $out[48];
+		$EmpResStart = $out[49];
+		$EmpOriAddr = $out[50];
+		$EmpOriCity = (int) $out[51];
+		$EmpOriZipCode = (int) $out[52];
+		$EmpOriPhone = (int) $out[53];
+		$EmpOriStatus = $out[54];
+		$EmpOriStart = $out[55];
+		$FgStatus = $out[56];
+		$AuthTemp = $out[57];
+		$RejectBy = $out[58];
+		$RejectDesc = $out[59];
+		$ReportTo = $out[60];
+		$EmpLocRecruitCity = $out[61];
+		$EmpValId = $out[62];
+		$EmpValJobTtl = $out[63];
+		$EmpValOrg = $out[64];
+		$EmpApprId = $out[65];
+		$EmpApprJobTtl = $out[66];
+		$EmpApprOrg = $out[67];
+		$RefSource = $out[68];
+		$RefName = $out[69];
+            
+            $sql = "INSERT INTO dbo.Data (CanId,EmpName,EmpOrganization,EmpJobTitle,EmpJobLevel,EmpType,EmpCompany,EmpLocation,EmpLabour,EmpCostCtre,EmpDateBirth,EmpCityBirth,EmpSex,EmpBloodType,EmpCitizen,EmpRace,EmpReligion,EmpMaritalSt,EmpStartDate,EmpSignDate,EmpJoinDate,EmpDecision,EmpCreateDate,EmpDescription,EmpEffecDate,EmpInitiator,EmpDecStart,EmpDecEnd,EmpPhoto,EmpContractStart,EmpContractEnd,EmpSKType,EmpEmail,EmpLocRecruit,EmpWinLogin,EmpWinPassword,EmpWinLoginFlag,SKCostCtre,UserGroup,FgForeignLabor,OUCode,UpdDate,UpdUser,UpdFlag,RefNmbr,EmpResAddr,EmpResCity,EmpResZipCode,EmpResPhone,EmpResStatus,EmpResStart,EmpOriAddr,EmpOriCity,EmpOriZipCode,EmpOriPhone,EmpOriStatus,EmpOriStart,FgStatus,AuthTemp,RejectBy,RejectDesc,ReportTo,EmpLocRecruitCity,EmpValId,EmpValJobTtl,EmpValOrg,EmpApprId,EmpApprJobTtl,EmpApprOrg,RefSource,RefName) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    
+            $params = array(
+                $CanId,$EmpName,$EmpOrganization,$EmpJobTitle,$EmpJobLevel,$EmpType,$EmpCompany,$EmpLocation,$EmpLabour,$EmpCostCtre,$EmpDateBirth,$EmpCityBirth,$EmpSex,$EmpBloodType,$EmpCitizen,$EmpRace,$EmpReligion,$EmpMaritalSt,$EmpStartDate,$EmpSignDate,$EmpJoinDate,$EmpDecision,$EmpCreateDate,$EmpDescription,$EmpEffecDate,$EmpInitiator,$EmpDecStart,$EmpDecEnd,$EmpPhoto,$EmpContractStart,$EmpContractEnd,$EmpSKType,$EmpEmail,$EmpLocRecruit,$EmpWinLogin,$EmpWinPassword,$EmpWinLoginFlag,$SKCostCtre,$UserGroup,$FgForeignLabor,$OUCode,$UpdDate,$UpdUser,$UpdFlag,$RefNmbr,$EmpResAddr,$EmpResCity,$EmpResZipCode,$EmpResPhone,$EmpResStatus,$EmpResStart,$EmpOriAddr,$EmpOriCity,$EmpOriZipCode,$EmpOriPhone,$EmpOriStatus,$EmpOriStart,$FgStatus,$AuthTemp,$RejectBy,$RejectDesc,$ReportTo,$EmpLocRecruitCity,$EmpValId,$EmpValJobTtl,$EmpValOrg,$EmpApprId,$EmpApprJobTtl,$EmpApprOrg,$RefSource,$RefName
+            );
+    
+            $stmt = sqlsrv_prepare($conn, $sql, $params);
+    
+            if ($stmt === false) {
+                die(print_r(sqlsrv_errors(), true));
+            }
+    
+            if (sqlsrv_execute($stmt)) {
+                echo 'Data imported successfully!';
+            } else {
+                echo 'Failed to import data: ' . print_r(sqlsrv_errors(), true);
+                echo '<br>';
+                echo 'Problematic Row Data: ' . print_r($out, true);
+            }
+}
+	
+		// var_dump (admin_getCandidateAll("hired"));exit;
+	function executeExportCsvFunctions() {
+		adm_exportCsvDataForProint(false);
+		adm_exportCsvEduForProint(false);
+		adm_exportCsvFamForProint(false);
+		adm_exportCsvJobForProint(false);
+		adm_exportCsvIDCardForProint(false);
+	}
+
+	function ImportSqlServer() {
+		ImportData();
+		ImportEdu();
+		ImportExp();
+		ImportFam();
+		ImportIDCard();
+	}
+
+	// EKSEKUSI SELURUH FUNCTION YANG TERPANGGIL
+	function executeAll() {
+		$datacandidate = export_DataCandidateJoin();
+		executeExportCsvFunctions();
+		ImportSqlServer();
+		RemoveFile();
+		// createZipFile();
+	
+		// Loop untuk mengatur "export_flag" untuk setiap kandidat
+		foreach ($datacandidate as $candidate) {
+			querying("UPDATE m_candidate SET export_flag=? WHERE candidate_id=?", array('1', $candidate["candidate_id"]));
+		}
+	
+		header("Location: " . _PATHURL . "/index.php?mod=applicants&type=hired&mess=" . coded("Berhasil menginput data ke SQL Server."));
+		exit(); // Pastikan untuk menggunakan exit() setelah header location
+	}
+	
+	function FilePath() {
+		$candidate_id = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"] !== "") ? $_REQUEST["candidate_id"] : null;
+		$type = (isset($_REQUEST["type"]) && $_REQUEST["type"] !== "") ? $_REQUEST["type"] : null;
+
+		$filename1 = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"]<>"") ? "Candidate_Data".$_REQUEST["type"]."_".date("YmdHis")."_".$_REQUEST["candidate_id"].".csv" : "candidate_".$_REQUEST["type"]."_".date("YmdHis").".csv";
+		$filepath1 = 'cand_files/csv/Candidate/'.$filename1;
+		$filename2 = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"] !== "") ? "Candidate_Education" . $_REQUEST["type"] . "_" . date("YmdHis") . "_" . $_REQUEST["candidate_id"] . ".csv" : "candidate_" . $_REQUEST["type"] . "_" . date("YmdHis") . ".csv";
+		$filepath2 = 'cand_files/csv/CanEdu/' . $filename2;
+		$filename3 = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"] !== "") ? "Candidate_Family" . $_REQUEST["type"] . "_" . date("YmdHis") . "_" . $_REQUEST["candidate_id"] . ".csv" : "candidate_" . $_REQUEST["type"] . "_" . date("YmdHis") . ".csv";
+		$filepath3 = 'cand_files/csv/CanFamily/' . $filename3;
+		$filename4 = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"] !== "") ? "Candidate_Experience" . $_REQUEST["type"] . "_" . date("YmdHis") . "_" . $_REQUEST["candidate_id"] . ".csv" : "candidate_" . $_REQUEST["type"] . "_" . date("YmdHis") . ".csv";
+		$filepath4 = 'cand_files/csv/CanExperience/' . $filename4;
+		$filename5 = "Candidate_IDCard{$type}_" . date("YmdHis") . "_{$candidate_id}.csv";
+		$filepath5 = 'cand_files/csv/CanIDCard/' . $filename5;
+	}
+
+	function RemoveFile() {
+
+		$candidate_id = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"] !== "") ? $_REQUEST["candidate_id"] : null;
+		$type = (isset($_REQUEST["type"]) && $_REQUEST["type"] !== "") ? $_REQUEST["type"] : null;
+		
+		$filename1 = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"]<>"") ? "Candidate_Data".$_REQUEST["type"]."_".date("YmdHis")."_".$_REQUEST["candidate_id"].".csv" : "candidate_".$_REQUEST["type"]."_".date("YmdHis").".csv";
+		$filepath1 = 'cand_files/csv/Candidate/'.$filename1;
+		$filename2 = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"] !== "") ? "Candidate_Education" . $_REQUEST["type"] . "_" . date("YmdHis") . "_" . $_REQUEST["candidate_id"] . ".csv" : "candidate_" . $_REQUEST["type"] . "_" . date("YmdHis") . ".csv";
+		$filepath2 = 'cand_files/csv/CanEdu/' . $filename2;
+		$filename3 = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"] !== "") ? "Candidate_Family" . $_REQUEST["type"] . "_" . date("YmdHis") . "_" . $_REQUEST["candidate_id"] . ".csv" : "candidate_" . $_REQUEST["type"] . "_" . date("YmdHis") . ".csv";
+		$filepath3 = 'cand_files/csv/CanFamily/' . $filename3;
+		$filename4 = (isset($_REQUEST["candidate_id"]) && $_REQUEST["candidate_id"] !== "") ? "Candidate_Experience" . $_REQUEST["type"] . "_" . date("YmdHis") . "_" . $_REQUEST["candidate_id"] . ".csv" : "candidate_" . $_REQUEST["type"] . "_" . date("YmdHis") . ".csv";
+		$filepath4 = 'cand_files/csv/CanExperience/' . $filename4;
+		$filename5 = "Candidate_IDCard{$type}_" . date("YmdHis") . "_{$candidate_id}.csv";
+		$filepath5 = 'cand_files/csv/CanIDCard/' . $filename5;
+
+		unlink($filepath1);    
+		unlink($filepath2);    
+		unlink($filepath3);    
+		unlink($filepath4);    
+		unlink($filepath5);    
+		
+	}
+
+// 	function runEvery24Hours() {
+// 		$start_time = time(); // Waktu saat ini
+
+// 		// Mengatur interval 24 jam
+// 		$interval = 5 * 60;
+
+// 		while (true) {
+// 			// Menjalankan fungsi pertama
+// 			adm_exportCsvDataForProint();
+// 			adm_exportCsvEduForProint();
+// 			adm_exportCsvFamForProint();
+// 			adm_exportCsvJobForProint();
+// 			adm_exportCsvIDCardForProint();
+
+// 			// Menunggu selama 24 jam
+// 			sleep($interval);
+// 		}
+// 	}
+}
+
+// runEvery24Hours();
 ?>

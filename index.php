@@ -27,6 +27,7 @@
 	else //template candidate
 	{ 
 		// tampilkan menu yang dipilih
+			
 		$menu = system_getMenu();
 		//print_r($menu);
 		//print_r($_SESSION);

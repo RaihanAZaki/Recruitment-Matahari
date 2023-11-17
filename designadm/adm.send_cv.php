@@ -62,7 +62,7 @@ else {
 			<label class="control-label col-md-3">Send to user</label>
 			<div class="col-md-8">
 								<table  class="table small-text" id="tb_user">
-									<tr class="tr-header">
+									<tr class="tr-header">	
 										<th>Barcode</th>
 										<th>Name</th>
 										<th>Email</th>

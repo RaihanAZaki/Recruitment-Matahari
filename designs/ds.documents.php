@@ -41,6 +41,7 @@ function getDocFile($dat, $type) {
 }
 
 $dataphoto=getDocFile($data,"php");
+$datacv=getDocFile($data,"curriculum");
 $datacoverletter=getDocFile($data,"coverletter");
 $dataijazah=getDocFile($data,"ijazah");
 $datatranscript=getDocFile($data,"transcript");
@@ -66,11 +67,17 @@ $dataidcard=getDocFile($data,"idcard");
 	<!-- awal panel body -->
 	<div class="panel-body" style="line-height:150%; text-align:justify;">		
 		
-		<ul class="nav nav-tabs">
+		<!-- <ul class="nav nav-tabs">
 			<li class="active">
 				<a data-toggle="tab" href="#passphoto">
 					Pass Photo
 					<div class="caption_indo80 novpadding left" style="padding-left:0px;margin-left:0px;">Passfoto</div>
+				</a>
+			</li>
+			<li>
+				<a data-toggle="tab" href="#curriculum">
+					Curriculum Vitae
+					<div class="caption_indo80 novpadding left" style="padding-left:0px;margin-left:0px;">Riwayat Hidup</div>
 				</a>
 			</li>
 			<li>
@@ -103,12 +110,63 @@ $dataidcard=getDocFile($data,"idcard");
 					<div class="caption_indo80 novpadding left" style="padding-left:0px;margin-left:0px;">Lain-lain</div>
 				</a>
 			</li>
-		</ul>
+		</ul> -->
+		<?php
+$datapplication = getDataApply();
+$status = isset($datapplication[0]["candidate_apply_stage"]) ? $datapplication[0]["candidate_apply_stage"] : "";
+
+?>
+
+<ul class="nav nav-tabs">
+	<li>
+        <a data-toggle="tab" href="#curriculum">
+            Curriculum Vitae
+            <div class="caption_indo80 novpadding left" style="padding-left:0px;margin-left:0px;">Riwayat Hidup</div>
+        </a>
+    </li>
+    <li <?php if ($status !== "offering")  echo 'style="display: none;"'; ?>>
+        <a data-toggle="tab" href="#passphoto">
+            Pass Photo
+            <div class="caption_indo80 novpadding left" style="padding-left:0px;margin-left:0px;">Passfoto</div>
+        </a>
+    </li>
+    <li <?php if ($status !== "offering") echo 'style="display: none;"'; ?>>
+        <a data-toggle="tab" href="#coverletter">
+            Application Letter
+            <div class="caption_indo80 novpadding left" style="padding-left:0px;margin-left:0px;">Surat Lamaran</div>
+        </a>
+    </li>
+    <li <?php if ($status !== "offering") echo 'style="display: none;"'; ?>>
+        <a data-toggle="tab" href="#ijazah">
+            Diploma Certificate
+            <div class="caption_indo80 novpadding left" style="padding-left:0px;margin-left:0px;">Ijazah</div>
+        </a>
+    </li>
+    <li <?php if ($status !== "offering") echo 'style="display: none;"'; ?>>
+        <a data-toggle="tab" href="#transcript">
+            Transcript
+            <div class="caption_indo80 novpadding left" style="padding-left:0px;margin-left:0px;">Transkrip</div>
+        </a>
+    </li>
+    <li <?php if ($status !== "offering") echo 'style="display: none;"'; ?>>
+        <a data-toggle="tab" href="#idcard">
+            ID Card
+            <div class="caption_indo80 novpadding left" style="padding-left:0px;margin-left:0px;">KTP</div>
+        </a>
+    </li>
+    <li <?php if ($status !== "offering") echo 'style="display: none;"'; ?>>
+        <a data-toggle="tab" href="#others">
+            Others
+            <div class="caption_indo80 novpadding left" style="padding-left:0px;margin-left:0px;">Lain-lain</div>
+        </a>
+    </li>
+</ul>
+
 
 		<div class="tab-content" style="padding:20px;">
 		
 			<!-- part pass photo -->
-			<div id="passphoto" class="tab-pane fade in active">
+			<div id="passphoto" class="tab-pane fade active">
 				<h3 style="margin-bottom:0;"><cufonize>Pass Photo</cufonize></h3>
 				<div class="caption_indo80 top0" style="padding-left:0px;margin-left:0px;">Pasfoto</div>
 				<div class="row">
@@ -176,6 +234,75 @@ $dataidcard=getDocFile($data,"idcard");
 			  
 			</div>
 			<!-- end of part pass photo -->
+		
+			<!-- part cover letter -->
+			<div id="curriculum" class="tab-pane fade active">
+				<h3 style="margin-bottom:0;"><cufonize>Curriculum Vitae</cufonize></h3>
+				<div class="caption_indo80 top0" style="padding-left:0px;margin-left:0px;">Riwayat Hidup</div>
+				<div class="row">
+				
+					<div class="col-md-6">
+						<?php
+						if(isset($datacv["id"]) && isset($datacv["name"]) && $datacv["name"]<>"" ){
+							$pros="edit";
+						?>
+							<div>
+								<object data="<?php echo _CANDFILES."/cand_cv/".$datacv["name"];?>" type="application/pdf">
+								alt : <a href="<?php echo _CANDFILES."/cand_cv/".$datacv["name"];?>" target="_blank"><?php echo $datacv["name"];?></a>
+								</object>
+							</div>
+						<?php	
+						}
+						else {
+							echo "<i class=\"fa fa-file-pdf-o fa-8x fa-border fontAbu top10 bottom10 left10 right10\"></i>";
+							$pros="add";
+						}
+						?>
+					</div>
+					<div class="col-md-6">
+						<form name="curriculumfrm" id="curriculumfrm" class="form-horizontal" method="post" action="<?php echo _PATHURL;?>/letsprocess.php" role="form" enctype="multipart/form-data">
+							<div class="form-group">
+								<div class="row">
+									<b>Requirements:</b>
+									<ul>
+										<li>Formal application letter not longer than 1 page A4.</li>
+										<li>File in PDF format, Maximum size is 1 MB</li>
+									</ul>
+								</div>
+								<div class="row caption_indo80" style="padding-left:0px;">
+									<b>Ketentuan:</b>
+									<ul>
+										<li>Surat Lamaran Kerja formal tidak lebih dari 1 halaman A4.</li>
+										<li>File dalam format PDF dengan ukuran maksimal 1 MB</li>
+									</ul>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<div class="col-md-9">
+									<input type="file" name="candidate_file" class="form-control">
+									<input type="hidden" name="candidate_file_type" value="curriculum">
+									<input type="hidden" name="candidate_file_id_exist" value="<?php echo ($pros=="edit")?$datacv["id"]:"0";?>">
+									<input type="hidden" name="candidate_file_name_exist" value="<?php echo ($pros=="edit")?$datacv["name"]:"0";?>">
+									<input type="hidden" name="mod" value="upload_candidateFile">
+									<input type="hidden" name="maxsize" value="1048576">
+									<input type="hidden" name="fileExt" value="pdf">
+									<input type="hidden" name="candFolder" value="cand_cv">
+
+								</div>
+							</div>
+							
+							<div class="form-group"> 
+								<div class="col-md-4">
+									<button type="submit" class="btn btn-success"><i class="fa fa-upload"> &nbsp; Upload/Unggah</i></button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+
+			</div>
+			<!-- end of cover letter -->
 			
 			<!-- part cover letter -->
 			<div id="coverletter" class="tab-pane fade active">

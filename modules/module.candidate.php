@@ -3,10 +3,10 @@
 
 function getDataResume() {
 	$query=querying("SELECT candidate_id, log_auth_id, candidate_name, candidate_email, candidate_gender, candidate_religion, candidate_birthplace, 
-	candidate_birthdate, candidate_race, candidate_nationality, candidate_country, candidate_idtype, candidate_idcard, candidate_bodyheight, 
-	candidate_bodyweight, candidate_bloodtype, candidate_sim_a, candidate_sim_c, candidate_npwp, candidate_marital, candidate_p_address, 
-	candidate_p_city, candidate_p_postcode, candidate_c_address, candidate_c_city, candidate_c_postcode, candidate_hp1, candidate_hp2, 
-	candidate_phone, candidate_cp_name1, candidate_cp_relation1, candidate_cp_phone1, candidate_cp_name2, candidate_cp_relation2, 
+	candidate_birthdate, candidate_race, candidate_nationality, candidate_country, candidate_idtype, candidate_idcard, candidate_bloodtype, 
+	candidate_sim_a, candidate_sim_c, candidate_npwp, candidate_marital, candidate_p_address, 
+	candidate_p_city, candidate_p_postcode, candidate_c_address, candidate_c_city, candidate_c_postcode, candidate_hp1,
+	candidate_cp_name1, candidate_cp_relation1, candidate_cp_phone1, candidate_cp_name2, candidate_cp_relation2, 
 	candidate_cp_phone2, candidate_ref_name, candidate_ref_division, candidate_ref_position, candidate_expected_salary, candidate_hobby
 	FROM m_candidate WHERE log_auth_id=? AND status_id=? ORDER BY candidate_id DESC LIMIT 1", array($_SESSION["log_auth_id"],"active"));
 	if($data=sqlGetData($query)){
@@ -424,7 +424,7 @@ function update_candidateResume() {
 	$_GET  = sanitize_get($_GET);
 	
 	
-	// print_r($_POST); exit;
+	//print_r($_POST); exit;
 	/* candidate_name, candidate_email, candidate_gender, candidate_religion, candidate_birthplace, candidate_birthdate, 
 candidate_race, candidate_nationality, candidate_country, candidate_idtype, candidate_idcard, candidate_bodyheight, candidate_bodyweight, 
 candidate_bloodtype, candidate_sim_a, candidate_sim_c, candidate_npwp, candidate_marital, candidate_p_address, candidate_p_city, candidate_p_postcode, 
@@ -457,12 +457,12 @@ candidate_ref_name, candidate_ref_division, candidate_ref_position, candidate_ex
 	if (!isset($_POST["candidate_c_address"]) or $_POST["candidate_c_address"] == "") 		$missteps[] = 21;
 	if (!isset($_POST["candidate_c_city"]) or $_POST["candidate_c_city"] == "") 		$missteps[] = 22;
 	//if (!isset($_POST["candidate_c_postcode"]) or $_POST["candidate_c_postcode"] == "") 		$missteps[] = 23;
-	if (!isset($_POST["candidate_hp1"]) or $_POST["candidate_hp1"] == "") 		$missteps[] = 24;
+	//if (!isset($_POST["candidate_hp1"]) or $_POST["candidate_hp1"] == "") 		$missteps[] = 24;
 	//if (!isset($_POST["candidate_hp2"]) or $_POST["candidate_hp2"] == "") 		$missteps[] = 25;
 	//if (!isset($_POST["candidate_phone"]) or $_POST["candidate_phone"] == "") 		$missteps[] = 26;
 	if (!isset($_POST["candidate_cp_name1"]) or $_POST["candidate_cp_name1"] == "") 		$missteps[] = 27;
 	if (!isset($_POST["candidate_cp_relation1"]) or $_POST["candidate_cp_relation1"] == "") 		$missteps[] = 28;
-	// if (!isset($_POST["candidate_cp_phone1"]) or $_POST["candidate_cp_phone1"] == "") 		$missteps[] = 29;
+	if (!isset($_POST["candidate_cp_phone1"]) or $_POST["candidate_cp_phone1"] == "") 		$missteps[] = 29;
 	//if (!isset($_POST["candidate_cp_name2"]) or $_POST["candidate_cp_name2"] == "") 		$missteps[] = 30;
 	//if (!isset($_POST["candidate_cp_relation2"]) or $_POST["candidate_cp_relation2"] == "") 		$missteps[] = 31;
 	//if (!isset($_POST["candidate_cp_phone2"]) or $_POST["candidate_cp_phone2"] == "") 		$missteps[] = 32;
@@ -478,10 +478,9 @@ candidate_ref_name, candidate_ref_division, candidate_ref_position, candidate_ex
 		
 		$_SESSION["session"] = $_POST;	
 		//print_r($_SESSION); exit;
-
 		if(isset($_POST["place_of_birth"]) && is_array($_POST["place_of_birth"])) {
 			$_SESSION["session"]["candidate_birthplace"]=$_POST["candidate_birthplace"][0];
-		}
+	}
 		if(isset($_POST["candidate_c_city"]) && is_array($_POST["candidate_c_city"])) {
 				$_SESSION["session"]["candidate_c_city"]=$_POST["candidate_c_city"][0];
 		}
@@ -511,8 +510,8 @@ candidate_ref_name, candidate_ref_division, candidate_ref_position, candidate_ex
 	
 	else {
 		$data=array();
-		$data["candidate_birthplace"]=(isset($_POST["place_of_birth"]) && is_array($_POST["place_of_birth"]))?$_POST["place_of_birth"][0]:"";
 		$data["candidate_c_city"]=(isset($_POST["candidate_c_city"]) && is_array($_POST["candidate_c_city"]))?$_POST["candidate_c_city"][0]:"";
+		$data["candidate_birthplace"]=(isset($_POST["place_of_birth"]) && is_array($_POST["place_of_birth"]))?$_POST["place_of_birth"][0]:"";
 		$data["candidate_p_city"]=(isset($_POST["candidate_p_city"]) && is_array($_POST["candidate_p_city"]))?$_POST["candidate_p_city"][0]:"";
 		$data["candidate_marital"]=(isset($_POST["candidate_marital"]) && is_array($_POST["candidate_marital"]))?$_POST["candidate_marital"][0]:"";
 		/*$data["candidate_religion"]=(isset($_POST["candidate_religion"]) && is_array($_POST["candidate_religion"]))?$_POST["candidate_religion"][0]:"";*/
@@ -520,16 +519,20 @@ candidate_ref_name, candidate_ref_division, candidate_ref_position, candidate_ex
 		$data["candidate_cp_relation1"]=(isset($_POST["candidate_cp_relation1"]) && is_array($_POST["candidate_cp_relation1"]))?$_POST["candidate_cp_relation1"][0]:"";
 		$data["candidate_cp_relation2"]=(isset($_POST["candidate_cp_relation2"]) && is_array($_POST["candidate_cp_relation2"]))?$_POST["candidate_cp_relation2"][0]:"";
 		$data["candidate_race"]=(isset($_POST["candidate_race"]) && is_array($_POST["candidate_race"]))?$_POST["candidate_race"][0]:"";
-
-
 		$birthdate=reverseDate($_POST["birthdate"]);
+
+		
 		//proses update database
 		$query=querying("UPDATE m_candidate
 			SET
-				candidate_gender=?,
-				candidate_birthplace=?,
-				candidate_birthdate=?,
 				candidate_religion=?,
+				candidate_gender=?,
+				candidate_birthdate=?,
+				candidate_birthplace=?,
+				candidate_nationality=?,
+				candidate_country=?,
+				candidate_idtype=?,
+				candidate_idcard=?,
 				candidate_race=?,
 				candidate_marital=?,
 				candidate_bloodtype=?,
@@ -556,8 +559,10 @@ candidate_ref_name, candidate_ref_division, candidate_ref_position, candidate_ex
 				candidate_hobby=?,
 				user_update=?,
 				date_update=NOW()
-			WHERE candidate_id=?", array($_POST["candidate_gender"], $data["candidate_birthplace"], $birthdate, $_POST["candidate_religion"], $data["candidate_race"], $data["candidate_marital"],$data["candidate_bloodtype"],
-			 $_POST["candidate_sim_a"], $_POST["candidate_sim_c"], $_POST["candidate_npwp"], $_POST["candidate_p_address"], 
+			WHERE candidate_id=?", array($_POST["candidate_religion"], $_POST["candidate_gender"],$birthdate, $data["candidate_birthplace"], $_POST["candidate_nationality"],
+					((isset($_POST["candidate_nationality"]) && $_POST["candidate_nationality"]=="wni")?"Indonesia":$_POST["candidate_country"]), ((isset($_POST["candidate_nationality"]) && $_POST["candidate_nationality"]=="wni")?"KTP":"Passport"), 
+					((isset($_POST["candidate_nationality"]) && $_POST["candidate_nationality"]=="wni")?$_POST["nomor_ktp"]:$_POST["nomor_passport"]), $data["candidate_race"], $data["candidate_marital"], 
+			 $data["candidate_bloodtype"], $_POST["candidate_sim_a"], $_POST["candidate_sim_c"], $_POST["candidate_npwp"], $_POST["candidate_p_address"], 
 			$data["candidate_p_city"], $_POST["candidate_p_postcode"], $_POST["candidate_c_address"], $data["candidate_c_city"], $_POST["candidate_c_postcode"], 
 			$_POST["candidate_hp1"], $_POST["candidate_cp_name1"], $data["candidate_cp_relation1"], $_POST["candidate_cp_phone1"], 
 			$_POST["candidate_cp_name2"], $data["candidate_cp_relation2"], $_POST["candidate_cp_phone2"], $_POST["candidate_ref_name"]
@@ -575,6 +580,7 @@ candidate_ref_name, candidate_ref_division, candidate_ref_position, candidate_ex
 		
 	}
 }
+
 
 
 function disableFunction($innername) {
@@ -637,13 +643,13 @@ function enableFunction($functionName) {
 				$remove_array_kenol[]=$candidate_organization_id[$i];
 			}
 			
-			/*
-			print_r ($candidate_organization_id);
-			echo "yg ada di database = ";print_r ($id_found); 
-			echo "<br>yg data baru utuh = ";print_r ($candidate_organization_id); print_r($candidate_organization_start);
-			echo "<br>tanpa array ke nol = ";print_r ($remove_array_kenol); 
-			exit;
-			*/
+			
+			// print_r ($candidate_organization_id);
+			// echo "yg ada di database = ";print_r ($id_found); 
+			// echo "<br>yg data baru utuh = ";print_r ($candidate_organization_id); print_r($candidate_organization_start);
+			// echo "<br>tanpa array ke nol = ";print_r ($remove_array_kenol); 
+			// exit;
+			
 			$sukses = 0;
 			$array_insert = array();
 
@@ -651,6 +657,7 @@ function enableFunction($functionName) {
 			//candidate_organization_id, candidate_id, candidate_organization_name, candidate_organization_role, candidate_organization_start, candidate_organization_end, user_insert, date_insert, user_update, date_update
 
 			for($i=0;$i<count($candidate_organization_name);$i++)
+			
 			{
 				$candidate_organization_name[$i]=sanitize_post($candidate_organization_name[$i]);
 				$candidate_organization_role[$i]=sanitize_post($candidate_organization_role[$i]);
@@ -669,8 +676,8 @@ function enableFunction($functionName) {
 							$sukses ++;
 							$array_insert[] = $candidate_organization_id[$i];
 						}
-					}
-					if($candidate_organization_id[$i] == 0)			//insert
+					} else
+					// if($candidate_organization_id[$i] == 0)			//insert
 					{
 						if(querying("INSERT into m_candidate_organization(candidate_id, candidate_organization_name, candidate_organization_role, 
 						candidate_organization_start, candidate_organization_end, user_insert, date_insert, user_update, date_update) 
@@ -705,7 +712,7 @@ function enableFunction($functionName) {
 			
 	}
 
-//part update skills
+// part update skills
 	function update_candidateSkill() {
 		/* candidate_skill_id, candidate_id, candidate_skill_name, candidate_skill_level, candidate_skill_notes, user_insert, date_insert, user_update, date_update */
 		$candidate_skill_notes = (isset($_POST["candidate_skill_notes"]) AND $_POST["candidate_skill_notes"] <> "") ? $_POST["candidate_skill_notes"] : "";
@@ -764,8 +771,8 @@ function enableFunction($functionName) {
 							$sukses ++;
 							$array_insert[] = $candidate_skill_id[$i];
 						}
-					}
-					if($candidate_skill_id[$i] == 0)			//insert
+					} else
+					// if($candidate_skill_id[$i] == 0)			//insert
 					{
 						if(querying("INSERT into m_candidate_skill(candidate_id, candidate_skill_name, candidate_skill_level, 
 						candidate_skill_notes, user_insert, date_insert, user_update, date_update) 
@@ -824,6 +831,8 @@ function enableFunction($functionName) {
 			$data=sqlGetData($query);
 			for($d=0;$d<count($data);$d++) {
 				$id_found[] = $data[$d]["candidate_language_id"];
+				// var_dump($id_found);exit;
+
 			}
 			//print_r ($id_found); exit;
 			
@@ -846,16 +855,19 @@ function enableFunction($functionName) {
 			//candidate_language_id, candidate_id, candidate_language_name, candidate_language_conversation, candidate_language_read, candidate_language_write, user_insert, date_insert, user_update, date_update
 
 			for($i=0;$i<count($candidate_language_name);$i++)
-			{
+			// var_dump($candidate_language_name);exit;
+			{  
 				$candidate_language_name[$i]=sanitize_post($candidate_language_name[$i]);
 				$candidate_language_conversation[$i]=sanitize_post($candidate_language_conversation[$i]);
 				$candidate_language_read[$i]=sanitize_post($candidate_language_read[$i]);
 				$candidate_language_write[$i]=sanitize_post($candidate_language_write[$i]);
+				// var_dump($candidate_language_name);exit;
 				
 				if($candidate_language_name[$i] <> "")
 				{
-					if($candidate_language_id[$i] > 0)			//update
+					if($candidate_language_id[$i] > 0)		//update
 					{
+						// var_dump($candidate_language_id);exit;
 						if(querying("UPDATE m_candidate_language SET candidate_language_name=?, candidate_language_conversation=?, 
 						candidate_language_read=?, candidate_language_write=?, user_update=?, date_update = now() WHERE candidate_language_id = ?", 
 						array($candidate_language_name[$i], $candidate_language_conversation[$i], $candidate_language_read[$i], $candidate_language_write[$i], 
@@ -864,8 +876,8 @@ function enableFunction($functionName) {
 							$sukses ++;
 							$array_insert[] = $candidate_language_id[$i];
 						}
-					}
-					if($candidate_language_id[$i] == 0)			//insert
+					} else
+					// if($candidate_language_id[$i] == 0)			//insert
 					{
 						if(querying("INSERT into m_candidate_language(candidate_id, candidate_language_name, candidate_language_conversation, 
 						candidate_language_read, candidate_language_write, user_insert, date_insert, user_update, date_update) 
@@ -881,7 +893,7 @@ function enableFunction($functionName) {
 			// Looping as much as id_found, check, if it is not in newID, delete the record
 			for($i=0;$i<count($id_found);$i++)
 			{
-				//echo "<br>id_found= ".$id_found[$i];
+				// echo "<br>id_found= ".$id_found[$i];exit;
 				if(!in_array($id_found[$i],$array_insert))
 				querying("DELETE from m_candidate_language WHERE candidate_language_id = ?", array($id_found[$i]));					
 			}
@@ -979,8 +991,8 @@ function enableFunction($functionName) {
 							$sukses ++;
 							$array_insert[] = $candidate_family_id[$i];
 						}
-					}
-					if($candidate_family_id[$i] == 0)			//insert
+					} else
+					// if($candidate_family_id[$i] == 0)			//insert
 					{
 						if(querying("INSERT into m_candidate_family(candidate_id, candidate_family_name, candidate_family_birthdate, 
 						candidate_family_relation, candidate_family_birthplace, candidate_family_lastedu, candidate_family_lastjob, 

@@ -27,6 +27,8 @@ $datacandidate=adm_getSearchResult($start_from,$limit);
 ?>
 
 
+
+
 <div class="row bottom30">
 
 <!-- bagian list job adv -->

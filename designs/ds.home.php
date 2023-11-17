@@ -67,7 +67,7 @@
     // Memeriksa kondisi tahap "offering"
     if (is_array($datapplication) && count($datapplication) > 0) {
         // Memeriksa kondisi tahap "offering"
-        if ($datapplication[0]["candidate_apply_stage"] == "offering") {
+        if ($datapplication[0]["candidate_apply_stage"] == "offering" && $datapplication[0]["candidate_apply_status"] == "ongoing") {
             // Jika belum mencapai tahap "offering", tampilkan pesan dalam modal popup
             echo '<div class="modal fade" id="completionModal" tabindex="-1" role="dialog" aria-labelledby="completionModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">

@@ -67,82 +67,9 @@ candidate_country, candidate_idtype, candidate_idcard, candidate_hp1, candidate_
 			</div>
 			
 			<div class="form-group">
-				<label class="control-label col-md-3" for="birthplace">Place of birth: &nbsp;<span class="asterisk">*</span></label>
-				<div class="col-md-4">
-					<div class="button-group">
-						<input name="place_of_birth" id="birthplace" class="form-control validate[required]">
-					</div>
-				</div>
-				<span><small class="text-info"><i>(As shown on ID Card)</i></small></span>
-
-			</div>
-
-			<div class="form-group">
-				<label class="control-label col-md-3" for="birthdate">Date of birth: &nbsp;<span class="asterisk">*</span></label>
-
-				<div class="col-md-4">
-					<input type="text" id="birthdate" placeholder="dd-mm-yyyy" name="birthdate" class="form-control validate[required,funcCall[checkLEGAL]] date" value="<?php echo (isset($_SESSION["session"]["birthdate"]))?$_SESSION["session"]["birthdate"]:"";?>">
-				</div>
-				<span><small class="text-info"><i>(As shown on ID Card)</i></small></span>
-
-			</div>
-			
-			<div class="form-group">
-				<label class="control-label col-md-3" for="sex">Gender: &nbsp;<span class="asterisk">*</span></label>
-				<div class="col-md-4">
-					<label class="radio-inline"><input type="radio" name="sex" id="male" value="male" class="validate[required]"  <?php echo (isset($_SESSION["session"]["sex"]) && $_SESSION["session"]["sex"]=="male")?"checked":"";?> >Male</label>
-					<label class="radio-inline"><input type="radio" name="sex" id="female" value="female" class="validate[required]" <?php echo (isset($_SESSION["session"]["sex"]) && $_SESSION["session"]["sex"]=="female")?"checked":"";?>>Female</label>
-				</div>
-			</div>
-			
-
-			<div class="form-group">
-				<label class="control-label col-md-3" for="full_name">Nationality: &nbsp;<span class="asterisk">*</span></label>
-				<div class="col-md-4">
-					<label class="radio-inline"><input type="radio" name="nationality" id="wni" value="wni" class="validate[required]" <?php echo (isset($_SESSION["session"]["nationality"]) && $_SESSION["session"]["nationality"]=="wni")?"checked":"";?>>Indonesian</label>
-					<label class="radio-inline"><input type="radio" name="nationality" id="wna" value="wna" class="validate[required]" <?php echo (isset($_SESSION["session"]["nationality"]) && $_SESSION["session"]["nationality"]=="wna")?"checked":"";?>>Expatriat</label>
-				</div>
-			</div>
-			<!-- muncul jika pilih WNI -->
-			<div id="partwni" class="form-group" style="<?php echo (isset($_SESSION["session"]["nationality"]) && $_SESSION["session"]["nationality"]=="wni")?"":"display:none";?>">
-				<label class="control-label col-md-3" for="nomor_ktp">ID Number (KTP): &nbsp;<span class="asterisk"></span></label>
-				<div class="col-md-4">
-				<input type="text" class="form-control " name="nomor_ktp" id="nomor_ktp" pattern="\d{16}" title="masukkan nomor KTP Anda yang masih berlaku" placeholder="Please enter your valid ID Number" value="<?php echo (isset($_SESSION["session"]["nomor_ktp"]) && $_SESSION["session"]["nomor_ktp"]<>"")?$_SESSION["session"]["nomor_ktp"]:"";?>">
-				</div>
-			</div>
-
-			<!-- muncul jika pilih WNA -->
-			<div id="partwna" class="form-group" style="<?php echo (isset($_SESSION["session"]["nationality"]) && $_SESSION["session"]["nationality"]=="wna")?"":"display:none";?>">
-				<label class="control-label col-md-3" for="country">Country: &nbsp;<span class="asterisk">*</span></label>
-				<div class="col-md-4">
-					<input type="text" class="form-control" name="country" id="country" placeholder="Country of origin" value="<?php echo (isset($_SESSION["session"]["country"]))?$_SESSION["session"]["country"]:"";?>">
-				</div>
-			
-				<label class="control-label col-md-2" for="nomor_passport">Passport Number: &nbsp;<span class="asterisk">*</span></label>
-				<div class="col-md-3">
-					<input type="text" class="form-control" name="nomor_passport" id="nomor_passport" placeholder="Please enter candidate valid Passport Number" value="<?php echo (isset($_SESSION["session"]["nomor_passport"]))?$_SESSION["session"]["nomor_passport"]:"";?>">
-				</div>
-			</div>
-			<!-- akhir part WNA -->
-			
-			<div class="form-group">
 				<label class="control-label col-md-3" for="cellphone1">Cellular number: &nbsp;<span class="asterisk">*</span></label>
 				<div class="col-md-4">
 					<input type="text" class="form-control validate[required, custom[phone]]" name="cellphone1" id="cellphone1" placeholder="Enter candidate cellular phone number" value="<?php echo (isset($_SESSION["session"]["cellphone1"]))?$_SESSION["session"]["cellphone1"]:"";?>">
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label class="control-label col-md-3" for="cellphone2">Cellular number 2:</label>
-				<div class="col-md-4">
-					<input type="text" class="form-control validate[custom[phone]]" name="cellphone2" id="cellphone2" placeholder="Enter candidate secondary cellular number" value="<?php echo (isset($_SESSION["session"]["cellphone2"]))?$_SESSION["session"]["cellphone2"]:"";?>">
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label class="control-label col-md-3" for="homephone">Home phone number:</label>
-				<div class="col-md-4">
-					<input type="text" class="form-control validate[custom[phone]]" name="homephone" id="homephone" placeholder="Enter candidate home phone number" value="<?php echo (isset($_SESSION["session"]["homephone"]))?$_SESSION["session"]["homephone"]:"";?>">
 				</div>
 			</div>
 

@@ -87,9 +87,7 @@ if (is_array($data) && count($data) > 0) {
 $data=clean_view($data);
 ?>
 
-<?php
-$dataresume=getDataResume();
-?>
+
 
 <div class="panel panel-info" style="margin-bottom:30px;">
 	<div class="panel-heading">
@@ -278,11 +276,22 @@ else {
   </div>
 </div>
 
+
+<?php
+$dataresume=getDataResume();
+?>
 <div id="myModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal()">&times;</span>
     <h2 style="margin-bottom: 20px;">Referral Person</h2>
 	<form method="post" action="<?php echo _PATHURL;?>/letsprocess.php">
+
+	<div class="form-group">
+		<div>
+			<label for="nama_pengusul">Nama:</label>
+		</div>
+			<input type="nama_pengusul" class="form-control" name="nama_pengusul" id="nama_pengusul" value="<?php echo (isset($dataresume[0]["candidate_name"]) && $dataresume[0]["candidate_name"]<>"")?$dataresume[0]["candidate_name"]:"";?>" readonly="readonly">
+	</div>
 
 	<div class="form-group">
 		<div>

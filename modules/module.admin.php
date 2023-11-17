@@ -112,11 +112,11 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 		}
 	
 		function admin_getCandidateAll($type="") {
-			if(isset($type) && $type=="register") {
-				$query=querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, curriculum, candidate_hp1, candidate_hp2,  register_date, register_expiry_date, register_activation_code
-			FROM m_register nolock ORDER BY register_id DESC",
-				array());
-			}
+				if(isset($type) && $type=="register") {
+					$query=querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, candidate_hp1, register_date, register_expiry_date, register_activation_code
+				FROM m_register nolock ORDER BY register_id DESC",
+					array());
+				}
 			else if (isset($type) && $type=="activate"){
 				$query=querying("SELECT log_auth_id, employee_id, log_auth_name, log_auth_passwd, log_auth_role, log_auth_lastlogin, log_auth_lastip, register_id, register_date, register_activation_code, register_activation_date, status_id
 			FROM log_auth nolock WHERE status_id=? and log_auth_role=? ORDER BY log_auth_id DESC",
@@ -155,12 +155,12 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 		function admin_getListCandidate($type,$start,$limit) {
 			if(isset($type) && $type=="register") {
 				if($start=="" && $limit=="") {
-					$query=querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, curriculum, candidate_hp1, candidate_hp2, register_date, register_expiry_date, register_activation_code
+					$query=querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, candidate_hp1, register_date, register_expiry_date, register_activation_code
 				FROM m_register ORDER BY register_id DESC",
 					array());
 				}
 				else {
-					$query=querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, curriculum, candidate_hp1, candidate_hp2, register_date, register_expiry_date, register_activation_code
+					$query=querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, candidate_hp1, register_date, register_expiry_date, register_activation_code
 				FROM m_register ORDER BY register_id DESC LIMIT ".$start.", ".$limit,
 				array());
 					
@@ -332,10 +332,10 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 
 		function admin_getDetailCandidate($candidate_id) {
 			$query=querying("SELECT candidate_id, log_auth_id, candidate_name, candidate_email, candidate_gender, candidate_religion, candidate_birthplace, 
-			candidate_birthdate, candidate_race, candidate_nationality, candidate_country, candidate_idtype, candidate_idcard, candidate_bodyheight, 
-			candidate_bodyweight, candidate_bloodtype, candidate_sim_a, candidate_sim_c, candidate_npwp, candidate_marital, candidate_p_address, 
-			candidate_p_city, candidate_p_postcode, candidate_c_address, candidate_c_city, candidate_c_postcode, candidate_hp1, candidate_hp2, 
-			candidate_phone, candidate_cp_name1, candidate_cp_relation1, candidate_cp_phone1, candidate_cp_name2, candidate_cp_relation2, candidate_cp_phone2, 
+			candidate_birthdate, candidate_race, candidate_nationality, candidate_country, candidate_idtype, candidate_idcard, candidate_bloodtype, 
+			candidate_sim_a, candidate_sim_c, candidate_npwp, candidate_marital, candidate_p_address, 
+			candidate_p_city, candidate_p_postcode, candidate_c_address, candidate_c_city, candidate_c_postcode, candidate_hp1, 
+			candidate_cp_name1, candidate_cp_relation1, candidate_cp_phone1, candidate_cp_name2, candidate_cp_relation2, candidate_cp_phone2, 
 			candidate_ref_name, candidate_ref_division, candidate_ref_position, candidate_expected_salary, candidate_hobby
 			FROM m_candidate WHERE candidate_id=? AND status_id=? ORDER BY candidate_id DESC LIMIT 1", array($candidate_id,"active"));
 			if($data=sqlGetData($query)){
@@ -1001,8 +1001,6 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 						candidate_religion=?,
 						candidate_race=?,
 						candidate_marital=?,
-						candidate_bodyheight=?,
-						candidate_bodyweight=?,
 						candidate_bloodtype=?,
 						candidate_sim_a=?,
 						candidate_sim_c=?,
@@ -1014,8 +1012,6 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 						candidate_c_city=?,
 						candidate_c_postcode=?,
 						candidate_hp1=?,
-						candidate_hp2=?,
-						candidate_phone=?,
 						candidate_cp_name1=?,
 						candidate_cp_relation1=?,
 						candidate_cp_phone1=?,
@@ -1031,10 +1027,10 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 						date_update=NOW()
 					WHERE candidate_id=?", array($_POST["full_name"], $_POST["email1"], $_POST["candidate_gender"], $data["candidate_birthplace"], $birthdate, $_POST["candidate_nationality"],
 					((isset($_POST["candidate_nationality"]) && $_POST["candidate_nationality"]=="wni")?"Indonesia":$_POST["candidate_country"]), ((isset($_POST["candidate_nationality"]) && $_POST["candidate_nationality"]=="wni")?"KTP":"Passport"), 
-					((isset($_POST["candidate_nationality"]) && $_POST["candidate_nationality"]=="wni")?$_POST["nomor_ktp"]:$_POST["nomor_passport"]), $data["candidate_religion"], $data["candidate_race"], $data["candidate_marital"], $_POST["candidate_bodyheight"], 
-					$_POST["candidate_bodyweight"], $data["candidate_bloodtype"], $_POST["candidate_sim_a"], $_POST["candidate_sim_c"], $_POST["candidate_npwp"], $_POST["candidate_p_address"], 
+					((isset($_POST["candidate_nationality"]) && $_POST["candidate_nationality"]=="wni")?$_POST["nomor_ktp"]:$_POST["nomor_passport"]), $data["candidate_religion"], $data["candidate_race"], $data["candidate_marital"],
+					 $data["candidate_bloodtype"], $_POST["candidate_sim_a"], $_POST["candidate_sim_c"], $_POST["candidate_npwp"], $_POST["candidate_p_address"], 
 					$data["candidate_p_city"], $_POST["candidate_p_postcode"], $_POST["candidate_c_address"], $data["candidate_c_city"], $_POST["candidate_c_postcode"], 
-					$_POST["candidate_hp1"], $_POST["candidate_hp2"], $_POST["candidate_phone"], $_POST["candidate_cp_name1"], $data["candidate_cp_relation1"], $_POST["candidate_cp_phone1"], 
+					$_POST["candidate_hp1"], $_POST["candidate_cp_name1"], $data["candidate_cp_relation1"], $_POST["candidate_cp_phone1"], 
 					$_POST["candidate_cp_name2"], $data["candidate_cp_relation2"], $_POST["candidate_cp_phone2"], $_POST["candidate_ref_name"]
 					, $_POST["candidate_ref_division"], $_POST["candidate_ref_position"], $_POST["candidate_expected_salary"], $_POST["candidate_hobby"], $_SESSION["log_auth_id"], $_POST["candidate_id"]));
 				
@@ -1386,8 +1382,8 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 							$sukses ++;
 							$array_insert[] = $candidate_organization_id[$i];
 						}
-					}
-					if($candidate_organization_id[$i] == 0)			//insert
+					} else
+					// if($candidate_organization_id[$i] == 0)			//insert
 					{
 						if(querying("INSERT into m_candidate_organization(candidate_id, candidate_organization_name, candidate_organization_role, 
 						candidate_organization_start, candidate_organization_end, user_insert, date_insert, user_update, date_update) 
@@ -1584,8 +1580,8 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 							$sukses ++;
 							$array_insert[] = $candidate_skill_id[$i];
 						}
-					}
-					if($candidate_skill_id[$i] == 0)			//insert
+					} else
+					// if($candidate_skill_id[$i] == 0)			//insert
 					{
 						if(querying("INSERT into m_candidate_skill(candidate_id, candidate_skill_name, candidate_skill_level, 
 						candidate_skill_notes, user_insert, date_insert, user_update, date_update) 
@@ -1690,8 +1686,8 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 							$sukses ++;
 							$array_insert[] = $candidate_language_id[$i];
 						}
-					}
-					if($candidate_language_id[$i] == 0)			//insert
+					} else
+					// if($candidate_language_id[$i] == 0)			//insert
 					{
 						if(querying("INSERT into m_candidate_language(candidate_id, candidate_language_name, candidate_language_conversation, 
 						candidate_language_read, candidate_language_write, user_insert, date_insert, user_update, date_update) 
@@ -1807,8 +1803,8 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 							$sukses ++;
 							$array_insert[] = $candidate_family_id[$i];
 						}
-					}
-					if($candidate_family_id[$i] == 0)			//insert
+					} else
+					// if($candidate_family_id[$i] == 0)			//insert
 					{
 						if(querying("INSERT into m_candidate_family(candidate_id, candidate_family_name, candidate_family_birthdate, 
 						candidate_family_relation, candidate_family_birthplace, candidate_family_lastedu, candidate_family_lastjob, 
@@ -1834,13 +1830,11 @@ if(isset($_SESSION["log_auth_id"]) && isset($_SESSION["log_auth_name"]) && isset
 			
 			if($sukses > 0)
 			{
-				header("location: "._PATHURL."/index.php?mod=detailcandidate&job_vacancy_id=".coded($_POST["job_vacancy_id"])."&candidate_apply_stage=".coded($_POST["candidate_apply_stage"])."&candidate_id=".coded($_POST["candidate_id"])."&mess=".coded("Family member has been updated.")."#".$_POST["menu_name"]);
-				exit;
+				header("location: "._PATHURL."/index.php?mod=admhome&job_vacancy_id=".coded($_POST["job_vacancy_id"])."&candidate_apply_stage=".coded($_POST["candidate_apply_stage"])."&candidate_id=".coded($_POST["candidate_id"])."&mess=".coded("Family member has been updated.")."#".$_POST["menu_name"]);
 			}
 			else
 			{
-				header("location: "._PATHURL."/index.php?mod=detailcandidate&job_vacancy_id=".coded($_POST["job_vacancy_id"])."&candidate_apply_stage=".coded($_POST["candidate_apply_stage"])."&candidate_id=".coded($_POST["candidate_id"])."&gal=".coded("1")."&mess=".coded("Family member update failed.")."#".$_POST["menu_name"]);
-				exit;
+				header("location: "._PATHURL."/index.php?mod=admhome&job_vacancy_id=".coded($_POST["job_vacancy_id"])."&candidate_apply_stage=".coded($_POST["candidate_apply_stage"])."&candidate_id=".coded($_POST["candidate_id"])."&gal=".coded("1")."&mess=".coded("Family member update failed.")."#".$_POST["menu_name"]);
 			}
 			
 	}
@@ -2101,8 +2095,6 @@ function admin_upload_candidateFileOthers() {
 						header("location: "._PATHURL."/index.php?mod=detailcandidate&job_vacancy_id=".coded($_POST["job_vacancy_id"])."&candidate_apply_stage=".coded($_POST["candidate_apply_stage"])."&candidate_id=".coded($_POST["candidate_id"])."&gal=".coded("1")."&mess=".coded("Add ".$tipefile." is failed.")."#".$_POST["candidate_file_type"]);
 						exit;
 					}
-				
-
 		}
 		
 	}	
@@ -2409,11 +2401,11 @@ function admin_upload_candidateDelFileOthers() {
 				$missteps = array();
 				if (!isset($_POST["full_name"]) or $_POST["full_name"] == "") 	$missteps[] = '0';
 				if (!isset($_POST["email1"]) or $_POST["email1"] == "") 		$missteps[] = 1;
-				if (!isset($_POST["sex"]) or $_POST["sex"] == "") 		$missteps[] = 2;
-				if (!isset($pob) or $pob == "") 		$missteps[] = 4;
-				if (!isset($_POST["birthdate"]) or $_POST["birthdate"] == "") 		$missteps[] = 5;
-				if (!isset($_POST["nationality"]) or $_POST["nationality"] == "") 		$missteps[] = 7;
-				if (isset($_POST["nationality"]) && $_POST["nationality"]=="wna" && $_POST["country"] == "") 		$missteps[] = 8;
+				// if (!isset($_POST["sex"]) or $_POST["sex"] == "") 		$missteps[] = 2;
+				// if (!isset($pob) or $pob == "") 		$missteps[] = 4;
+				// if (!isset($_POST["birthdate"]) or $_POST["birthdate"] == "") 		$missteps[] = 5;
+				// if (!isset($_POST["nationality"]) or $_POST["nationality"] == "") 		$missteps[] = 7;
+				// if (isset($_POST["nationality"]) && $_POST["nationality"]=="wna" && $_POST["country"] == "") 		$missteps[] = 8;
 				//if (isset($_POST["nationality"]) && $_POST["nationality"]=="wna" && (!isset($_POST["nomor_passport"]) || $_POST["nomor_passport"] == "") ) 		$missteps[] = 10;
 				//if (isset($_POST["nationality"]) && $_POST["nationality"]=="wni" && (!isset($_POST["nomor_ktp"]) || $_POST["nomor_ktp"] == ""  || (strlen($_POST["nomor_ktp"]) < 15) || (strlen($_POST["nomor_ktp"]) > 16) )) 		$missteps[] = 37;
 				
@@ -2432,7 +2424,7 @@ function admin_upload_candidateDelFileOthers() {
 				
 				if (!isset($_POST["cellphone1"]) or $_POST["cellphone1"] == "") $missteps[] = 43;
 					
-				if (isset($_POST["cellphone1"]) && register_checkMobile())  $missteps[] = 44;
+				// if (isset($_POST["cellphone1"]) && register_checkMobile())  $missteps[] = 44;
 
 				/*
 				print_r($missteps);
@@ -2463,15 +2455,15 @@ function admin_upload_candidateDelFileOthers() {
 					//echo "ga ada error"; exit;
 					//echo $_POST["birthdate"];
 					//exit;
-					$birthdate=explode("-",$_POST["birthdate"]);
+					// $birthdate=explode("-",$_POST["birthdate"]);
 								
 					$expiry_date=date('Y-m-d', strtotime("+2 week"));
 
 					$ipaddress = (isset($_SERVER["REMOTE_ADDR"]))?$_SERVER["REMOTE_ADDR"]:"";
 					
-					$candidate_birthdate = $birthdate[2]."-".$birthdate[1]."-".$birthdate[0];
+					// $candidate_birthdate = $birthdate[2]."-".$birthdate[1]."-".$birthdate[0];
 					
-					$register_activation_code = letshashit($_POST["email1"].$candidate_birthdate,"activatereg");
+					$register_activation_code = letshashit($_POST["email1"],"activatereg");
 
 					//print_r($_POST);
 					/*
@@ -2483,12 +2475,9 @@ function admin_upload_candidateDelFileOthers() {
 					*/
 					
 					$query = querying("INSERT INTO m_register
-			(candidate_name, candidate_email, candidate_passwd, candidate_birthplace, candidate_birthdate, candidate_gender, candidate_nationality, candidate_country, 
-			candidate_idtype, candidate_idcard, candidate_hp1, candidate_hp2, candidate_phone, register_date, register_expiry_date, register_activation_code)
-			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?)", array($_POST["full_name"], $_POST["email1"], $_POST["pwd1"], $_POST["place_of_birth"][0], 
-			$candidate_birthdate, $_POST["sex"], $_POST["nationality"], ((isset($_POST["nationality"]) && $_POST["nationality"]=="wni")?"Indonesia":$_POST["country"]), 
-			((isset($_POST["nationality"]) && $_POST["nationality"]=="wni")?"KTP":"Passport"), ((isset($_POST["nationality"]) && $_POST["nationality"]=="wni")?$_POST["nomor_ktp"]:$_POST["nomor_passport"]), 
-			$_POST["cellphone1"], $_POST["cellphone2"], $_POST["homephone"], $expiry_date, $register_activation_code ) );
+			(candidate_name, candidate_email, candidate_passwd, candidate_hp1, register_date, register_expiry_date, register_activation_code)
+			VALUES (?, ?, ?, ?, NOW(), ?, ?)", array($_POST["full_name"], $_POST["email1"], $_POST["pwd1"], 
+			$_POST["cellphone1"], $expiry_date, $register_activation_code ) );
 					
 
 					if ($query)
@@ -2504,7 +2493,7 @@ function admin_upload_candidateDelFileOthers() {
 							exit;
 						}
 						
-						$query = querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, candidate_birthplace, candidate_birthdate, candidate_gender, candidate_nationality, candidate_country, candidate_idtype, candidate_idcard, candidate_hp1, candidate_hp2, candidate_phone, register_date, register_activation_code
+						$query = querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, candidate_hp1, register_date, register_activation_code
 						FROM m_register WHERE candidate_email= ? ORDER BY register_id ASC LIMIT 1",array($_POST["email1"]));
 						$data = sqlGetData($query);
 						$galat = 1;
@@ -2563,9 +2552,9 @@ function admin_upload_candidateDelFileOthers() {
 			function admin_insertToMCandidate($data) {
 				
 					if (querying("INSERT INTO m_candidate
-				(log_auth_id, candidate_name, candidate_email, candidate_birthplace, candidate_birthdate, candidate_gender, candidate_nationality, candidate_country, candidate_idtype, candidate_idcard, candidate_hp1, candidate_hp2, candidate_phone, status_id, user_insert, date_insert, user_update, date_update)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, NOW())",
-					array($data["log_auth_id"], $data["candidate_name"], $data["candidate_email"], $data["candidate_birthplace"], $data["candidate_birthdate"], $data["candidate_gender"], $data["candidate_nationality"], $data["candidate_country"], $data["candidate_idtype"], $data["candidate_idcard"], $data["candidate_hp1"], $data["candidate_hp2"], $data["candidate_phone"], "active", $_SESSION["log_auth_id"], $_SESSION["log_auth_id"]) )) return true;
+				(log_auth_id, candidate_name, candidate_email, candidate_hp1, status_id, user_insert, date_insert, user_update, date_update)
+				VALUES (?, ?, ?, ?, ?, ?,  NOW(), ?, NOW())",
+					array($data["log_auth_id"], $data["candidate_name"], $data["candidate_email"], $data["candidate_hp1"], "active", $_SESSION["log_auth_id"], $_SESSION["log_auth_id"]) )) return true;
 					else return false;	
 			}
 			
@@ -2653,7 +2642,7 @@ function admin_upload_candidateDelFileOthers() {
 					exit;
 				}
 				
-				$query = querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, curriculum, candidate_hp1, candidate_hp2, register_date, register_activation_code
+				$query = querying("SELECT register_id, candidate_name, candidate_email, candidate_passwd, candidate_hp1, register_date, register_activation_code
 				FROM m_register WHERE register_id=? AND candidate_email= ? ORDER BY register_id ASC LIMIT 1",array($_POST["register_id"],$_POST["candidate_email"]));
 				$data = sqlGetData($query);
 				$galat = 1;
@@ -2666,9 +2655,9 @@ function admin_upload_candidateDelFileOthers() {
 					if($_POST["candidate_email"] == $data[0]["candidate_email"] ) 
 					{
 						$ipaddress = (isset($_SERVER["REMOTE_ADDR"]))?$_SERVER["REMOTE_ADDR"]:"";	
-						$candidate_birthdate = reverseDate($data[0]["candidate_birthdate"]);
+						// $candidate_birthdate = reverseDate($data[0]["candidate_birthdate"]);
 						
-						$register_activation_code = letshashit($_POST["candidate_email"].$candidate_birthdate,"activatereg");
+						$register_activation_code = letshashit($_POST["candidate_email"],"activatereg");
 
 						
 						
@@ -2707,7 +2696,6 @@ function admin_upload_candidateDelFileOthers() {
 				
 			}
 
-			
 			function adm_applyForCandidate() {
 				//print_r($_POST);exit;
 				$is_applied=vacancy_isApplied($_POST["candidate_id"],$_POST["candidate_email"],$_POST["job_vacancy_id"]);

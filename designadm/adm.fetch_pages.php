@@ -101,24 +101,45 @@ $datacandidate=admin_getListCandidate($type,$position,$item_per_page);
 								<input type="hidden" name="mod" value="adm_exportExcel">
 								<input type="hidden" name="type" value="<?php echo $type;?>">
 								<input type="hidden" name="candidate_id" value="<?php echo $datacandidate[$i]["candidate_id"];?>">
-								<button type="submit" class="btn btn-primary btn-xs" onclick="return confirm('Are you sure to export  <?php echo $type;?> candidate?')" title="Export to excel file." >&nbsp;<i class="fa fa-file-excel-o"></i>&nbsp;</button>
+								<button type="submit"class="btn btn-primary btn-xs" onclick="return confirm('Are you sure to export  <?php echo $type;?> candidate?')" title="Export to excel file." >&nbsp;<i class="fa fa-file-excel-o"></i>&nbsp;</button>
 							</form>
 							
+							<?php
+							$disableMenu = false;
+							$query = querying("SELECT * FROM m_candidate WHERE candidate_id = ?", array($datacandidate[$i]["candidate_id"]));
+
+							if ($query) {
+								$datajoin = mysqli_fetch_assoc($query);
+
+								if (isset($datajoin["export_flag"]) && $datajoin["export_flag"] == 1) {
+									$disableMenu = true;
+								}
+							}
+						?>
+						<form name="exportExcelProint" method="post" action="<?php echo _PATHURL;?>/letsprocess.php" style="float:left; padding-left:4px;">                                                        
+							<input type="hidden" name="mod" value="executeAll">
+							<input type="hidden" name="type" value="<?php echo $type;?>">
+							<input type="hidden" name="candidate_id" value="<?php echo $datacandidate[$i]["candidate_id"];?>">
+							<button type="submit" class="btn btn-success btn-xs" onclick="return confirm('Are you sure to export <?php echo $type;?> candidate?')" title="Export to all file." <?php if($disableMenu) echo "disabled";  ?>> &nbsp;<i class="fa fa-download"></i>&nbsp;
+							</button>
+						</form>
+<!-- 
 							<form name="exportExcelProint" method="post" action="<?php echo _PATHURL;?>/letsprocess.php" style="float:left; padding-left:4px;">															
-								<input type="hidden" name="mod" value="adm_exportExcelForProint">
+								<input type="hidden" name="mod" value="createZipFile">
 								<input type="hidden" name="type" value="<?php echo $type;?>">
 								<input type="hidden" name="candidate_id" value="<?php echo $datacandidate[$i]["candidate_id"];?>">
-								<button type="submit" class="btn btn-success btn-xs" onclick="return confirm('Are you sure to export  <?php echo $type;?> candidate?')" title="Export to excel file." >&nbsp;<i class="fa fa-file-excel-o"></i>&nbsp;</button>
-							</form>
+								<button type="submit" class="btn btn-warning btn-xs" onclick="return confirm('Are you sure to export  <?php echo $type;?> candidate?')" title="Export to ZIP file." >&nbsp;<i class="fa fa-file-archive-o"></i>&nbsp;</button>
+							</form> -->
 
 							<?php
 							}
 						
-						}
+						} 
 						?>
 					</td>
 				</tr>
 			<?php
+			
 			}
 			?>
 			</tbody>

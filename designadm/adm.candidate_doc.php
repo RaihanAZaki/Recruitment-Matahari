@@ -41,7 +41,8 @@ else {
 				}
 			}
 
-			$dataphoto=getDocFile($data,"passphoto");
+			$datacv = getDocFile($data,"");
+			$dataphoto=getDocFile($data,"php");
 			$datacoverletter=getDocFile($data,"coverletter");
 			$dataijazah=getDocFile($data,"ijazah");
 			$datatranscript=getDocFile($data,"transcript");
@@ -66,6 +67,7 @@ else {
 					
 					<ul class="nav nav-tabs">
 						<li class="active"><a data-toggle="tab" href="#passphoto">Pass Photo</a></li>
+						<li><a data-toggle="tab" href="#curriculum">Curriculum Vitae</a></li>
 						<li><a data-toggle="tab" href="#coverletter">Application Letter</a></li>
 						<li><a data-toggle="tab" href="#ijazah">Certificate/ Ijazah</a></li>
 						<li><a data-toggle="tab" href="#transcript">Transcript</a></li>
@@ -141,6 +143,77 @@ else {
 						</div>
 						<!-- end of part pass photo -->
 						
+						<!-- part Curriculum Vitae -->
+						<div id="curriculum" class="tab-pane fade active">
+							<h3><cufonize>Curriculum Vitae</cufonize></h3>
+							<div class="row">
+							
+								<div class="col-md-6">
+									<?php
+									if(isset($datacv["id"]) && isset($datacv["name"]) && $datacv["name"]<>"" ){
+										$pros="edit";
+									?>
+										<div>
+											<object data="<?php echo _CANDFILES."/cand_cv/".$datacv["name"];?>" type="application/pdf">
+											alt : <a href="<?php echo _CANDFILES."/cand_cv/".$datacv["name"];?>" target="_blank"><?php echo $datacv["name"];?></a>
+											</object>
+										</div>
+									<?php	
+									}
+									else {
+										echo "<i class=\"fa fa-file-pdf-o fa-8x fa-border fontAbu top10 bottom10 left10 right10\"></i>";
+										$pros="add";
+									}
+									?>
+								</div>
+								<div class="col-md-6">
+									<form name="curriculumfrm" id="curriculumfrm" class="form-horizontal" method="post" action="<?php echo _PATHURL;?>/letsprocess.php" role="form" enctype="multipart/form-data">
+										<div class="form-group">
+											<div class="row">
+												<b>Requirements:</b>
+												<ul>
+													<li>Formal application letter not longer than 1 page A4.</li>
+													<li>File in PDF format, Maximum size is 1 MB</li>
+												</ul>
+											</div>
+											<div class="row caption_indo80" style="padding-left:0px;">
+												<b>Ketentuan:</b>
+												<ul>
+													<li>Surat Lamaran Kerja formal tidak lebih dari 1 halaman A4.</li>
+													<li>File dalam format PDF dengan ukuran maksimal 1 MB</li>
+												</ul>
+											</div>
+										</div>
+										
+										<div class="form-group">
+											<div class="col-md-9">
+												<input type="file" name="candidate_file" class="form-control">
+												<input type="hidden" name="candidate_file_type" value="curriculum">
+												<input type="hidden" name="candidate_file_id_exist" value="<?php echo ($pros=="edit")?$datacv["id"]:"0";?>">
+												<input type="hidden" name="candidate_file_name_exist" value="<?php echo ($pros=="edit")?$datacv["name"]:"0";?>">
+												<input type="hidden" name="mod" value="upload_candidateFile">
+												<input type="hidden" name="maxsize" value="1048576">
+												<input type="hidden" name="fileExt" value="pdf">
+												<input type="hidden" name="candFolder" value="cand_cv">
+												<input type="hidden" name="job_vacancy_id" value="<?php echo (isset($_GET["job_vacancy_id"]))?decoded($_GET["job_vacancy_id"]):"";?>" />
+												<input type="hidden" name="candidate_apply_stage" value="<?php echo (isset($_GET["candidate_apply_stage"]))?decoded($_GET["candidate_apply_stage"]):"";?>" />
+												<input type="hidden" name="candidate_id" value="<?php echo (isset($_GET["candidate_id"]))?decoded($_GET["candidate_id"]):"";?>" />
+												<input type="hidden" name="menu_name" value="<?php echo (isset($_GET["menu_name"]))?$_GET["menu_name"]:"";?>" />
+
+											</div>
+										</div>
+										
+										<div class="form-group"> 
+											<div class="col-md-4">
+												<button type="submit" class="btn btn-success"><i class="fa fa-upload"> &nbsp; Upload/Unggah</i></button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						<!-- end of Curriculum Vitae -->
+
 						<!-- part cover letter -->
 						<div id="coverletter" class="tab-pane fade active">
 						  <h3><cufonize>Application Letter</cufonize></h3>

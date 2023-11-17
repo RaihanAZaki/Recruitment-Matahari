@@ -156,10 +156,10 @@ function system_showAlert() {
 		} 
 }
 
-
 function system_usrlogin()	{
 	//sys_checkCap();
 	/*print_r($_POST); echo "<br><br>";*/
+	
 	$explodemail=array();
 	$explodemail=(isset($_POST["usrname"]) && $_POST["usrname"]<>"")?explode("@",$_POST["usrname"]):"";
 	/* check karyawan atau bukan karyawan */
@@ -210,10 +210,19 @@ function system_usrlogin()	{
 
 		$ipaddress = gethostbyaddr($_SERVER['REMOTE_ADDR'])." / ".$_SERVER['REMOTE_ADDR'];
 		querying("UPDATE log_auth SET log_auth_lastlogin=now(), log_auth_lastip=? where log_auth_id=? ",array($ipaddress,$data[0]["log_auth_id"]));
-		header("location: index.php");
-		return true;
-		exit;
-	}
+
+		$datacv = getDataDoc();
+		$status = isset($datacv[0]["candidate_file_type"]) ? $datacv[0]["candidate_file_type"] : "";
+		$role = isset($data[0]["log_auth_role"]) ? $data[0]["log_auth_role"] : "";
+		// var_dump($status);exit;
+		if ($status !== "curriculum" && $role == "candid") {
+			header("Location: " . _PATHURL . "/documents/#curriculum");
+			exit;
+		} else {
+			header("Location: " . _PATHURL . "/index.php");
+			exit;
+		}
+	}		
 	else
 	{
 		system_log_badattempt();

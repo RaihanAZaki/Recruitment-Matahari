@@ -39,7 +39,7 @@ print_r($data);
 exit;
 */
 if(count($data)>0) $data=clean_view($data);
-
+$array_edu=array('Doctoral - S3', 'Master - S2', 'Bachelor - S1', 'Diploma', 'Highschool - SMA', 'Junior Highschool - SMP', 'Elementary - SD');
 ?>
 <div><?php echo system_showAlert();?></div>
 
@@ -158,15 +158,14 @@ if(count($data)>0) $data=clean_view($data);
 									</div>
 									<div class="col-md-4">
 										<select class="form-control" name="candidate_family_lastedu[]">
-											<option value="">Choose Education - <i>Pilih Pendidikan</i></option>
-											<option value="Post Doctoral">Post Doctoral</option>
-											<option value="Doctoral - S3">Doctoral - S3</option>
-											<option value="Master - S2">Master Degree - S2</option>
-											<option value="Bachelor - S1">Bachelor Degree - S1</option>
-											<option value="Diploma">Diploma</option>
-											<option value="Highschool - SMA">Highschool - SMA</option>
-											<option value="Junior Highschool - SMP">Junior Highschool - SMP</option>
-											<option value="Elementary - SD">Elementary - SD</option>
+										<option value="">Choose degree</option>
+											<?php
+											for($ed=0;$ed<count($array_edu);$ed++) {
+											?>
+											<option value="<?php echo $array_edu[$ed];?>" <?php echo (isset($data[$i]["candidate_edu_degree"]) && $array_edu[$ed]==$data[$i]["candidate_edu_degree"])?"selected":"";?> ><?php echo $array_edu[$ed];?></option>
+											<?php
+											}
+											?>
 										</select>									
 									</div>								
 									<label class="control-label col-md-2" for="candidate_family_rip">Status:</label>
@@ -292,15 +291,14 @@ if(count($data)>0) $data=clean_view($data);
 										</div>
 										<div class="col-md-4">
 											<select class="form-control" name="candidate_family_lastedu[]">
-												<option value="">Choose Education - <i>Pilih Pendidikan</i></option>
-												<option value="Post Doctoral" <?php echo (isset($data[$fam]["candidate_family_lastedu"]) && $data[$fam]["candidate_family_lastedu"]=="Post Doctoral")?"selected":"";?>>Post Doctoral</option>
-												<option value="Doctoral - S3" <?php echo (isset($data[$fam]["candidate_family_lastedu"]) && $data[$fam]["candidate_family_lastedu"]=="Doctoral - S3")?"selected":"";?>>Doctoral - S3</option>
-												<option value="Master - S2" <?php echo (isset($data[$fam]["candidate_family_lastedu"]) && $data[$fam]["candidate_family_lastedu"]=="Master Degree - S2")?"selected":"";?>>Master Degree - S2</option>
-												<option value="Bachelor - S1" <?php echo (isset($data[$fam]["candidate_family_lastedu"]) && $data[$fam]["candidate_family_lastedu"]=="Bachelor Degree - S1")?"selected":"";?>>Bachelor Degree - S1</option>
-												<option value="Diploma" <?php echo (isset($data[$fam]["candidate_family_lastedu"]) && $data[$fam]["candidate_family_lastedu"]=="Diploma")?"selected":"";?>>Diploma</option>
-												<option value="Highschool - SMA" <?php echo (isset($data[$fam]["candidate_family_lastedu"]) && $data[$fam]["candidate_family_lastedu"]=="Highschool - SMA")?"selected":"";?>>Highschool - SMA</option>
-												<option value="Junior Highschool - SMP" <?php echo (isset($data[$fam]["candidate_family_lastedu"]) && $data[$fam]["candidate_family_lastedu"]=="Junior Highschool - SMP")?"selected":"";?>>Junior Highschool - SMP</option>
-												<option value="Elementary - SD" <?php echo (isset($data[$fam]["candidate_family_lastedu"]) && $data[$fam]["candidate_family_lastedu"]=="Elementary - SD")?"selected":"";?>>Elementary - SD</option>
+											<option value="">Choose degree</option>
+											<?php
+											for($ed=0;$ed<count($array_edu);$ed++) {
+											?>
+											<option value="<?php echo $array_edu[$ed];?>" <?php echo (isset($data[$i]["candidate_edu_degree"]) && $array_edu[$ed]==$data[$i]["candidate_edu_degree"])?"selected":"";?> ><?php echo $array_edu[$ed];?></option>
+											<?php
+											}
+											?>
 											</select>									
 										</div>								
 										<label class="control-label col-md-2" for="candidate_family_rip">Status:</label>
@@ -423,15 +421,14 @@ if(count($data)>0) $data=clean_view($data);
 									</div>
 									<div class="col-md-4">
 										<select class="form-control" name="candidate_family_lastedu[]">
-											<option value="">Choose Education - <i>Pilih Pendidikan</i></option>
-											<option value="Post Doctoral">Post Doctoral</option>
-											<option value="Doctoral - S3">Doctoral - S3</option>
-											<option value="Master - S2">Master Degree - S2</option>
-											<option value="Bachelor - S1">Bachelor Degree - S1</option>
-											<option value="Diploma">Diploma</option>
-											<option value="Highschool - SMA">Highschool - SMA</option>
-											<option value="Junior Highschool - SMP">Junior Highschool - SMP</option>
-											<option value="Elementary - SD">Elementary - SD</option>
+										<option value="">Choose degree</option>
+										<?php
+											for($ed=0;$ed<count($array_edu);$ed++) {
+										?>
+										<option value="<?php echo $array_edu[$ed];?>" <?php echo (isset($data[$i]["candidate_edu_degree"]) && $array_edu[$ed]==$data[$i]["candidate_edu_degree"])?"selected":"";?> ><?php echo $array_edu[$ed];?></option>
+										<?php
+											}
+										?>
 										</select>									
 									</div>								
 									<label class="control-label col-md-2" for="candidate_family_rip">Status:</label>
